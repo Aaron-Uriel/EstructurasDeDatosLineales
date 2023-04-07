@@ -1,4 +1,5 @@
 subdir('head_based')
+subdir('node')
 
 # These arguments are only used to build the shared library
 # not the executables that use the library.

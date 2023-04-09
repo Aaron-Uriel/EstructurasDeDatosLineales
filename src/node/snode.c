@@ -38,7 +38,7 @@ snode_append(SNode *const self, SNode *const adjacent_snode)
  * Es útil cuando quieres insertar nodos al final por ejemplo.
  */
 SNode
-*snode_go_to_last(SNode *const self)
+*snode_jump_to_last(SNode *const self)
 {
     /* El bucle for más ilegible que verás en tu vida XD */
     SNode *current_node;
@@ -52,6 +52,10 @@ SNode
 SNode
 *snode_jump_to_n(SNode *const self, const uint32_t n)
 {
+    if (self == NULL) {
+        return NULL;
+    }
+
     SNode *node = self;
     uint32_t i;
     for (i = 0; i < n; i++) {

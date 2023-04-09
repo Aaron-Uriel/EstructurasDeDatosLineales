@@ -44,3 +44,27 @@ node_prepend(Node *const self, Node *const adjacent_node)
 {
     self->previous = adjacent_node;
 }
+
+Node
+*node_go_to_last(Node *const self)
+{
+    /* El bucle for más ilegible que verás en tu vida XD */
+    Node *current_node;
+    for (current_node = self; 
+         current_node->next != NULL;
+         current_node = current_node->next);
+
+    return current_node;
+}
+
+Node
+*node_go_to_first(Node *const self)
+{
+    /* El bucle for más ilegible que verás en tu vida XD */
+    Node *current_node;
+    for (current_node = self; 
+         current_node->previous != NULL;
+         current_node = current_node->previous);
+
+    return current_node;
+}

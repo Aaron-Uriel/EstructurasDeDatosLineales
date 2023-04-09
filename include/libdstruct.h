@@ -37,6 +37,7 @@ SNode   *snode_new(int32_t value);
 void    snode_delete(SNode *const self);
 SNode   *snode_get_next(SNode *const self);
 void    snode_append(SNode *const self, SNode *const adjacent_node);
+SNode   *snode_go_to_end(SNode *const self);
 
 typedef struct Node Node;
 struct Node {
@@ -51,5 +52,7 @@ Node *node_get_next(Node *const self);
 Node *node_get_previous(Node *const self);
 void node_append(Node *const self, Node *const adjacent_node);
 void node_prepend(Node *const self, Node *const adjacent_node);
+Node *node_go_to_last(Node *const self);
+Node *node_go_to_first(Node *const self);
 
 #endif

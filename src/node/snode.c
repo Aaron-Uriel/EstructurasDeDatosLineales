@@ -32,3 +32,19 @@ snode_append(SNode *const self, SNode *const adjacent_snode)
 	self->next = adjacent_snode;
 }
 
+/*
+ * Descripción de la función.
+ * Esta función sirve para llegar al final de una serie de nodos enlazados.
+ * Es útil cuando quieres insertar nodos al final por ejemplo.
+ */
+SNode
+*snode_go_to_last(SNode *const self)
+{
+    /* El bucle for más ilegible que verás en tu vida XD */
+    SNode *current_node;
+    for (current_node = self; 
+         current_node->next != NULL;
+         current_node = current_node->next);
+
+    return current_node;
+}

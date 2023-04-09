@@ -48,3 +48,16 @@ SNode
 
     return current_node;
 }
+
+SNode
+*snode_jump_to_n(SNode *const self, const uint32_t n)
+{
+    SNode *node = self;
+    uint32_t i;
+    for (i = 0; i < n; i++) {
+        if (node->next == NULL) { return NULL; }
+        node = node->next;
+    }
+
+    return node;     
+}

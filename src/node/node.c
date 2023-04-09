@@ -46,7 +46,7 @@ node_prepend(Node *const self, Node *const adjacent_node)
 }
 
 Node
-*node_go_to_last(Node *const self)
+*node_jump_to_last(Node *const self)
 {
     /* El bucle for más ilegible que verás en tu vida XD */
     Node *current_node;
@@ -58,7 +58,7 @@ Node
 }
 
 Node
-*node_go_to_first(Node *const self)
+*node_jump_to_first(Node *const self)
 {
     /* El bucle for más ilegible que verás en tu vida XD */
     Node *current_node;
@@ -67,4 +67,21 @@ Node
          current_node = current_node->previous);
 
     return current_node;
+}
+
+Node
+*node_jump_to_n(Node *const self, const uint32_t n)
+{
+    if (self == NULL) {
+        return NULL;
+    }
+
+    Node *node = self;
+    uint32_t i;
+    for (i = 0; i < n; i++) {
+        if (node->next == NULL) { return NULL; }
+        node = node->next;
+    }
+
+    return node;     
 }

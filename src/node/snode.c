@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include <node.h>
+#include <libdstruct.h>
 
 struct SNode {
 	int32_t  value;

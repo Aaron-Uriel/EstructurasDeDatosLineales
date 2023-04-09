@@ -17,6 +17,8 @@
   #endif
 #endif
 
+#include <stdint.h>
+
 typedef struct List List;
 typedef struct HList HList;
 typedef struct SList SList;
@@ -24,5 +26,19 @@ typedef struct SList SList;
 typedef struct Queue Queue;
 typedef struct HQueue HQueue;
 typedef struct SQueue SQueue;
+
+typedef struct SNode SNode;
+SNode   *snode_new(int32_t value);
+void    snode_delete(SNode *const self);
+SNode   *snode_get_next(SNode *const self);
+void    snode_append(SNode *const self, SNode *const adjacent_node);
+
+typedef struct Node Node;
+Node *node_new(int32_t value);
+void node_delete(Node *const self);
+Node *node_get_next(Node *const self);
+Node *node_get_previous(Node *const self);
+void node_append(Node *const self, Node *const adjacent_node);
+void node_prepend(Node *const self, Node *const adjacent_node);
 
 #endif

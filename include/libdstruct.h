@@ -30,7 +30,7 @@ typedef struct SQueue SQueue;
 typedef struct SNode SNode;
 struct SNode {
 	int32_t  value;
-	SNode    *_next;
+	SNode    *next;
 };
 
 SNode   *snode_new(int32_t value);

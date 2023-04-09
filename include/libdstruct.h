@@ -19,13 +19,9 @@
 
 #include <stdint.h>
 
-typedef struct List List;
-typedef struct HList HList;
-typedef struct SList SList;
 
-typedef struct Queue Queue;
-typedef struct HQueue HQueue;
-typedef struct SQueue SQueue;
+
+/* Nodos */
 
 typedef struct SNode SNode;
 struct SNode {
@@ -56,5 +52,23 @@ void node_prepend(Node *const self, Node *const adjacent_node);
 Node *node_jump_to_last(Node *const self);
 Node *node_jump_to_first(Node *const self);
 Node *node_jump_to_n(Node *const self, const uint32_t n);
+
+/* Fin de nodos */
+
+/* Listas */
+
+void    slist_insert_node(SNode **const slist, SNode *const node, const uint32_t index);
+SNode   *slist_extract_node(SNode **const slist, const uint32_t index);
+void    slist_print(SNode **slist);
+
+typedef struct HList HList;
+
+/* Fin de listas */
+
+/* Colas */
+
+typedef struct HQueue HQueue;
+
+/* Fin de colas */
 
 #endif

@@ -2,20 +2,14 @@
 
 #include <libdstruct.h>
 
-struct Node {
-    int32_t value;
-    Node    *_previous;
-    Node    *_next;
-};
-
 Node *
 node_new(int32_t value)
 {
 	Node *const new_node = malloc(sizeof(Node));
 	if (new_node != NULL) {
 		new_node->value     = value;
-		new_node->_next     = NULL;
-        new_node->_previous = NULL;
+		new_node->next     = NULL;
+        new_node->previous = NULL;
 	}
 
 	return new_node;
@@ -28,25 +22,25 @@ node_delete(Node *const self)
 }
 
 Node *
-node_get_next(Node *const self)
+node_getnext(Node *const self)
 {
-	return self->_next;
+	return self->next;
 }
 
 Node
 *node_get_previous(Node *const self)
 {
-    return self->_previous;
+    return self->previous;
 }
 
 void 
 node_append(Node *const self, Node *const adjacent_node)
 {
-	self->_next = adjacent_node;
+	self->next = adjacent_node;
 }
 
 void
 node_prepend(Node *const self, Node *const adjacent_node)
 {
-    self->_previous = adjacent_node;
+    self->previous = adjacent_node;
 }

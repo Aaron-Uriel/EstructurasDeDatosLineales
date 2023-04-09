@@ -2,11 +2,6 @@
 
 #include <libdstruct.h>
 
-struct SNode {
-	int32_t  value;
-	SNode    *_next;
-};
-
 SNode *
 snode_new(int32_t value)
 {

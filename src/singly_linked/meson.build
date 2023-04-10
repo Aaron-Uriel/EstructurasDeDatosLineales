@@ -1,1 +1,1 @@
-source_files += files('slist.c')
+source_files += files('slist.c', 'squeue.c')

@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include <libdstruct.h>
 
@@ -16,43 +17,53 @@ node_new(int32_t value)
 }
 
 void
-node_delete(Node *const self)
+node_delete(Node ** self)
 {
 	free(self);
+    *self = NULL;
 }
 
 Node *
 node_getnext(Node *const self)
 {
+    if (self == NULL) { return NULL; }
+
 	return self->next;
 }
 
 Node
 *node_get_previous(Node *const self)
 {
+    if (self == NULL) { return NULL; }
+
     return self->previous;
 }
 
 void 
 node_append(Node *const self, Node *const adjacent_node)
 {
+    if (self == NULL) { return; }
+
 	self->next = adjacent_node;
 }
 
 void
 node_prepend(Node *const self, Node *const adjacent_node)
 {
+    if (self == NULL) { return; }
+
     self->previous = adjacent_node;
 }
 
 Node
 *node_jump_to_last(Node *const self)
 {
-    /* El bucle for más ilegible que verás en tu vida XD */
-    Node *current_node;
-    for (current_node = self; 
-         current_node->next != NULL;
-         current_node = current_node->next);
+    if (self == NULL) { return NULL; }
+
+    Node *current_node = self;
+    while(current_node->next != NULL) {
+         current_node = current_node->next;
+    }
 
     return current_node;
 }
@@ -60,21 +71,19 @@ Node
 Node
 *node_jump_to_first(Node *const self)
 {
-    /* El bucle for más ilegible que verás en tu vida XD */
-    Node *current_node;
-    for (current_node = self; 
-         current_node->previous != NULL;
-         current_node = current_node->previous);
+    if (self == NULL) { return NULL; }
 
+    Node *current_node = self;
+    while(current_node->previous != NULL) {
+         current_node = current_node->previous;
+    }
     return current_node;
 }
 
 Node
 *node_jump_to_n(Node *const self, const uint32_t n)
 {
-    if (self == NULL) {
-        return NULL;
-    }
+    if (self == NULL) { return NULL; }
 
     Node *node = self;
     uint32_t i;
@@ -84,4 +93,14 @@ Node
     }
 
     return node;     
+}
+
+void
+node_print_all_linked_nodes(const Node *const self)
+{
+    const Node *current_node = self;
+    while (current_node->next != NULL) {
+        printf("%d ", current_node->value);
+    }
+    printf("NULL\n");
 }

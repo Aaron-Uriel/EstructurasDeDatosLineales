@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include <libdstruct.h>
 
@@ -15,14 +16,17 @@ snode_new(int32_t value)
 }
 
 void
-snode_delete(SNode *const self)
+snode_delete(SNode **self)
 {
-	free(self);
+	free(*self);
+    *self = NULL; 
 }
 
 SNode *
 snode_get_next(SNode *const self)
 {
+    if (self == NULL) { return NULL; }
+
 	return self->next;
 }
 
@@ -40,11 +44,12 @@ snode_append(SNode *const self, SNode *const adjacent_snode)
 SNode
 *snode_jump_to_last(SNode *const self)
 {
-    /* El bucle for más ilegible que verás en tu vida XD */
-    SNode *current_node;
-    for (current_node = self; 
-         current_node->next != NULL;
-         current_node = current_node->next);
+    if (self == NULL) { return NULL; }
+
+    SNode *current_node = self;
+    while(current_node->next != NULL) {
+        current_node = current_node->next;
+    }
 
     return current_node;
 }
@@ -52,9 +57,7 @@ SNode
 SNode
 *snode_jump_to_n(SNode *const self, const uint32_t n)
 {
-    if (self == NULL) {
-        return NULL;
-    }
+    if (self == NULL) { return NULL; }
 
     SNode *node = self;
     uint32_t i;
@@ -64,4 +67,16 @@ SNode
     }
 
     return node;     
+}
+
+void
+snode_print_all_linked_nodes(const SNode *const self)
+{
+    if (self == NULL) { return; }
+
+    const SNode *current_node = self;
+    while (current_node->next != NULL) {
+        printf("%d ", current_node->value);
+    }
+    printf("NULL\n");
 }

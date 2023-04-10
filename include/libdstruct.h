@@ -30,11 +30,12 @@ struct SNode {
 };
 
 SNode   *snode_new(int32_t value);
-void    snode_delete(SNode *const self);
+void    snode_delete(SNode **self);
 SNode   *snode_get_next(SNode *const self);
 void    snode_append(SNode *const self, SNode *const adjacent_node);
 SNode   *snode_jump_to_end(SNode *const self);
 SNode   *snode_jump_to_n(SNode *const self, const uint32_t n);
+void    snode_print_all_linked_nodes(const SNode *const self);
 
 typedef struct Node Node;
 struct Node {
@@ -44,7 +45,7 @@ struct Node {
 };
 
 Node *node_new(int32_t value);
-void node_delete(Node *const self);
+void node_delete(Node **const self);
 Node *node_get_next(Node *const self);
 Node *node_get_previous(Node *const self);
 void node_append(Node *const self, Node *const adjacent_node);
@@ -52,6 +53,7 @@ void node_prepend(Node *const self, Node *const adjacent_node);
 Node *node_jump_to_last(Node *const self);
 Node *node_jump_to_first(Node *const self);
 Node *node_jump_to_n(Node *const self, const uint32_t n);
+void node_print_all_linked_nodes(const Node *const self);
 
 /* Fin de nodos */
 

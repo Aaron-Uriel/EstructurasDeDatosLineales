@@ -64,11 +64,5 @@ slist_extract_node(SNode **const slist, const uint32_t index)
 void
 slist_print(SNode **slist)
 {
-	SNode *current_node;
-    for (current_node = *slist;
-         current_node->next != NULL;
-         current_node = current_node->next) {
-		printf ("%d -> ", current_node->value);
-    }
-	printf ("NULL\n");
+    snode_print_all_linked_nodes(*slist);
 }

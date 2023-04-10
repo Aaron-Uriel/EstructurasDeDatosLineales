@@ -37,9 +37,26 @@ int menu_secundario(void)
     return opcionSecun;
 }
 
+int menu_cola_pila (void)
+{
+    int opcion;
+    printf("._________________________________.\n");
+    printf("|______________Menú_______________|\n");
+    printf("| 1.- Agregar (Crear + insertar)  |\n");
+    printf("| 2.- Quitar (Extraer + Eliminar) |\n");
+    printf("| 3.- Imprimir cola               |\n");
+    printf("| 4.- Volver                      |\n");
+    printf("|_________________________________|\n");
+    printf("| Opcion: ");
+    scanf ("%d", &opcion);
+    return opcion;
+}
+
+
+
 int main(void)
 {
-    int opcion, opcionSecun;
+    int opcion, opcionSecun, tercerOpcion;
     do
     {
         opcion = menu_principal();
@@ -52,7 +69,30 @@ int main(void)
                 switch (opcionSecun)
                 {
                 case 1:
-                        printf("Uno");
+                    do
+                    {
+                        tercerOpcion = menu_cola_pila();
+                        switch (tercerOpcion)
+                        {
+                        case 1:
+                            
+                            break;
+                        case 2:
+                                printf("dos");
+                            break;
+                        case 3: 
+                                printf("tres");
+                            break;
+                        case 4: 
+                            break;    
+                        
+                        default:
+                            printf("\tOpcion invalida.\n");
+                            break;
+                        }
+
+                    } while (tercerOpcion != 4);
+                    
                     break;
                 case 2:
                         printf("dos");
@@ -132,11 +172,6 @@ int main(void)
         }
     } while (opcion != 4);
     
-
-
-
-
-
 
     return 0;
 }

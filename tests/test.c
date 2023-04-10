@@ -59,23 +59,23 @@ int main(void)
     int opcion, opcionSecun, tercerOpcion;
     do
     {
-        opcion = menu_principal();
-        switch (opcion)
+        opcion = menu_principal();  
+        switch (opcion) //Inicio del menú principal
         {   
-        case 1:
+        case 1: //Simplemente ligadas. ---------------------
             do
             {
                 opcionSecun = menu_secundario();
                 switch (opcionSecun)
                 {
-                case 1:
+                case 1: //Cola ----------------------------
                     do
                     {
                         tercerOpcion = menu_cola_pila();
                         switch (tercerOpcion)
                         {
                         case 1:
-                            
+                            printf("Uno\n");
                             break;
                         case 2:
                                 printf("dos");
@@ -94,10 +94,83 @@ int main(void)
                     } while (tercerOpcion != 4);
                     
                     break;
-                case 2:
+
+                case 2: //Lista -----------------------------
+                        do
+                        {
+                        tercerOpcion = menu_cola_pila();
+                        switch (tercerOpcion)
+                        {
+                        case 1:
+                            printf("Uno\n");
+                            break;
+                        case 2:
+                                printf("dos");
+                            break;
+                        case 3: 
+                                printf("tres");
+                            break;
+                        case 4: 
+                            break;    
+                        
+                        default:
+                            printf("\tOpcion invalida.\n");
+                            break;
+                        }
+
+                        } while (tercerOpcion != 4);
+                    break;
+
+                case 3:  //Con cabecera --------------------------------------
+                        do
+                        {
+                        tercerOpcion = menu_cola_pila();
+                        switch (tercerOpcion)
+                        {
+                        case 1:
+                            printf("Uno\n");
+                            break;
+                        case 2:
+                                printf("dos");
+                            break;
+                        case 3: 
+                                printf("tres");
+                            break;
+                        case 4: 
+                            break;    
+                        
+                        default:
+                            printf("\tOpcion invalida.\n");
+                            break;
+                        }
+
+                        } while (tercerOpcion != 4);
+
+                    break;
+                case 4: 
+                    break;
+                
+                default:
+                    printf("\tOpcion invalida.\n");
+                    break;
+                }
+            } while (opcionSecun != 4);
+
+            break;
+
+        case 2: //Doblemente ligadas
+            do
+            {
+                opcionSecun = menu_secundario();
+                switch (opcionSecun)
+                {
+                case 1: //Cola --------------------------------------------
+                        printf("Uno");
+                    break;
+                case 2: //Pila ----------------------------------------
                         printf("dos");
                     break;
-                case 3: 
+                case 3:  //Lista -------------------------------------------
                         printf("tres");
                     break;
                 case 4: 
@@ -111,45 +184,19 @@ int main(void)
 
             break;
 
-        case 2:
+        case 3:  //Con cabecera
             do
             {
                 opcionSecun = menu_secundario();
                 switch (opcionSecun)
                 {
-                case 1:
+                case 1: //Cola -----------------------------------
                         printf("Uno");
                     break;
-                case 2:
+                case 2: //Pila ------------------------------------
                         printf("dos");
                     break;
-                case 3: 
-                        printf("tres");
-                    break;
-                case 4: 
-                    break;
-                
-                default:
-                    printf("\tOpcion invalida.\n");
-                    break;
-                }
-            } while (opcionSecun != 4);
-
-            break;
-
-        case 3: 
-            do
-            {
-                opcionSecun = menu_secundario();
-                switch (opcionSecun)
-                {
-                case 1:
-                        printf("Uno");
-                    break;
-                case 2:
-                        printf("dos");
-                    break;
-                case 3: 
+                case 3:  //Lista ---------------------------------------
                         printf("tres");
                     break;
                 case 4: 
@@ -169,7 +216,7 @@ int main(void)
         default:
             printf("------ Oopción invalida. ------\n");
             break;
-        }
+        } //Fin del menú principal
     } while (opcion != 4);
     
 

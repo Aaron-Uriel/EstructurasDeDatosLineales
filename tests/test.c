@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <libdstruct.h>
 
 int menu_principal(void)
 {
     int opcion;
+    system("clear");
     printf("*******************************\n");
     printf("|   Colas, Pilas y listas.    |\n");
     printf("._____________________________.\n");
@@ -29,7 +31,7 @@ int menu_secundario(void)
     printf("\t|3.- Lista.  |\n");
     printf("\t|4.- Volver. |\n");
     printf("\t|____________|\n");
-     printf("\t|Opcion: ");
+    printf("\t|Opcion: ");
     scanf("%d", &opcionSecun);
     printf("\t|_____________|\n");
     return opcionSecun;
@@ -38,18 +40,103 @@ int menu_secundario(void)
 int main(void)
 {
     int opcion, opcionSecun;
-    opcion = menu_principal();
-    if (opcion == 0)
+    do
     {
-        printf("Fue 0");
-    }
+        opcion = menu_principal();
+        switch (opcion)
+        {   
+        case 1:
+            do
+            {
+                opcionSecun = menu_secundario();
+                switch (opcionSecun)
+                {
+                case 1:
+                        printf("Uno");
+                    break;
+                case 2:
+                        printf("dos");
+                    break;
+                case 3: 
+                        printf("tres");
+                    break;
+                case 4: 
+                    break;
+                
+                default:
+                    printf("\tOpcion invalida.\n");
+                    break;
+                }
+            } while (opcionSecun != 4);
 
-    opcionSecun = menu_secundario();
-    if (opcionSecun == 0)
-    {
-        printf("Fue 0");
-    }
+            break;
+
+        case 2:
+            do
+            {
+                opcionSecun = menu_secundario();
+                switch (opcionSecun)
+                {
+                case 1:
+                        printf("Uno");
+                    break;
+                case 2:
+                        printf("dos");
+                    break;
+                case 3: 
+                        printf("tres");
+                    break;
+                case 4: 
+                    break;
+                
+                default:
+                    printf("\tOpcion invalida.\n");
+                    break;
+                }
+            } while (opcionSecun != 4);
+
+            break;
+
+        case 3: 
+            do
+            {
+                opcionSecun = menu_secundario();
+                switch (opcionSecun)
+                {
+                case 1:
+                        printf("Uno");
+                    break;
+                case 2:
+                        printf("dos");
+                    break;
+                case 3: 
+                        printf("tres");
+                    break;
+                case 4: 
+                    break;
+                
+                default:
+                    printf("\tOpcion invalida.\n");
+                    break;
+                }
+            } while (opcionSecun != 4);
+
+            break;
+
+        case 4: 
+            break;
+
+        default:
+            printf("------ Oopción invalida. ------\n");
+            break;
+        }
+    } while (opcion != 4);
     
+
+
+
+
+
 
     return 0;
 }

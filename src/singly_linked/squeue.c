@@ -23,7 +23,7 @@ squeue_insert_node(SNode **squeue, SNode *snode)
     if (squeue == NULL) {
         squeue = &snode;
     } else {
-        SNode *const last_node_in_squeue = snode_jump_to_end(*squeue);
+        SNode *const last_node_in_squeue = snode_jump_to_last(*squeue);
         last_node_in_squeue->next = snode;
     }
 }

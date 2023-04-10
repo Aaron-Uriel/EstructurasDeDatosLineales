@@ -7,7 +7,7 @@ subdir('node')
 lib_args = ['-DBUILDING_LIBDSTRUCT']
 
 libdstruct = shared_library(
-  'libdstruct',
+  'dstruct',
   source_files,
   install : true,
   c_args : lib_args,

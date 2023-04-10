@@ -33,7 +33,7 @@ SNode   *snode_new(int32_t value);
 void    snode_delete(SNode **self);
 SNode   *snode_get_next(SNode *const self);
 void    snode_append(SNode *const self, SNode *const adjacent_node);
-SNode   *snode_jump_to_end(SNode *const self);
+SNode   *snode_jump_to_last(SNode *const self);
 SNode   *snode_jump_to_n(SNode *const self, const uint32_t n);
 void    snode_print_all_linked_nodes(const SNode *const self);
 

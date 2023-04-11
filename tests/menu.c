@@ -40,6 +40,7 @@ int menu_secundario(void)
 int menu_cola_pila (void)
 {
     int opcion;
+    system("clear");
     printf("._________________________________.\n");
     printf("|______________Menú_______________|\n");
     printf("| 1.- Agregar (Crear + insertar)  |\n");

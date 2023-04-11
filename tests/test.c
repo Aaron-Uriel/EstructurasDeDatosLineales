@@ -73,7 +73,7 @@ int main(void)
                 case 3:  //Lista--------------------------------------
                         do
                         {
-                        tercerOpcion = menu_cola_pila();
+                        tercerOpcion = menu_cola_pila(); 
                         switch (tercerOpcion)
                         {
                         case 1:

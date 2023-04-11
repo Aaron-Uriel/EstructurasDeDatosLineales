@@ -17,3 +17,19 @@
     }
     
  }
+
+ void spila_print(struct nodo *pila
+{
+
+    struct nodo *actual;
+    actual = pila;
+
+    while (actual != NULL)
+    {
+        printf("%d -> ", actual->id);
+        actual = actual->sig;
+    }
+
+    printf("NULL\n");
+    
+}

@@ -1,12 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <libdstruct.h>
-#include <menu.c>
-#include <Spila.c>
+#include "menu.c"
 
 int main(void)
 {
-    SNode *pila = NULL, *node = NULL;
     int opcion, opcionSecun, tercerOpcion;
     do
     {
@@ -53,13 +51,13 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            add_node(&pila, node);
+                                printf("uno\n");
                             break;
                         case 2:
                                 printf("dos");
                             break;
                         case 3: 
-                                spila_print(pila);
+                                printf("tres\n");
                             break;
                         case 4: 
                             break;    

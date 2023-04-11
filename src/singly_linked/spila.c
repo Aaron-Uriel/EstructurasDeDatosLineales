@@ -19,22 +19,6 @@
     
  }
 
-
-SNode *slist_extract_node(SNode **pila, SNode node)
-{
-    SNode *endSPila = snode_jump_to_last(*pila);
-    if (endSPila == NULL)
-    {
-        printf("Está vacia.");
-    } else
-    {
-        printf("\t Se elimino %d de la pila.\n", endSPila->value);
-        snode_delete(node);
-    }
-    
-    
-}
-
  void spila_print(struct nodo *pila)
 {
 

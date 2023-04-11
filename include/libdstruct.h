@@ -52,9 +52,9 @@ Node *node_get_previous(Node *const self);
 void node_append(Node *const self, Node *const adjacent_node);
 void node_prepend(Node *const self, Node *const adjacent_node);
 Node *node_jump_to_last(Node *const self);
-Node *node_jump_to_first(Node *const self);
+Node *node_jump_to_first(const Node *const self);
 Node *node_jump_to_n(Node *const self, const uint32_t n);
-void node_print_all_linked_nodes(const Node *const self);
+void node_print_all_linked_nodes(Node *const self);
 void node_print_debug(const Node *const self);
 
 /* Fin de nodos. */

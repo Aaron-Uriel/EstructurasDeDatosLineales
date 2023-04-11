@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include <libdstruct.h>
 
 int menu_principal(void)
@@ -51,3 +52,4 @@ int menu_cola_pila (void)
     scanf ("%d", &opcion);
     return opcion;
 }
+

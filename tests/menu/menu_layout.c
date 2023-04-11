@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <libdstruct.h>
-#include <menu.c>
+
+#include "menu_functions.c"
 
 int main(void)
 {

@@ -21,7 +21,7 @@
 
 
 
-/* Nodos */
+/* Nodos. */
 
 typedef struct SNode SNode;
 struct SNode {
@@ -55,9 +55,9 @@ Node *node_jump_to_first(Node *const self);
 Node *node_jump_to_n(Node *const self, const uint32_t n);
 void node_print_all_linked_nodes(const Node *const self);
 
-/* Fin de nodos */
+/* Fin de nodos. */
 
-/* Listas */
+/* Listas. */
 
 void    slist_insert_node(SNode **const slist, SNode *const node, const uint32_t index);
 SNode   *slist_extract_node(SNode **const slist, const uint32_t index);
@@ -65,12 +65,18 @@ void    slist_print(SNode **slist);
 
 typedef struct HList HList;
 
-/* Fin de listas */
+/* Fin de listas. */
 
-/* Colas */
+/* Colas. */
 
 typedef struct HQueue HQueue;
 
-/* Fin de colas */
+/* Fin de colas. */
+
+/* Pilas. */
+
+void add_node (SNode *pila, SNode node);
+
+/* Fin de pilas. */
 
 #endif

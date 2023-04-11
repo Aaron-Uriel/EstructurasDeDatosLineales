@@ -104,3 +104,20 @@ node_print_all_linked_nodes(const Node *const self)
     }
     printf("NULL\n");
 }
+
+/*
+ * La función imprime una representación textual del nodo, útil para depuración.
+ */
+void
+node_print_debug(const Node *const self)
+{
+    if (self == NULL) {
+        fprintf(stderr, "\tNode con valor NULL");
+    } else {
+        fprintf(stderr,
+                "\t(Node) { .value = %d; .next = %p; .previous = %p };",
+                self->value,
+                (void *)self->next,
+                (void *)self->previous);
+    }
+}

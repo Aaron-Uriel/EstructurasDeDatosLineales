@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <libdstruct.h>
 
@@ -79,4 +80,20 @@ snode_print_all_linked_nodes(const SNode *const self)
         printf("%d ", current_node->value);
     }
     printf("NULL\n");
+}
+
+/*
+ * La función imprime una representación textual del nodo, útil para depuración.
+ */
+void
+snode_print_debug(const SNode *const self)
+{
+    if (self == NULL) {
+        fprintf(stderr, "\tSNode con valor NULL");
+    } else {
+        fprintf(stderr,
+                "\t(SNode) { .value = %d; .next = %p };",
+                self->value,
+                (void *)self->next);
+    }
 }

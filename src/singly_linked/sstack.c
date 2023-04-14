@@ -26,6 +26,24 @@ sstack_insert_node(SNode **sstack, SNode *snode, int id)
     
 }
 
+void sstack_delete(SNode **sstack)
+{
+    
+    SNode *second_last_snode = *sstack;
+    SNode *last_snode = second_last_snode->next;
+    if (last_snode == NULL) {
+        sstack = NULL;
+    }
+
+    while(last_snode->next != NULL) {
+        second_last_snode = last_snode;
+        last_snode = last_snode->next;
+    }
+    printf("Se eliminó %d\n",last_snode->value);
+    last_snode = NULL;
+    second_last_snode->next = NULL;
+}
+
 
 void sstack_imprimir(SNode **sstack)
 {

@@ -40,19 +40,20 @@ void sstack_imprimir(SNode **sstack)
 
 void sstack_delete(SNode **sstack)
 {
-    SNode *sstack_delete;
     
+    SNode *second_last_snode = *sstack;
+    SNode *last_snode = second_last_snode->next;
+    if (last_snode == NULL) {
+        sstack = NULL;
+    }
 
-    if (sstack == NULL) {
-        printf("No hay elementos a eliminar");
-    } else
-        {
-            sstack_delete = snode_jump_to_last(*sstack);
-            printf("Se eliminó %d\n", sstack_delete -> value);
-            free(sstack_delete);
-
-    
-        }   
+    while(last_snode->next != NULL) {
+        second_last_snode = last_snode;
+        last_snode = last_snode->next;
+    }
+    printf("Se eliminó %d\n",last_snode->value);
+    last_snode = NULL;
+    second_last_snode->next = NULL;
 }
 
 
@@ -76,13 +77,14 @@ main(void)
     sstack_insert_node(&sstack, snode, id);
     sstack_imprimir(&sstack);
     sstack_delete(&sstack);
-    
-     printf("Numero del nodo: ");
+    sstack_imprimir(&sstack);
+
+    printf("Numero del nodo: ");
     scanf("%d", &id );
     sstack_insert_node(&sstack, snode, id);
     sstack_imprimir(&sstack);
-
-
+    sstack_delete(&sstack);
+    sstack_imprimir(&sstack);
 
     return 0;
 }

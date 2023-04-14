@@ -1,3 +1,4 @@
+#include "error.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -9,8 +10,8 @@ snode_new(int32_t value)
 {
 	SNode *const new_snode = malloc(sizeof(SNode));
 	if (new_snode != NULL) {
-		new_snode->value     = value;
-		new_snode->next     = NULL;
+		new_snode->value = value;
+		new_snode->next = NULL;
 	}
 
 	return new_snode;
@@ -23,17 +24,14 @@ snode_delete(SNode **self)
     *self = NULL; 
 }
 
-SNode *
-snode_get_next(SNode *const self)
-{
-    if (self == NULL) { return NULL; }
-
-	return self->next;
-}
-
 void 
 snode_append(SNode *const self, SNode *const adjacent_snode)
 {
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return;
+    }
+
 	self->next = adjacent_snode;
 }
 
@@ -45,7 +43,10 @@ snode_append(SNode *const self, SNode *const adjacent_snode)
 SNode
 *snode_jump_to_last(SNode *const self)
 {
-    if (self == NULL) { return NULL; }
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return NULL;
+    }
 
     SNode *current_node = self;
     while(current_node->next != NULL) {
@@ -58,7 +59,10 @@ SNode
 SNode
 *snode_jump_to_n(SNode *const self, const uint32_t n)
 {
-    if (self == NULL) { return NULL; }
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return NULL;
+    }
 
     SNode *node = self;
     uint32_t i;
@@ -73,11 +77,15 @@ SNode
 void
 snode_print_all_linked_nodes(const SNode *const self)
 {
-    if (self == NULL) { return; }
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return;
+    }
 
     const SNode *current_node = self;
-    while (current_node->next != NULL) {
-        printf("%d ", current_node->value);
+    while (current_node != NULL) {
+        printf("%d -> ", current_node->value);
+        current_node = current_node->next;
     }
     printf("NULL\n");
 }
@@ -89,11 +97,12 @@ void
 snode_print_debug(const SNode *const self)
 {
     if (self == NULL) {
-        fprintf(stderr, "\tSNode con valor NULL");
-    } else {
-        fprintf(stderr,
-                "\t(SNode) { .value = %d; .next = %p };",
-                self->value,
-                (void *)self->next);
+        error(__func__, ERR_NULL_NODE);
+        return;
     }
+
+    fprintf(stderr,
+            "\t(SNode) { .value = %d; .next = %p };",
+            self->value,
+            (void *)self->next);
 }

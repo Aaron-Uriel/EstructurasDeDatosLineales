@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include <libdstruct.h>
+#include <error.h>
 
 Node *
 node_new(int32_t value)
@@ -23,26 +24,13 @@ node_delete(Node **self)
     *self = NULL;
 }
 
-Node *
-node_getnext(Node *const self)
-{
-    if (self == NULL) { return NULL; }
-
-	return self->next;
-}
-
-Node
-*node_get_previous(Node *const self)
-{
-    if (self == NULL) { return NULL; }
-
-    return self->previous;
-}
-
 void 
 node_append(Node *const self, Node *const adjacent_node)
 {
-    if (self == NULL) { return; }
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return;
+    }
 
 	self->next = adjacent_node;
 }
@@ -50,7 +38,10 @@ node_append(Node *const self, Node *const adjacent_node)
 void
 node_prepend(Node *const self, Node *const adjacent_node)
 {
-    if (self == NULL) { return; }
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return;
+    }
 
     self->previous = adjacent_node;
 }
@@ -58,7 +49,10 @@ node_prepend(Node *const self, Node *const adjacent_node)
 Node
 *node_jump_to_last(Node *const self)
 {
-    if (self == NULL) { return NULL; }
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return NULL;
+    }
 
     Node *current_node = self;
     while(current_node->next != NULL) {
@@ -71,7 +65,10 @@ Node
 Node
 *node_jump_to_first(Node *const self)
 {
-    if (self == NULL) { return NULL; }
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return NULL;
+    }
 
     Node *current_node = self;
     while(current_node->previous != NULL) {
@@ -83,7 +80,10 @@ Node
 Node
 *node_jump_to_n(Node *const self, const uint32_t n)
 {
-    if (self == NULL) { return NULL; }
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return NULL;
+    }
 
     Node *node = self;
     uint32_t i;
@@ -98,9 +98,14 @@ Node
 void
 node_print_all_linked_nodes(const Node *const self)
 {
+    if (self == NULL) {
+        error(__func__, ERR_NULL_NODE);
+        return;
+    }
     const Node *current_node = self;
     while (current_node->next != NULL) {
         printf("%d ", current_node->value);
+        current_node = current_node->next;
     }
     printf("NULL\n");
 }
@@ -112,12 +117,13 @@ void
 node_print_debug(const Node *const self)
 {
     if (self == NULL) {
-        fprintf(stderr, "\tNode con valor NULL");
-    } else {
-        fprintf(stderr,
-                "\t(Node) { .value = %d; .next = %p; .previous = %p };",
-                self->value,
-                (void *)self->next,
-                (void *)self->previous);
+        error(__func__, ERR_NULL_NODE);
+        return;
     }
+
+    fprintf(stderr,
+            "\t(Node) { .value = %d; .next = %p; .previous = %p };",
+            self->value,
+            (void *)self->next,
+            (void *)self->previous);
 }

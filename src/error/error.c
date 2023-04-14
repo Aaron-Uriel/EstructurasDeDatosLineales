@@ -11,7 +11,7 @@ error(const char *const function_name, enum ErrorKind errkind) {
         strcpy(err_as_string, "Fuera de límites");
         break;
     case ERR_NULL_NODE:
-        strcpy(err_as_string, "Uno de los valores recibidos es NULL");
+        strcpy(err_as_string, "Uno de los valor del nodo recibido es NULL");
         break;
     case ERR_NULL_DATA_STRUCT:
         strcpy(err_as_string, "La estructura de datos está vacía, es NULL");

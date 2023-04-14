@@ -7,5 +7,12 @@ sstack_test = executable('sstack_test', 'stack.c',
   link_with : libdstruct,
   include_directories : includes,
 )
+test('sstack_test', sstack_test)
 
-test('libdstruct', sstack_test)
+slist_test = executable('slist_test', 'slist.c',
+  link_with : libdstruct,
+  include_directories : includes,
+)
+test('slist_test', slist_test)
+
+

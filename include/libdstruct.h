@@ -61,9 +61,11 @@ PUBLIC void node_print_debug(const Node *const self);
 
 /* Listas. */
 
-PUBLIC void    slist_insert_node(SNode **const slist, SNode *const node, const uint32_t index);
-PUBLIC SNode   *slist_extract_node(SNode **const slist, const uint32_t index);
-void    slist_print(SNode **slist);
+PUBLIC void     slist_push_back(SNode **slist, SNode *snode);
+PUBLIC void     slist_insert_snode(SNode **const slist, SNode *const snode, const uint32_t index);
+PUBLIC SNode    *slist_pop_back(SNode **slist);
+PUBLIC SNode    *slist_extract_node(SNode **const slist, const uint32_t index);
+PUBLIC void    slist_print(SNode *slist);
 
 typedef struct HList HList;
 

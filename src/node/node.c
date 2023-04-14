@@ -17,9 +17,9 @@ node_new(int32_t value)
 }
 
 void
-node_delete(Node ** self)
+node_delete(Node **self)
 {
-	free(self);
+	free(*self);
     *self = NULL;
 }
 

@@ -77,6 +77,10 @@ PUBLIC void slist_push_back(SNode **slist, SNode *snode);
 
 typedef struct HQueue HQueue;
 
+PUBLIC SNode *squeue_dequeue(SNode **const squeue);
+PUBLIC void squeue_enqueue(SNode **squeue, SNode *snode);
+PUBLIC void squeue_print(SNode *squeue);
+
 /* Fin de colas. */
 
 /* Pila. */

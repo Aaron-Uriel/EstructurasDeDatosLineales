@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 #include <libdstruct.h>
 
@@ -11,7 +11,6 @@ main(void)
     for(int i = 0; i < 6; i++) {
         slist_push_back(&slist, snode_new(i * 10));
     }
-    printf("Nodos insertados: ");
 
     /* 0 -> 10 -> 20 -> 30 -> 40 -> 50 */
     slist_print(slist);

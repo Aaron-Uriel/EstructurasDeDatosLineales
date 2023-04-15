@@ -42,7 +42,7 @@ report(const char *const function_name,
     }
 
     fprintf(stderr, "En la función %s():\n"
-            "\t%s: %s\n",
+            "\t%s: %s.\n",
             function_name,
             report_kind_as_string,
             report_desc_as_string);

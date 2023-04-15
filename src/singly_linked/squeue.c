@@ -2,16 +2,15 @@
 #include <stdio.h>
 
 #include <libdstruct.h>
-#include <error.h>
+#include <report.h>
 
 SNode *
-squeue_enqueue(SNode **const squeue)
+squeue_dequeue(SNode **const squeue)
 {
-    if (squeue == NULL) {
-        //error(__func__, ERR_NULL_DATA_STRUCT);
+    if (*squeue == NULL) {
+        report(__func__, ERROR, NULL_DATA_STRUCT);
         return NULL;
     }
-
     SNode *const extracted_node = *squeue;
     *squeue = (*squeue)->next;
 
@@ -19,19 +18,24 @@ squeue_enqueue(SNode **const squeue)
 }
 
 void
-squeue_insert_node(SNode **squeue, SNode *snode)
+squeue_enqueue(SNode **squeue, SNode *snode)
 {
-    if (squeue == NULL) {
-        squeue = &snode;
-    } else {
-        SNode *const last_node_in_squeue = snode_jump_to_last(*squeue);
-        last_node_in_squeue->next = snode;
+    if (*squeue == NULL) {
+        report(__func__, INFO, NULL_DATA_STRUCT);
+        *squeue = snode;
+        return;
     }
+    SNode *const last_node_in_squeue = snode_jump_to_last(*squeue);
+    last_node_in_squeue->next = snode;
 }
 
 void
-squeue_imprimir(const SNode *const *const squeue)
+squeue_print(SNode *squeue)
 {
-    snode_print_all_linked_nodes(*squeue);
+    if (squeue == NULL) {
+        report(__func__, ERROR, NULL_DATA_STRUCT);
+        return;
+    }
+    snode_print_all_linked_nodes(squeue);
 }
 

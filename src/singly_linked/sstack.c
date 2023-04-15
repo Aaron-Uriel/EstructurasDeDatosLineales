@@ -49,3 +49,4 @@ void sstack_imprimir(SNode **sstack)
 {
     snode_print_all_linked_nodes(*sstack);
 }
+

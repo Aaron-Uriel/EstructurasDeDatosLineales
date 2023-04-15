@@ -1,7 +1,7 @@
 subdir('head_based')
 subdir('singly_linked')
 subdir('node')
-subdir('error')
+subdir('report')
 
 # These arguments are only used to build the shared library
 # not the executables that use the library.

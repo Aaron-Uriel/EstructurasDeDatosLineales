@@ -54,7 +54,7 @@ PUBLIC void node_prepend(Node *const self, Node *const adjacent_node);
 PUBLIC Node *node_jump_to_last(Node *const self);
 PUBLIC Node *node_jump_to_first(Node *const self);
 PUBLIC Node *node_jump_to_n(Node *const self, const uint32_t n);
-PUBLIC void node_print_all_linked_nodes(const Node *const self);
+PUBLIC void node_print_all_linked_nodes(Node *const self);
 PUBLIC void node_print_debug(const Node *const self);
 
 /* Fin de nodos. */
@@ -79,10 +79,12 @@ typedef struct HQueue HQueue;
 
 /* Fin de colas. */
 
-/* Pilas. */
+/* Pila. */
 
-PUBLIC void add_node (SNode *pila, SNode node);
+PUBLIC void sstack_insert_node(SNode **sstack, SNode *snode, int id);
+PUBLIC void sstack_delete(SNode **sstack);
+PUBLIC void sstack_imprimir(SNode **sstack);
 
-/* Fin de pilas. */
+/* Fin de pila. */
 
 #endif

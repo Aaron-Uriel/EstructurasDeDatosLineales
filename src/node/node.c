@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include <libdstruct.h>
-#include <error.h>
+#include <report.h>
 
 Node *
 node_new(int32_t value)
@@ -28,7 +28,7 @@ void
 node_append(Node *const self, Node *const adjacent_node)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -39,7 +39,7 @@ void
 node_prepend(Node *const self, Node *const adjacent_node)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -50,7 +50,7 @@ Node
 *node_jump_to_last(Node *const self)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
@@ -66,7 +66,7 @@ Node
 *node_jump_to_first(Node *const self)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
@@ -81,29 +81,32 @@ Node
 *node_jump_to_n(Node *const self, const uint32_t n)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
     Node *node = self;
     uint32_t i;
     for (i = 0; i < n; i++) {
-        if (node->next == NULL) { return NULL; }
+        if (node->next == NULL) {
+            report(__func__, ERROR, OUT_OF_BOUNDS);
+            return NULL;
+        }
         node = node->next;
     }
 
-    return node;     
+    return node; 
 }
 
 void
-node_print_all_linked_nodes(const Node *const self)
+node_print_all_linked_nodes(Node *const self)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return;
     }
-    const Node *current_node = self;
-    while (current_node->next != NULL) {
+    const Node *current_node = node_jump_to_first(self);
+    while (current_node != NULL) {
         printf("%d ", current_node->value);
         current_node = current_node->next;
     }
@@ -117,7 +120,7 @@ void
 node_print_debug(const Node *const self)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return;
     }
 

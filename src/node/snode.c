@@ -1,9 +1,9 @@
-#include "error.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
 #include <libdstruct.h>
+#include <report.h>
 
 SNode *
 snode_new(int32_t value)
@@ -28,7 +28,7 @@ void
 snode_append(SNode *const self, SNode *const adjacent_snode)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -44,7 +44,7 @@ SNode
 *snode_jump_to_last(SNode *const self)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
@@ -60,14 +60,17 @@ SNode
 *snode_jump_to_n(SNode *const self, const uint32_t n)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
     SNode *node = self;
     uint32_t i;
     for (i = 0; i < n; i++) {
-        if (node->next == NULL) { return NULL; }
+        if (node->next == NULL) {
+            report(__func__, ERROR, OUT_OF_BOUNDS);
+            return NULL;
+        }
         node = node->next;
     }
 
@@ -78,7 +81,7 @@ void
 snode_print_all_linked_nodes(const SNode *const self)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -97,7 +100,7 @@ void
 snode_print_debug(const SNode *const self)
 {
     if (self == NULL) {
-        error(__func__, ERR_NULL_NODE);
+        report(__func__, ERROR, NULL_NODE);
         return;
     }
 

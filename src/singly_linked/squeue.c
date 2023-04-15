@@ -2,24 +2,25 @@
 #include <stdio.h>
 
 #include <libdstruct.h>
+#include <error.h>
 
 SNode *
-squeue_extract_node(SNode **const squeue)
+squeue_enqueue(SNode **const squeue)
 {
-    /* squeue solo  es NULL si la cola está vacía */
     if (squeue == NULL) {
+        //error(__func__, ERR_NULL_DATA_STRUCT);
         return NULL;
-    } else {
-        SNode *const extracted_node = *squeue;
-        *squeue = (*squeue)->next;
-        return extracted_node; 
     }
+
+    SNode *const extracted_node = *squeue;
+    *squeue = (*squeue)->next;
+
+    return extracted_node; 
 }
 
 void
 squeue_insert_node(SNode **squeue, SNode *snode)
 {
-    /* squeue solo es NULL cuando la cola está vacía. */
     if (squeue == NULL) {
         squeue = &snode;
     } else {

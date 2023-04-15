@@ -25,25 +25,27 @@ node_delete(Node **self)
 }
 
 void 
-node_append(Node *const self, Node *const adjacent_node)
+node_append(Node *const self, Node *const node)
 {
     if (self == NULL) {
         report(__func__, ERROR, NULL_NODE);
         return;
     }
 
-	self->next = adjacent_node;
+	self->next = node;
+    node->previous = self;
 }
 
 void
-node_prepend(Node *const self, Node *const adjacent_node)
+node_prepend(Node *const self, Node *const node)
 {
     if (self == NULL) {
         report(__func__, ERROR, NULL_NODE);
         return;
     }
 
-    self->previous = adjacent_node;
+    self->previous = node;
+    node->next = self;
 }
 
 Node

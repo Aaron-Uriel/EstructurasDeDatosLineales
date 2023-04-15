@@ -27,7 +27,7 @@ node_delete(Node **self)
 void 
 node_append(Node *const self, Node *const node)
 {
-    if (self == NULL) {
+    if (self == NULL || node == NULL) {
         report(__func__, ERROR, NULL_NODE);
         return;
     }
@@ -39,7 +39,7 @@ node_append(Node *const self, Node *const node)
 void
 node_prepend(Node *const self, Node *const node)
 {
-    if (self == NULL) {
+    if (self == NULL || node == NULL) {
         report(__func__, ERROR, NULL_NODE);
         return;
     }

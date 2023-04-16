@@ -13,10 +13,13 @@ SNode *
 snode_new(int32_t value)
 {
 	SNode *const new_snode = malloc(sizeof(SNode));
-	if (new_snode != NULL) {
-		new_snode->value = value;
-		new_snode->next = NULL;
-	}
+    if (new_snode == NULL) {
+        report(__func__, ERROR, OUT_OF_MEMORY);
+        return NULL;
+    }
+
+    new_snode->value = value;
+    new_snode->next = NULL;
 
 	return new_snode;
 }

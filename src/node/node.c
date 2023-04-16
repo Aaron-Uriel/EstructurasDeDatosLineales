@@ -12,11 +12,13 @@ Node *
 node_new(int32_t value)
 {
 	Node *const new_node = malloc(sizeof(Node));
-	if (new_node != NULL) {
-		new_node->value     = value;
-		new_node->next     = NULL;
-        new_node->previous = NULL;
-	}
+	if (new_node == NULL) {
+        report(__func__, ERROR, OUT_OF_MEMORY);
+    }
+
+    new_node->value     = value;
+    new_node->next      = NULL;
+    new_node->previous  = NULL;
 
 	return new_node;
 }

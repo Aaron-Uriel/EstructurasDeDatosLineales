@@ -4,6 +4,10 @@
 #include <libdstruct.h>
 #include <report.h>
 
+/*
+ * Devuelve un apuntador que contiene la dirección de un nodo recién creado,
+ * con el valor ingresado.
+ */
 Node *
 node_new(int32_t value)
 {
@@ -17,6 +21,11 @@ node_new(int32_t value)
 	return new_node;
 }
 
+/*
+ * Libera el espacio en memoria ocupado por el nodo, adicionalmente como medida 
+ * de seguridad, hace que el apuntador a nodo que recibe apunte a NULL después 
+ * de ser liberado.
+ */
 void
 node_delete(Node **self)
 {
@@ -24,6 +33,13 @@ node_delete(Node **self)
     *self = NULL;
 }
 
+/*
+ * Crea una relación entre los dos nodos:
+ * - El primer nodo (self) ahora dirá que su siguiente nodo 
+ *   es el segundo nodo (node).
+ * - El segundo nodo (node) ahora dirá que su nodo anterior
+ *   es el primer nodo (self).
+ */
 void 
 node_append(Node *const self, Node *const node)
 {
@@ -36,6 +52,13 @@ node_append(Node *const self, Node *const node)
     node->previous = self;
 }
 
+/*
+ * Crea una relación entre los dos nodos:
+ * - El primer nodo (self) ahora dirá que su nodo anterior
+ *   es el segundo nodo (node).
+ * - El segundo nodo (node) ahora dirá que su siguiente nodo
+ *   es el primer nodo (self).
+ */
 void
 node_prepend(Node *const self, Node *const node)
 {
@@ -48,6 +71,9 @@ node_prepend(Node *const self, Node *const node)
     node->next = self;
 }
 
+/*
+ * Devuelve un apuntador al último nodo de todos los nodos enlazados.
+ */
 Node
 *node_jump_to_last(Node *const self)
 {
@@ -64,6 +90,9 @@ Node
     return current_node;
 }
 
+/*
+ * Devuelve un apuntador al primer nodo de todos los nodos enlazados.
+ */
 Node
 *node_jump_to_first(Node *const self)
 {
@@ -79,6 +108,10 @@ Node
     return current_node;
 }
 
+/*
+ * Te devuelve un apuntador al n-ésimo nodo hacia adelante, respecto al nodo ingresado.
+ * Si el valor n está más allá de la cadena de nodos se devuelve NULL.
+ */
 Node
 *node_jump_to_n(Node *const self, const uint32_t n)
 {
@@ -100,6 +133,9 @@ Node
     return node; 
 }
 
+/*
+ * Imprime los valores de todos los nodos relacionados, de principio a fin.
+ */
 void
 node_print_all_linked_nodes(Node *const self)
 {

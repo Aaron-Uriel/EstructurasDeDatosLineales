@@ -5,6 +5,10 @@
 #include <libdstruct.h>
 #include <report.h>
 
+/*
+ * Devuelve un apuntador que contiene la dirección de un nodo recién creado,
+ * con el valor ingresado.
+ */
 SNode *
 snode_new(int32_t value)
 {
@@ -17,6 +21,11 @@ snode_new(int32_t value)
 	return new_snode;
 }
 
+/*
+ * Libera el espacio en memoria ocupado por el nodo, adicionalmente como medida 
+ * de seguridad, hace que el apuntador a nodo que recibe apunte a NULL después 
+ * de ser liberado.
+ */
 void
 snode_delete(SNode **self)
 {
@@ -24,6 +33,11 @@ snode_delete(SNode **self)
     *self = NULL; 
 }
 
+/*
+ * Crea una relación unidireccional entre los dos nodos:
+ * - El primer nodo (self) ahora dirá que su siguiente nodo es
+ *   el segundo nodo (snode).
+ */
 void 
 snode_append(SNode *const self, SNode *const snode)
 {
@@ -36,9 +50,7 @@ snode_append(SNode *const self, SNode *const snode)
 }
 
 /*
- * Descripción de la función.
- * Esta función sirve para llegar al final de una serie de nodos enlazados.
- * Es útil cuando quieres insertar nodos al final por ejemplo.
+ * Devuelve un apuntador al último nodo de todos los nodos enlazados.
  */
 SNode
 *snode_jump_to_last(SNode *const self)
@@ -56,6 +68,10 @@ SNode
     return current_node;
 }
 
+/*
+ * Te devuelve un apuntador al n-ésimo nodo hacia adelante, respecto al nodo ingresado.
+ * Si el valor n está más allá de la cadena de nodos se devuelve NULL.
+ */
 SNode
 *snode_jump_to_n(SNode *const self, const uint32_t n)
 {
@@ -77,6 +93,12 @@ SNode
     return node;     
 }
 
+/*
+ * Imprime los valores de todos los nodos relacionados, debido a que es una
+ * relación de una sola dirección solo se desde el nodo pasado hasta el último,
+ * el nodo recibido por la función no será necesariamente el primero en 
+ * toda la relación.
+ */
 void
 snode_print_all_linked_nodes(const SNode *const self)
 {

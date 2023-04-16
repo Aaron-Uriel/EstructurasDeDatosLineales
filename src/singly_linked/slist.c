@@ -4,6 +4,9 @@
 #include <libdstruct.h>
 #include <report.h>
 
+/*
+ * Añade un nodo al final de la lista.
+ */
 void
 slist_push_back(SNode **slist, SNode *snode)
 {
@@ -21,6 +24,11 @@ slist_push_back(SNode **slist, SNode *snode)
     last_snode->next = snode;
 }
 
+/*
+ * Inserta un nodo en una posición arbitraria de la lista.
+ * En caso de querer insertar en una posición fuera de los confines la lista,
+ * la función no hace nada.
+ */
 void
 slist_insert_snode(SNode **const slist, SNode *const snode, const uint32_t index)
 {
@@ -61,6 +69,9 @@ slist_insert_snode(SNode **const slist, SNode *const snode, const uint32_t index
     snode->next = snode_at_index;
 }
 
+/*
+ * Extrae el último nodo de la lista y lo devuelve.
+ */
 SNode *
 slist_pop_back(SNode **slist)
 {
@@ -89,6 +100,11 @@ slist_pop_back(SNode **slist)
     return last_snode;
 }
 
+/*
+ * Extrae un nodo de una posición arbitraria dentro de los confines de la lista.
+ * En caso de intentar extraer un nodo fuera de los límites, la función
+ * regresa NULL.
+ */
 SNode *
 slist_extract_node(SNode **const slist, const uint32_t index)
 {
@@ -122,6 +138,9 @@ slist_extract_node(SNode **const slist, const uint32_t index)
     return extracted_node;
 }
 
+/*
+ * Imprime la lista.
+ */
 void
 slist_print(SNode *slist)
 {
@@ -131,3 +150,4 @@ slist_print(SNode *slist)
     }
     snode_print_all_linked_nodes(slist);
 }
+

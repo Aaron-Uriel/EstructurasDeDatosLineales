@@ -20,3 +20,10 @@ squeue_test = executable('squeue_test', 'squeue.c',
   include_directories : includes,
 )
 test('squeue_test', squeue_test)
+
+nodes_test = executable('nodes_test', 'nodes.c',
+  link_with : libdstruct,
+  include_directories : includes,
+)
+test('nodes_test', nodes_test)
+

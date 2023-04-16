@@ -37,6 +37,28 @@ snode_delete(SNode **self)
 }
 
 /*
+ * Se encarga de hacer una copia exacta del nodo original.
+ */
+SNode *
+snode_clone(SNode *self)
+{
+    if (self == NULL) {
+        report(__func__, ERROR, NULL_NODE);
+        return NULL;
+    }
+
+    /* Reservamos el espacio en memoria que ocupará el nodo clonado */
+    SNode *cloned_node = malloc(sizeof(*cloned_node));
+    if (cloned_node == NULL) {
+        report(__func__, ERROR, OUT_OF_MEMORY);
+        return NULL;
+    }
+    memcpy(cloned_node, self, sizeof(*cloned_node));
+
+    return cloned_node;
+}
+
+/*
  * Crea una relación unidireccional entre los dos nodos:
  * - El primer nodo (self) ahora dirá que su siguiente nodo es
  *   el segundo nodo (snode).

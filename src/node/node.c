@@ -3,6 +3,7 @@
 
 #include <libdstruct.h>
 #include <report.h>
+#include <string.h>
 
 /*
  * Devuelve un apuntador que contiene la dirección de un nodo recién creado,
@@ -35,6 +36,27 @@ node_delete(Node **self)
     *self = NULL;
 }
 
+/*
+ * Se encarga de hacer una copia exacta del nodo original.
+ */
+Node *
+node_clone(Node *self)
+{
+    if (self == NULL) {
+        report(__func__, ERROR, NULL_NODE);
+        return NULL;
+    }
+
+    /* Reservamos el espacio en memoria que ocupará el nodo clonado */
+    Node *cloned_node = malloc(sizeof(*cloned_node));
+    if (cloned_node == NULL) {
+        report(__func__, ERROR, OUT_OF_MEMORY);
+        return NULL;
+    }
+    memcpy(cloned_node, self, sizeof(*cloned_node));
+
+    return cloned_node;
+}
 /*
  * Crea una relación entre los dos nodos:
  * - El primer nodo (self) ahora dirá que su siguiente nodo 

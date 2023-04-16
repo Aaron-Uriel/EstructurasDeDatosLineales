@@ -25,14 +25,14 @@ snode_delete(SNode **self)
 }
 
 void 
-snode_append(SNode *const self, SNode *const adjacent_snode)
+snode_append(SNode *const self, SNode *const snode)
 {
-    if (self == NULL) {
+    if (self == NULL || snode == NULL) {
         report(__func__, ERROR, NULL_NODE);
         return;
     }
 
-	self->next = adjacent_snode;
+	self->next = snode;
 }
 
 /*

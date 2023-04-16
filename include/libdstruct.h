@@ -32,7 +32,7 @@ struct SNode {
 PUBLIC SNode   *snode_new(int32_t value);
 PUBLIC void    snode_delete(SNode **self);
 PUBLIC SNode   *snode_get_next(SNode *const self);
-PUBLIC void    snode_append(SNode *const self, SNode *const adjacent_node);
+PUBLIC void    snode_append(SNode *const self, SNode *const snode);
 PUBLIC SNode   *snode_jump_to_last(SNode *const self);
 PUBLIC SNode   *snode_jump_to_n(SNode *const self, const uint32_t n);
 PUBLIC void    snode_print_all_linked_nodes(const SNode *const self);

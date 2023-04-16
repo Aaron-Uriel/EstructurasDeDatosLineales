@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -67,6 +68,39 @@ slist_insert_snode(SNode **const slist, SNode *const snode, const uint32_t index
     /* Ocurre cuando queremos insertar dentro de la lista */
     snode_before_index->next = snode;
     snode->next = snode_at_index;
+}
+
+/*
+ * Busca si existe el nodo recibido dentro de la lista, si este existe se regresa
+ * el índice de ese nodo.
+ * La función regresa -1 cuando ocurre algún error relacionado a las variables
+ * pasadas a la funciín, se regresa -2 si no se encontró el nodo en la lista.
+ * Para verificar que si sean el mismo nodo, se comparan las direcciones de
+ * memoria, si la dirección a la que apunta algún elemento coincide con la de
+ * snode se considera como encontrado.
+ */
+int32_t
+slist_search_snode(SNode **const slist, SNode *const snode) {
+    if (snode == NULL) {
+        report(__func__, ERROR, NULL_NODE);
+        return -1;
+    }
+    if (*slist == NULL) {
+        report(__func__, ERROR, NULL_DATA_STRUCT);
+        return -1;
+    }
+
+    SNode *current_node;
+    int32_t i;
+    for (current_node = *slist, i = 0;
+         current_node != NULL;
+         current_node = current_node->next, i++) {
+        if (current_node == snode) {
+            return i;
+        }
+    }
+    
+    return -2;
 }
 
 /*

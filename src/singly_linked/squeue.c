@@ -12,7 +12,11 @@ squeue_dequeue(SNode **const squeue)
         return NULL;
     }
     SNode *const extracted_node = *squeue;
-    *squeue = (*squeue)->next;
+    SNode *const new_first_node = (*squeue)->next;
+    if (new_first_node == NULL) {
+        report(__func__, INFO, DATA_STRUCT_WILL_BE_EMPTY);
+    }
+    *squeue = new_first_node;
 
     return extracted_node; 
 }

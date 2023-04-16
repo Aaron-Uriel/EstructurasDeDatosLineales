@@ -14,7 +14,7 @@ report(const char *const function_name,
         strcpy(report_kind_as_string, "Depuración");
         break;
     case INFO:
-        strcpy(report_kind_as_string, "Información (acción tomada)");
+        strcpy(report_kind_as_string, "Información");
         break;
     case WARN:
         strcpy(report_kind_as_string, "Advertencia");
@@ -30,6 +30,9 @@ report(const char *const function_name,
     switch (report_desc) {
     case OUT_OF_BOUNDS:
         strcpy(report_desc_as_string, "fuera de límites");
+        break;
+    case OUT_OF_MEMORY:
+        strcpy(report_desc_as_string, "sin memoria disponible");
         break;
     case NULL_NODE:
         strcpy(report_desc_as_string, "el nodo recibido es de valor NULL");

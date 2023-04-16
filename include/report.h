@@ -1,23 +1,16 @@
 #ifndef LOG_H
 #define LOG_H
 
-#if defined _WIN32 || defined __CYGWIN__
-  #ifdef BUILDING_LIBDSTRUCT
-    #define LIBDSTRUCT_PUBLIC __declspec(dllexport)
-  #else
-    #define LIBDSTRUCT_PUBLIC __declspec(dllimport)
-  #endif
+#ifdef BUILDING_LIBDSTRUCT
+    #define INTERNAL __attribute__((visibility ("internal")))
 #else
-  #ifdef BUILDING_LIBDSTRUCT
-      #define INTERNAL __attribute__((visibility ("internal")))
-  #else
-      #define INTERNAL
-  #endif
+    #define INTERNAL
 #endif
 
 enum ReportKind { DEBUG, INFO, WARN, ERROR };
 enum ReportDesc {
     OUT_OF_BOUNDS,
+    OUT_OF_MEMORY,
     NULL_NODE,
     NULL_DATA_STRUCT,
     DATA_STRUCT_WILL_BE_EMPTY

@@ -27,3 +27,8 @@ nodes_test = executable('nodes_test', 'nodes.c',
 )
 test('nodes_test', nodes_test)
 
+dqueue_test = executable('dqueue_test', 'dqueue.c',
+  link_with : libdstruct,
+  include_directories : includes,
+)
+test('dqueue_test', dqueue_test)

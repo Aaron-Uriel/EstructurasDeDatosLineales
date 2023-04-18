@@ -9,6 +9,11 @@ main(void) {
     Node *node = node_new(25), *node2;
     snode2 = snode_clone(snode);
     node2 = node_clone(node);
+    node->value;
+     Node *node3 = node_new (30);
+     node->next = node3;
+     node3->previous = node;
+     printf ("%d\n", node->next->value);
 
     assert(snode != snode2 && node != node2);
 

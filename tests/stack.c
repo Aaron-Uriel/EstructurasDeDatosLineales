@@ -2,15 +2,13 @@
 #include <stdio.h>
 
 #include <libdstruct.h>
-/* 
- * Aquí probamos las funciones de la pila y vemos que todo va bien xd.
- * Si algo sale más return 1;, y si todo ta' bien return 0;
- */
 
-void dlist_insert_node(Node **dlist, Node *node, int id){
+
+void dolist_insert_node(Node **dlist, Node *node, int id){
+    int listo = 0;
     node = node_new(id); 
     Node *actual = *dlist;
-    Node *prev; 
+    Node *prev, *temporal = node; 
 
 
     if (node != NULL)
@@ -20,20 +18,43 @@ void dlist_insert_node(Node **dlist, Node *node, int id){
 
         } else {
             actual = *dlist; 
-            while (actual->next != NULL) 
-            {;
-                prev = actual;
-                actual = actual->next;
-                actual->previous = prev;
+            while (actual->next != NULL && listo == 0) 
+            {
+                if (node->value >= actual->value)
+                {
+                    prev = actual;
+                    actual = actual->next;
+                    actual->previous = prev;
 
+                } else if (node->value < actual->value)
+                {
+                    temporal = actual;
+                    node->previous = temporal->previous;
+                    actual->previous = node;
+                    node->next = actual;
+                    prev->next = node;
+                    *dlist = node;
+                    
+                    listo = 1;
+
+                }
+                
             }
 
+            if (listo < 1)
+            {
             actual->next = node;
             node->previous = actual;
-
-            
+            node->next = NULL;
+            }
+ 
         }
+        
+
     }
+
+
+
 
 }
 
@@ -52,17 +73,62 @@ main(void)
     int id;
     printf("Ingrese el numero del nodo: ");
     scanf("%d", &id);
-    dlist_insert_node(&list, node, id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list); 
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
     dlist_imprimir(&list);
 
     printf("Ingrese el numero del nodo: ");
     scanf("%d", &id);
-    dlist_insert_node(&list, node, id);
+    dolist_insert_node(&list, node, id);
     dlist_imprimir(&list);
 
     printf("Ingrese el numero del nodo: ");
     scanf("%d", &id);
-    dlist_insert_node(&list, node, id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+     printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
     dlist_imprimir(&list);
 
 

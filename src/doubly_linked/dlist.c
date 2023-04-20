@@ -19,7 +19,7 @@ void dolist_insert_node(Node **dlist, Node *node, int id)
             actual = *dlist; 
             while (actual->next != NULL && listo == 0) 
             {
-                if (node->value > actual->value)
+                if (node->value > actual->value) 
                 {
                     cont ++;
                     prev = actual;

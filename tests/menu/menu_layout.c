@@ -199,12 +199,27 @@ int main(void)
                         {
                         case 1:
                             //Agregar
+                            printf("\t|________________________________.\n");
+                            printf("\t|_____________Agregar____________|\n");
+                            printf("\t| Ingrese el valor del nodo: ");
+                            scanf("%d", &id);
+                            dolist_insert_node(&list, node, id);
+                           // system("clear");
                             break;
                         case 2:
                             //Quitar
+                            printf("\t|_________________________________________.\n");
+                            printf("\t|__________________Quitar_________________|\n");
+                            printf("\t| Ingrese el valor del nodo a eliminar: ");
+                            scanf("%d", &id);
+                            delete_node(&list, id);
+                            system("clear");
                             break;
                         case 3: 
                             //Imprimir
+                            system("clear");
+                            printf("|________Lista__________ _ _  _  _   _    _\n| ");
+                            dlist_imprimir(&list);
                             break;
                         case 4: 
                             break;    

@@ -6,7 +6,9 @@
 
 int main(void)
 {
-    int opcion, opcionSecun, tercerOpcion;
+    SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snode = NULL; 
+    Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL; 
+    int opcion, opcionSecun, tercerOpcion, id;
     do
     {
         opcion = menu_principal();  
@@ -25,13 +27,24 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            printf("Uno\n");
+                            //Agregar
+                            printf("\t|________________________________.\n");
+                            printf("\t|_____________Agregar____________|\n");
+                            printf("\t| Ingrese el valor del nodo: ");
+                            scanf("%d", &id);
+                            squeue_enqueue(&squeue, snode_new(id));
+                            system("clear");
                             break;
                         case 2:
-                                printf("dos");
+                            //Quitar
+                            squeue_dequeue(&squeue);
+                            system("clear");
                             break;
                         case 3: 
-                                printf("tres");
+                            //imprimir
+                            system("clear");
+                            printf("|________Cola__________ _ _  _  _   _    _\n| ");
+                            squeue_print(squeue);
                             break;
                         case 4: 
                             break;    
@@ -52,18 +65,30 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            printf("Uno\n");
+                            //Agregar
+                            printf("\t|________________________________.\n");
+                            printf("\t|_____________Agregar____________|\n");
+                            printf("\t| Ingrese el valor del nodo: ");
+                            scanf("%d", &id);
+                            sstack_insert_node(&sstack, snode,id);
+                            system("clear");
                             break;
                         case 2:
-                                printf("dos");
+                            //Quitar
+                            sstack_delete(&sstack);
+                            system("clear");
                             break;
                         case 3: 
-                                printf("tres");
+                            //Imprimir
+                            system("clear");
+                            printf("|________Pila__________ _ _  _  _   _    _\n| ");
+                            sstack_imprimir(&sstack);
                             break;
                         case 4: 
                             break;    
                         
                         default:
+                            system("clear");
                             printf("\tOpcion invalida.\n");
                             break;
                         }
@@ -78,13 +103,13 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            printf("Uno\n");
+                            //Agregar
                             break;
                         case 2:
-                                printf("dos");
+                            //Quitar
                             break;
                         case 3: 
-                                printf("tres");
+                            //Imprimir
                             break;
                         case 4: 
                             break;    
@@ -121,13 +146,13 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            printf("Uno\n");
+                            //Agregar
                             break;
                         case 2:
-                                printf("dos");
+                            //Quitar
                             break;
                         case 3: 
-                                printf("tres");
+                            //Imprimir
                             break;
                         case 4: 
                             break;    
@@ -147,13 +172,13 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            printf("Uno\n");
+                            //Agregar
                             break;
                         case 2:
-                                printf("dos");
+                            //Quitar
                             break;
                         case 3: 
-                                printf("tres");
+                            //Imprimir
                             break;
                         case 4: 
                             break;    
@@ -173,13 +198,13 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            printf("Uno\n");
+                            //Agregar
                             break;
                         case 2:
-                                printf("dos");
+                            //Quitar
                             break;
                         case 3: 
-                                printf("tres");
+                            //Imprimir
                             break;
                         case 4: 
                             break;    
@@ -214,16 +239,16 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            printf("Uno\n");
+                            //Agregar
                             break;
                         case 2:
-                                printf("dos");
+                            //Quitar
                             break;
                         case 3: 
-                                printf("tres");
+                            //Imprimir
                             break;
                         case 4: 
-                            break;    
+                            break;  
                         
                         default:
                             printf("\tOpcion invalida.\n");
@@ -240,16 +265,16 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            printf("Uno\n");
+                            //Agregar
                             break;
                         case 2:
-                                printf("dos");
+                            //Quitar
                             break;
                         case 3: 
-                                printf("tres");
+                            //Imprimir
                             break;
                         case 4: 
-                            break;    
+                            break;  
                         
                         default:
                             printf("\tOpcion invalida.\n");
@@ -266,16 +291,16 @@ int main(void)
                         switch (tercerOpcion)
                         {
                         case 1:
-                            printf("Uno\n");
+                            //Agregar
                             break;
                         case 2:
-                                printf("dos");
+                            //Quitar
                             break;
                         case 3: 
-                                printf("tres");
+                            //Imprimir
                             break;
                         case 4: 
-                            break;    
+                            break;  
                         
                         default:
                             printf("\tOpcion invalida.\n");

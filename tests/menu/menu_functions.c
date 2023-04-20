@@ -35,6 +35,7 @@ int menu_secundario(void)
     printf("\t|Opcion: ");
     scanf("%d", &opcionSecun);
     printf("\t|_____________|\n");
+    system("clear");
     return opcionSecun;
 }
 

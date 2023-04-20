@@ -36,7 +36,6 @@ void dolist_insert_node(Node **dlist, Node *node, int id)
                         listo = 1;
                     }
                     
-
                 } else if (node->value <= actual->value)
                 {
                     
@@ -71,7 +70,6 @@ void dolist_insert_node(Node **dlist, Node *node, int id)
  
         }
         
-
     }
 
 }

@@ -1,40 +1,53 @@
 #include <stdlib.h>
 #include <stdio.h>
-
 #include <libdstruct.h>
-/* 
- * Aquí probamos las funciones de la pila y vemos que todo va bien xd.
- * Si algo sale más return 1;, y si todo ta' bien return 0;
- */
 
 int
 main(void)
 {
-    SNode *sstack = NULL, *snode = NULL;
+   /*  Node *list = NULL, *node = NULL; 
     int id;
-    printf("Numero del nodo: ");
-    scanf("%d", &id );
-    sstack_insert_node(&sstack, snode, id);
-    sstack_imprimir(&sstack);
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list); 
 
-    printf("Numero del nodo: ");
-    scanf("%d", &id );
-    sstack_insert_node(&sstack, snode, id);
-    sstack_imprimir(&sstack);
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
 
-    printf("Numero del nodo: ");
-    scanf("%d", &id );
-    sstack_insert_node(&sstack, snode, id);
-    sstack_imprimir(&sstack);
-    sstack_delete(&sstack);
-    sstack_imprimir(&sstack);
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
 
-    printf("Numero del nodo: ");
-    scanf("%d", &id );
-    sstack_insert_node(&sstack, snode, id);
-    sstack_imprimir(&sstack);
-    sstack_delete(&sstack);
-    sstack_imprimir(&sstack);
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+    printf("Ingrese el nodo a borrar: ");
+    scanf("%d", &id);
+    delete_node(&list, id);
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+    printf("Ingrese el numero del nodo: ");
+    scanf("%d", &id);
+    dolist_insert_node(&list, node, id);
+    dlist_imprimir(&list);
+
+     printf("Ingrese el nodo a borrar: ");
+    scanf("%d", &id);
+    delete_node(&list, id);
+    dlist_imprimir(&list);
+
+
+*/
 
     return 0;
 }

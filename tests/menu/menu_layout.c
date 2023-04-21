@@ -204,7 +204,7 @@ int main(void)
                             printf("\t| Ingrese el valor del nodo: ");
                             scanf("%d", &id);
                             dolist_insert_node(&list, node, id);
-                           // system("clear");
+                            system("clear");
                             break;
                         case 2:
                             //Quitar

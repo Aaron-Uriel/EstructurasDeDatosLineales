@@ -57,6 +57,7 @@ node_clone(Node *self)
 
     return cloned_node;
 }
+
 /*
  * Crea una relación entre los dos nodos:
  * - El primer nodo (self) ahora dirá que su siguiente nodo 

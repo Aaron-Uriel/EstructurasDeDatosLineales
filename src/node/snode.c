@@ -152,7 +152,7 @@ snode_print_debug(const SNode *const self)
     }
 
     fprintf(stderr,
-            "\t(SNode) { .value = %d; .next = %p };",
+            "\t(SNode) { .value = %d; .next = %p };\n",
             self->value,
             (void *)self->next);
 }

@@ -2,10 +2,8 @@
 #include <stdlib.h>
 #include <libdstruct.h>
 
-void
-sstack_insert_node(SNode **sstack, SNode *snode, int id)
+void sstack_insert_node(SNode **sstack, SNode *snode)
 {
-    snode = snode_new(id); 
     SNode *actual;
 
     if (snode != NULL)
@@ -20,17 +18,23 @@ sstack_insert_node(SNode **sstack, SNode *snode, int id)
             }
 
             actual->next = snode;
+
         }
     }
 
     
 }
 
-int sstack_delete(SNode **sstack)
+SNode *sstack_delete(SNode **sstack)
 {
-    int deleted;
-    SNode *second_last_snode = *sstack;
+    SNode *second_last_snode = *sstack, *deleted = NULL;
     SNode *last_snode = second_last_snode->next;
+
+    if (*sstack == NULL)
+    {
+        return 
+    }
+    
     if (last_snode == NULL) {
         sstack = NULL;
     }
@@ -40,10 +44,10 @@ int sstack_delete(SNode **sstack)
         last_snode = last_snode->next;
     }
 
-    deleted = last_snode->value;
+    deleted = last_snode;
     last_snode = NULL;
     second_last_snode->next = NULL;
-    return
+    return deleted;
 }
 
 

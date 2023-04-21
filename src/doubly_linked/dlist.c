@@ -3,10 +3,9 @@
 
 #include <libdstruct.h>
 
-void dolist_insert_node(Node **dlist, Node *node, int id)
+void dolist_insert_node(Node **dlist, Node *node)
 {
-    int listo = 0, cont = 0;
-    node = node_new(id); 
+    int listo = 0, cont = 0; 
     Node *actual = *dlist;
     Node *prev, *temporal = node; 
 
@@ -80,10 +79,14 @@ void dlist_imprimir(Node **list)
     node_print_all_linked_nodes(*list);
 }
 
-int dlist_delete_node(Node **dlist, int id) //Elimina por medio de id y sólo el primero.
+
+
+
+
+Node *dlist_delete_node(Node **dlist, int id) //Elimina por medio de id y sólo el primero.
 {
-    Node *actual = *dlist, *prev = NULL, *next = NULL;
-    int deleted, cont = 0;
+    Node *actual = *dlist, *prev = NULL, *next = NULL, *deleted = NULL;
+    int cont = 0;
     if (actual != NULL)
     {
         while (actual->next != NULL)
@@ -100,9 +103,9 @@ int dlist_delete_node(Node **dlist, int id) //Elimina por medio de id y sólo el
         }
         if (actual->value != id)
         {
-            break;
+            deleted = NULL;
         } else{
-            deleted = actual->value;
+            deleted = actual;
             prev = actual->previous;
             next = actual->next;
             if (prev != NULL)
@@ -117,15 +120,13 @@ int dlist_delete_node(Node **dlist, int id) //Elimina por medio de id y sólo el
             }
             actual->previous = NULL;
             actual->next = NULL;
-            free(actual);
             if (cont == 0)
             {
                 *dlist = next;
             }
             
-            return deleted;
 
         }
- 
     }
+        return deleted;
 }

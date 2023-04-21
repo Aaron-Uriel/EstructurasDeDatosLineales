@@ -6,9 +6,9 @@
 
 int main(void)
 {
-    SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snode = NULL; 
-    Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL; 
-    int opcion, opcionSecun, tercerOpcion, id, deleted;
+    SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snode = NULL, *sdeleted = NULL; 
+    Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL, *deleted = NULL; 
+    int opcion, opcionSecun, tercerOpcion, id;
     do
     {
         opcion = menu_principal();  
@@ -37,7 +37,7 @@ int main(void)
                             break;
                         case 2:
                             //Quitar
-                            squeue_dequeue(&squeue);
+                            squeue_dequeue(&squeue); //regresa nodo
                             system("clear");
                             break;
                         case 3: 
@@ -70,13 +70,20 @@ int main(void)
                             printf("\t|_____________Agregar____________|\n");
                             printf("\t| Ingrese el valor del nodo: ");
                             scanf("%d", &id);
-                            sstack_insert_node(&sstack, snode,id);
+                            sstack_insert_node(&sstack, snode_new(id));
                             system("clear");
                             break;
                         case 2:
                             //Quitar
-                            deleted = sstack_delete(&sstack);
-                            printf("Se eliminó: %d", &deleted);
+                            sdeleted = sstack_delete(&sstack);
+                            if (sdeleted == NULL)
+                            {
+                                printf("No hay nada.\n");
+                            } else
+                            {
+                                printf("Se eliminó: %d\n", sdeleted->value);
+                                snode_delete(&sdeleted);
+                            }
                             break;
                         case 3: 
                             //Imprimir
@@ -165,7 +172,7 @@ int main(void)
                     } while (tercerOpcion != 4);
                     break;
 
-                case 2: //Pila --------------------------
+                case 2: //Pila -------------------------- no hay
                         do
                         {
                         tercerOpcion = menu_cola_pila();
@@ -203,7 +210,7 @@ int main(void)
                             printf("\t|_____________Agregar____________|\n");
                             printf("\t| Ingrese el valor del nodo: ");
                             scanf("%d", &id);
-                            dolist_insert_node(&list, node, id);
+                            dolist_insert_node(&list, node_new(id));
                             system("clear");
                             break;
                         case 2:
@@ -213,7 +220,14 @@ int main(void)
                             printf("\t| Ingrese el valor del nodo a eliminar: ");
                             scanf("%d", &id);
                             deleted = dlist_delete_node(&list, id);
-                            printf("Se elimino: %d", &deleted);
+                            if (deleted == NULL)
+                            {
+                                printf("No se encontró el nodo. \n");
+                            } else
+                            {
+                                printf("Se elimino: %d", deleted->value);
+                                free(deleted);
+                            }
                             break;
                         case 3: 
                             //Imprimir

@@ -20,6 +20,10 @@ int menu_principal(void)
     printf("|Opcion: ");
     scanf("%d", &opcion);
     printf("|_____________________________|\n");
+
+
+
+    
     return opcion;
 }
 

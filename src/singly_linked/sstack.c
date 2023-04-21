@@ -26,9 +26,9 @@ sstack_insert_node(SNode **sstack, SNode *snode, int id)
     
 }
 
-void sstack_delete(SNode **sstack)
+int sstack_delete(SNode **sstack)
 {
-    
+    int deleted;
     SNode *second_last_snode = *sstack;
     SNode *last_snode = second_last_snode->next;
     if (last_snode == NULL) {
@@ -39,9 +39,11 @@ void sstack_delete(SNode **sstack)
         second_last_snode = last_snode;
         last_snode = last_snode->next;
     }
-    printf("Se eliminó %d\n",last_snode->value);
+
+    deleted = last_snode->value;
     last_snode = NULL;
     second_last_snode->next = NULL;
+    return
 }
 
 

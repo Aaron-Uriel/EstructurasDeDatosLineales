@@ -8,7 +8,7 @@ int main(void)
 {
     SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snode = NULL; 
     Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL; 
-    int opcion, opcionSecun, tercerOpcion, id;
+    int opcion, opcionSecun, tercerOpcion, id, deleted;
     do
     {
         opcion = menu_principal();  
@@ -75,8 +75,8 @@ int main(void)
                             break;
                         case 2:
                             //Quitar
-                            sstack_delete(&sstack);
-                            system("clear");
+                            deleted = sstack_delete(&sstack);
+                            printf("Se eliminó: %d", &deleted);
                             break;
                         case 3: 
                             //Imprimir
@@ -212,8 +212,8 @@ int main(void)
                             printf("\t|__________________Quitar_________________|\n");
                             printf("\t| Ingrese el valor del nodo a eliminar: ");
                             scanf("%d", &id);
-                            dodelete_node(&list, id);
-                            system("clear");
+                            deleted = dlist_delete_node(&list, id);
+                            printf("Se elimino: %d", &deleted);
                             break;
                         case 3: 
                             //Imprimir

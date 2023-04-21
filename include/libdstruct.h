@@ -76,7 +76,7 @@ PUBLIC void squeue_print(SNode *squeue);
 /* Pila. */
 
 PUBLIC void sstack_insert_node(SNode **sstack, SNode *snode, int id);
-PUBLIC void sstack_delete(SNode **sstack);
+PUBLIC int sstack_delete(SNode **sstack);
 PUBLIC void sstack_imprimir(SNode **sstack);
 
 /* Fin de pila. */
@@ -84,6 +84,6 @@ PUBLIC void sstack_imprimir(SNode **sstack);
 /*Lista doblemente ligada*/
 PUBLIC void dolist_insert_node(Node **dlist, Node *node, int id);
 PUBLIC void dlist_imprimir(Node **list);
-PUBLIC void dodelete_node(Node **dlist, int id);
+PUBLIC void dlist_delete_node(Node **dlist, int id);
 /*Fin lista*/
 #endif

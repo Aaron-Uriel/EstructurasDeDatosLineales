@@ -80,7 +80,7 @@ void dlist_imprimir(Node **list)
     node_print_all_linked_nodes(*list);
 }
 
-void dodelete_node(Node **dlist, int id) //Elimina por medio de id y sólo el primero.
+int dlist_delete_node(Node **dlist, int id) //Elimina por medio de id y sólo el primero.
 {
     Node *actual = *dlist, *prev = NULL, *next = NULL;
     int deleted, cont = 0;
@@ -100,7 +100,7 @@ void dodelete_node(Node **dlist, int id) //Elimina por medio de id y sólo el pr
         }
         if (actual->value != id)
         {
-            printf("No se encontro el nodo\n");
+            break;
         } else{
             deleted = actual->value;
             prev = actual->previous;
@@ -118,12 +118,12 @@ void dodelete_node(Node **dlist, int id) //Elimina por medio de id y sólo el pr
             actual->previous = NULL;
             actual->next = NULL;
             free(actual);
-            printf("Se eliminó: %d \n", deleted);
             if (cont == 0)
             {
                 *dlist = next;
             }
             
+            return deleted;
 
         }
  

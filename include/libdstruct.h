@@ -84,6 +84,6 @@ PUBLIC void sstack_imprimir(SNode **sstack);
 /*Lista doblemente ligada*/
 PUBLIC void dolist_insert_node(Node **dlist, Node *node, int id);
 PUBLIC void dlist_imprimir(Node **list);
-PUBLIC void delete_node(Node **dlist, int id);
+PUBLIC void dodelete_node(Node **dlist, int id);
 /*Fin lista*/
 #endif

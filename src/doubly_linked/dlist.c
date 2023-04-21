@@ -80,7 +80,7 @@ void dlist_imprimir(Node **list)
     node_print_all_linked_nodes(*list);
 }
 
-void delete_node(Node **dlist, int id) //Elimina por medio de id y sólo el primero.
+void dodelete_node(Node **dlist, int id) //Elimina por medio de id y sólo el primero.
 {
     Node *actual = *dlist, *prev = NULL, *next = NULL;
     int deleted, cont = 0;

@@ -212,7 +212,7 @@ int main(void)
                             printf("\t|__________________Quitar_________________|\n");
                             printf("\t| Ingrese el valor del nodo a eliminar: ");
                             scanf("%d", &id);
-                            delete_node(&list, id);
+                            dodelete_node(&list, id);
                             system("clear");
                             break;
                         case 3: 

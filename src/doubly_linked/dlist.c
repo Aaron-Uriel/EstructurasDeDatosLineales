@@ -3,6 +3,15 @@
 
 #include <libdstruct.h>
 
+
+
+/*
+No regresa nada y recibe una dirección de un Node * y un Node *
+Mientras el nodo que sigue del nodo actual sea distinto de NULL y "Listo"
+no sea 0: Si el nodo que se va a ingresar es mayor que el actual, se recorre al siguiente
+Pero si es menor o igual lo inserta en ese lugar.
+
+*/
 void dolist_insert_node(Node **dlist, Node *node)
 {
     int listo = 0, cont = 0; 
@@ -73,7 +82,7 @@ void dolist_insert_node(Node **dlist, Node *node)
 
 }
 
-
+//Imprime
 void dlist_imprimir(Node **list)
 {
     node_print_all_linked_nodes(*list);
@@ -82,8 +91,14 @@ void dlist_imprimir(Node **list)
 
 
 
-
-Node *dlist_delete_node(Node **dlist, int id) //Elimina por medio de id y sólo el primero.
+/*
+Se hace el recorrido por los nodos, si en el nodo actual
+su valor es igual al id ingresado se rompe el ciclo, si no
+sigue avanzando hasta llegar al final.
+Si sí se encontró lo extrae y regresa el extraido, si no, regresa
+un Node * = NULL 
+*/
+Node *dlist_delete_node(Node **dlist, int id)
 {
     Node *actual = *dlist, *prev = NULL, *next = NULL, *deleted = NULL;
     int cont = 0;

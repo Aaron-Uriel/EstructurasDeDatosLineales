@@ -32,7 +32,7 @@ SNode *sstack_delete(SNode **sstack)
 
     if (*sstack == NULL)
     {
-        return 
+        return deleted;
     }
     
     if (last_snode == NULL) {

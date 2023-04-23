@@ -46,6 +46,7 @@ PUBLIC Node *node_jump_to_last(Node *const self);
 PUBLIC Node *node_jump_to_first(Node *const self);
 PUBLIC Node *node_jump_to_n(Node *const self, const uint32_t n);
 PUBLIC void node_print_all_linked_nodes(Node *const self);
+PUBLIC void node_print_range(Node *const start, Node *const end);
 PUBLIC void node_print_debug(const Node *const self);
 
 /* Fin de nodos. */

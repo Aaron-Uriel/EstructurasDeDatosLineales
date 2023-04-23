@@ -1,8 +1,6 @@
-#include <stdlib.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 #include <libdstruct.h>
-
 
 
 /*
@@ -71,9 +69,20 @@ void dolist_insert_node(Node **dlist, Node *node)
 
             if (listo < 1)
             {
-            actual->next = node;
-            node->previous = actual;
-            node->next = NULL;
+                if (node->value <= actual->value)
+                {
+                    temporal = actual;
+                    node->previous = NULL;
+                    actual->previous = node;
+                    node->next = temporal;
+                    *dlist = node;
+
+                } else
+                {
+                    actual->next = node;
+                    node->previous = actual;
+                    node->next = NULL;
+                }
             }
  
         }
@@ -139,9 +148,34 @@ Node *dlist_delete_node(Node **dlist, int id)
             {
                 *dlist = next;
             }
-            
-
         }
     }
         return deleted;
+}
+
+/*
+
+*/
+int dlist_search_node(Node **dlist, Node* node)
+{
+    Node *actual = *dlist;
+    int cont = 0;
+    if (*dlist == NULL || node == NULL)
+    {
+        return -1;
+    } else
+    {
+        while (actual != NULL)
+        {
+            if (actual->value == node->value)
+            {
+                cont++;
+                return cont;
+            }else
+            {
+                actual = actual->next;
+            }
+        }
+        return cont; 
+    }    
 }

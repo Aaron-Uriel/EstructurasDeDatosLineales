@@ -83,5 +83,6 @@ PUBLIC void sstack_imprimir(SNode **sstack);
 PUBLIC void dolist_insert_node(Node **dlist, Node *node);
 PUBLIC void dlist_imprimir(Node **list);
 PUBLIC Node *dlist_delete_node(Node **dlist, int id);
+PUBLIC int dlist_search_node(Node **dlist, Node* node);
 /*Fin lista*/
 #endif

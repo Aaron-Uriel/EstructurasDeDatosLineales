@@ -11,7 +11,7 @@ SNode *
 squeue_dequeue(SNode **const squeue)
 {
     if (*squeue == NULL) {
-        report(__func__, ERROR, NULL_DATA_STRUCT);
+        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return NULL;
     }
 
@@ -32,7 +32,7 @@ void
 squeue_enqueue(SNode **squeue, SNode *snode)
 {
     if (*squeue == NULL) {
-        report(__func__, INFO, NULL_DATA_STRUCT);
+        report(__func__, INFO, EMPTY_DATA_STRUCT);
         *squeue = snode;
         return;
     }
@@ -48,7 +48,7 @@ void
 squeue_print(SNode *squeue)
 {
     if (squeue == NULL) {
-        report(__func__, ERROR, NULL_DATA_STRUCT);
+        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return;
     }
     snode_print_all_linked_nodes(squeue);

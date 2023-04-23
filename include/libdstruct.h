@@ -57,7 +57,18 @@ PUBLIC int32_t  slist_search_snode(SNode **const slist, SNode *const snode);
 PUBLIC SNode    *slist_extract_node(SNode **const slist, const uint32_t index);
 PUBLIC void     slist_print(SNode *slist);
 
-typedef struct HList HList;
+typedef struct List List;
+struct List {
+    Node *first;
+    Node *last;
+    uint32_t size;
+};
+
+PUBLIC List     *list_new(void);
+PUBLIC void     list_insert_node(List *const list, Node *const node);
+PUBLIC int32_t  list_search_node(List *const list, Node *const node);
+PUBLIC Node     *list_extract_node(List *const list, const uint32_t n);
+PUBLIC void     list_print(List *const list);
 
 
 /* Fin de listas. */

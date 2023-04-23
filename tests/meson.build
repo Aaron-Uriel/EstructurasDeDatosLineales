@@ -15,6 +15,12 @@ slist_test = executable('slist_test', 'slist.c',
 )
 test('slist_test', slist_test)
 
+list_test = executable('list_test', 'list.c',
+  link_with : libdstruct,
+  include_directories : includes,
+)
+test('list_test', list_test)
+
 squeue_test = executable('squeue_test', 'squeue.c',
   link_with : libdstruct,
   include_directories : includes,

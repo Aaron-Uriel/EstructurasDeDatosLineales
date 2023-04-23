@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -202,25 +203,6 @@ node_print_all_linked_nodes(Node *const self)
         current_node = current_node->next;
     }
     printf("NULL\n");
-}
-
-/*
- * Imprime todos los nodos dentro de un determinado rango dado por nodos,
- * útil para las estructuras de datos con cabecera.
- * La función asume que los nodos pasados si están conectados directa o
- * indirectamente, si no es así, la función se detiene hasta encontrar un nodo
- * cuyo siguiente apunte a NULL.
- */
-void
-node_print_range(Node *const start, Node *const end)
-{
-    Node *current_node;
-    for (current_node = start;
-         current_node->next != NULL && current_node != end;
-         current_node = current_node->next) {
-        printf("%d -> ", current_node->value);
-    }
-    printf("\n");
 }
 
 /*

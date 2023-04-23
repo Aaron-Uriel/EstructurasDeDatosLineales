@@ -40,7 +40,7 @@ report(const char *const function_name,
         strcpy(report_desc_as_string, "la estructura de datos con cabcecera no está inicializada");
         break;
     case EMPTY_DATA_STRUCT:
-        strcpy(report_desc_as_string, "la estructura de datos está vacía.");
+        strcpy(report_desc_as_string, "la estructura de datos está vacía");
         break;
     default:
         strcpy(report_desc_as_string, "DESCONOCIDO");

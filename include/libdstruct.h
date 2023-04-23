@@ -41,6 +41,7 @@ PUBLIC void node_delete(Node **const self);
 PUBLIC Node *node_clone(Node *self);
 PUBLIC void node_append(Node *const self, Node *const node);
 PUBLIC void node_prepend(Node *const self, Node *const node);
+PUBLIC void node_unlink(Node *const self);
 PUBLIC Node *node_jump_to_last(Node *const self);
 PUBLIC Node *node_jump_to_first(Node *const self);
 PUBLIC Node *node_jump_to_n(Node *const self, const uint32_t n);

@@ -97,6 +97,34 @@ node_prepend(Node *const self, Node *const node)
 }
 
 /*
+ * Desprende al nodo de los nodos relacionados con el y viceversa.
+ * Si existen dos nodos conectados a este, estos se van a relacionar entre si,
+ * ya sin involucrar al nodo pasado a esta función.
+ */
+void
+node_unlink(Node *const self) {
+    if (self == NULL) {
+        report(__func__, ERROR, NULL_NODE);
+    }
+
+    Node *const previous_node = self->previous;
+    Node *const next_node = self->next;
+    if (previous_node != NULL && next_node != NULL) {
+        node_append(previous_node, self);
+        self->previous = NULL;
+        self->next = NULL;
+    }
+    else if (previous_node != NULL) {
+        previous_node->next = NULL;
+        self->previous = NULL;
+    }
+    else if (next_node != NULL) {
+        next_node->previous = NULL;
+        self->next = NULL;
+    }
+}
+
+/*
  * Devuelve un apuntador al último nodo de todos los nodos enlazados.
  */
 Node

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-
 #include <report.h>
 
 void
@@ -37,8 +36,11 @@ report(const char *const function_name,
     case NULL_NODE:
         strcpy(report_desc_as_string, "el nodo recibido es de valor NULL");
         break;
-    case NULL_DATA_STRUCT:
-        strcpy(report_desc_as_string, "la estructura de datos está vacía; es NULL");
+    case NULL_HEAD_DATA_STRUCT:
+        strcpy(report_desc_as_string, "la estructura de datos con cabcecera no está inicializada");
+        break;
+    case EMPTY_DATA_STRUCT:
+        strcpy(report_desc_as_string, "la estructura de datos está vacía.");
         break;
     default:
         strcpy(report_desc_as_string, "DESCONOCIDO");

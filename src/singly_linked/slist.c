@@ -19,7 +19,7 @@ slist_insert_snode(SNode **slist, SNode *snode)
     }
     /* Cuando la lista está vacía, ponemos el nodo como el primer elemento de la lista. */
     if (*slist == NULL) {
-        report(__func__, INFO, NULL_DATA_STRUCT);
+        report(__func__, INFO, EMPTY_DATA_STRUCT);
         *slist = snode;
         return;
     }
@@ -77,7 +77,7 @@ slist_search_snode(SNode **const slist, SNode *const snode) {
         return -1;
     }
     if (*slist == NULL) {
-        report(__func__, ERROR, NULL_DATA_STRUCT);
+        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return -1;
     }
 
@@ -106,7 +106,7 @@ SNode *
 slist_extract_node(SNode **const slist, const uint32_t index)
 {
     if (*slist == NULL) {
-        report(__func__, ERROR, NULL_DATA_STRUCT);
+        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return NULL;
     }
 
@@ -143,7 +143,7 @@ void
 slist_print(SNode *slist)
 {
     if (slist == NULL) {
-        report(__func__, ERROR, NULL_DATA_STRUCT);
+        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return;
     }
     snode_print_all_linked_nodes(slist);

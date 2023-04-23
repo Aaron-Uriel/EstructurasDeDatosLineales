@@ -31,13 +31,14 @@ void node_test(void) {
     /* Probamos la función para quitar enlaces. */
     node_unlink(mynode);
     assert(mynode->previous == NULL && mynode->next == NULL);
-    assert(node_array[7]->next == NULL && node_array[3]->previous == NULL);
+    assert(node_array[7]->next == node_array[3] && node_array[3]->previous == node_array[7]);
 
-    assert(memcmp((void *)mynode, (void *)myclone, sizeof(*mynode)) == 0);
+    /* Probamos que el clon ya es diferente del original. */
+    assert(memcmp((void *)mynode, (void *)myclone, sizeof(*mynode)) != 0);
 }
 
 int
 main(void) {
-
+    node_test();
     return 0;
 }

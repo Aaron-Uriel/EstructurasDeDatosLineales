@@ -110,7 +110,7 @@ node_unlink(Node *const self) {
     Node *const previous_node = self->previous;
     Node *const next_node = self->next;
     if (previous_node != NULL && next_node != NULL) {
-        node_append(previous_node, self);
+        node_append(previous_node, next_node);
         self->previous = NULL;
         self->next = NULL;
     }
@@ -205,6 +205,25 @@ node_print_all_linked_nodes(Node *const self)
 }
 
 /*
+ * Imprime todos los nodos dentro de un determinado rango dado por nodos,
+ * útil para las estructuras de datos con cabecera.
+ * La función asume que los nodos pasados si están conectados directa o
+ * indirectamente, si no es así, la función se detiene hasta encontrar un nodo
+ * cuyo siguiente apunte a NULL.
+ */
+void
+node_print_range(Node *const start, Node *const end)
+{
+    Node *current_node;
+    for (current_node = start;
+         current_node->next != NULL && current_node != end;
+         current_node = current_node->next) {
+        printf("%d -> ", current_node->value);
+    }
+    printf("\n");
+}
+
+/*
  * La función imprime una representación textual del nodo, útil para depuración.
  */
 void
@@ -216,7 +235,7 @@ node_print_debug(const Node *const self)
     }
 
     fprintf(stderr,
-            "\t(Node) { .value = %d; .next = %p; .previous = %p };",
+            "\t(Node) { .value = %d; .next = %p; .previous = %p };\n",
             self->value,
             (void *)self->next,
             (void *)self->previous);

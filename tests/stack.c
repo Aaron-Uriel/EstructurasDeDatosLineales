@@ -12,40 +12,42 @@
 int
 main(void)
 {
-    Node *listita = NULL;
+    SNode *listita = NULL, *copia = NULL;
     int numerito, busquita;
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    dolist_insert_node(&listita, node_new(numerito));
+    sstack_insert_node(&listita, snode_new(numerito));
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    dolist_insert_node(&listita, node_new(numerito));
+    sstack_insert_node(&listita, snode_new(numerito));
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    dolist_insert_node(&listita, node_new(numerito));
+    sstack_insert_node(&listita, snode_new(numerito));
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    dolist_insert_node(&listita, node_new(numerito));
+    sstack_insert_node(&listita, snode_new(numerito));
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    dolist_insert_node(&listita, node_new(numerito));
-    dlist_imprimir(&listita);
-    printf("Escribe el numerito a buscarrrrr: ");
+    sstack_insert_node(&listita, snode_new(numerito));
+    sstack_imprimir(&listita);
+    printf("Escribe el numerito a copiaarrrrr: ");
     scanf("%d", &numerito);
-    busquita = dlist_search_node(&listita, node_new(numerito));
-    if (busquita == -2)
+    copia = snode_jump_to_n(listita, numerito);
+    sstack_insert_node(&listita, snode_clone(copia));
+    sstack_imprimir(&listita);
+    /* busquita = slist_search_snode(&listita,snode_new(numerito));
+    if (busquita == -1)
     {
-        printf("Está vacío :(\n");
-    } else if (busquita == -1)
+        printf("Está vacío :(, se regresa %d \n", busquita);
+    } else if (busquita == -2)
     {
-        printf("No se encotró :(\n");
+        printf("No se encotró :(, se regresa %d\n", busquita);
     } else if (busquita >= 0)
     {
-        printf("Sí está, yeiiiii :D, %d \n", busquita);
+        printf("Sí está, yeiiiii :D, se regresa %d \n", busquita);
     }
-    
-    
-    
+    */
+
 
     return 0;
 }

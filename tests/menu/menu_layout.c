@@ -8,7 +8,7 @@ int main(void)
 {
     SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snodecpy = NULL, *sdeleted = NULL; 
     Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL, *deleted = NULL; 
-    int opcion, opcionSecun, tercerOpcion, id, search;
+    int opcion, opcionSecun, tercerOpcion, id, search, cont = 0;
     do
     {
         opcion = menu_principal();  
@@ -163,32 +163,20 @@ int main(void)
                                 printf("\t| + Está vacío. +\n");
                             } else if (search == -2)
                             {
-                                printf("\t|El nodo que busca no se encuentra en la lista. \n");
+                                printf("\t| El nodo que busca no se encuentra en la lista %d. \n", search);
                             }  else if (search >= 0)
                             {
-                                printf("\t|El nodo se encuentra en la lista.\n");
+                                printf("\t| El nodo está en en índice %d.\n", search);
                             }
                             break;  
                         case 5:
                             //Copiar
                             printf("\t|_________________________________________.\n");
                             printf("\t|__________________Copiar_________________|\n");
-                            printf("\t| Ingrese el nodo que quiere copiar: ");
+                            printf("\t| Ingrese el índice que quiere copiar: ");
                             scanf("%d", &id);
-
-                            search = slist_search_snode(&slist, snode_new(id));
-                            if (search == -1)
-                            {
-                                printf("\t| + Está vacío. +\n");
-                            } else if (search == -2)
-                            {
-                                printf("\t|El nodo que busca no se encuentra en la lista. \n");
-                            }  else if (search >= 0)
-                            {
-                                snodecpy = snode_clone(snode_new(id));
-                                slist_insert_snode(&slist, snodecpy);
-                            }
-
+                            snodecpy = snode_jump_to_n(slist, id);
+                            slist_insert_snode(&slist, snode_new(snodecpy->value));
                             break;  
                         case 6:
                             break;
@@ -282,8 +270,29 @@ int main(void)
                             dlist_imprimir(&list);
                             break;
                         case 4: 
-                            break;    
-                        
+                            //Buscar
+                            printf("\t|_________________________________________.\n");
+                            printf("\t|__________________Buscar_________________|\n");
+                            printf("\t| Ingrese el valor del nodo a buscar: ");
+                            scanf("%d", &id);
+
+                            search = dlist_search_node(&list, node_new(id));
+                            if (search == -2)
+                            {
+                                printf("\t| + Está vacío. +\n");
+                            } else if (search == -1)
+                            {
+                                printf("\t| El nodo que busca no se encuentra en la lista %d. \n", search);
+                            }  else if (search >= 0)
+                            {
+                                printf("\t| El nodo está en en índice %d.\n", search);
+                            }
+                            break; 
+                        case 5: 
+                            //Copiar
+                            break;        
+                        case 6: 
+                            break; 
                         default:
                             printf("\tOpcion invalida.\n");
                             break;

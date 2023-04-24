@@ -46,8 +46,8 @@ int menu_secundario_doblemente(void)
     int opcionSecun;
     printf("\t|____________.\n");
     printf("\t|1.- Cola.   |\n");
-    printf("\t|3.- Lista.  |\n");
-    printf("\t|4.- Volver. |\n");
+    printf("\t|2.- Lista.  |\n");
+    printf("\t|3.- Volver. |\n");
     printf("\t|____________|\n");
     printf("\t|Opcion: ");
     scanf("%d", &opcionSecun);

@@ -8,6 +8,7 @@ int main(void)
 {
     SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snodecpy = NULL, *sdeleted = NULL; 
     Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL, *deleted = NULL; 
+    List *hlist = NULL;
     int opcion, opcionSecun, tercerOpcion, id, search, cont = 0;
     do
     {
@@ -176,7 +177,7 @@ int main(void)
                             printf("\t| Ingrese el índice que quiere copiar: ");
                             scanf("%d", &id);
                             snodecpy = snode_jump_to_n(slist, id);
-                            slist_insert_snode(&slist, snode_new(snodecpy->value));
+                            slist_insert_snode(&slist, snode_clone(snodecpy));
                             break;  
                         case 6:
                             break;
@@ -376,6 +377,11 @@ int main(void)
                         {
                         case 1:
                             //Agregar
+                            printf("\t|________________________________.\n");
+                            printf("\t|_____________Agregar____________|\n");
+                            printf("\t| Ingrese el valor del nodo: ");
+                            scanf("%d", &id);
+                            //list_insert_node(&hlist, list_new());
                             break;
                         case 2:
                             //Quitar

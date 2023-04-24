@@ -551,13 +551,17 @@ int main(void)
 
             break;
         case 5:
+            opcionSecun = menu_secundario_estatica(void)
+            
             break;
+        case 6:
+            break;    
 
         default:
             printf("------ Oopción invalida. ------\n");
             break;
         } //Fin del menú principal
-    } while (opcion != 5);
+    } while (opcion != 6);
     
 
     return 0;

@@ -16,7 +16,8 @@ int menu_principal(void)
     printf("|2.- Doblemmente ligadas.     |\n");
     printf("|3.- Con cabecera.            |\n");
     printf("|4.- Con prioridad.           |\n");
-    printf("|5.- Salir.                   |\n");
+    printf("|5.- Estática.                |\n");
+    printf("|6.- Salir.                   |\n");
     printf("|_____________________________|\n");
     printf("|Opcion: ");
     scanf("%d", &opcion);
@@ -47,6 +48,21 @@ int menu_secundario_doblemente(void)
     printf("\t|____________.\n");
     printf("\t|1.- Cola.   |\n");
     printf("\t|2.- Lista.  |\n");
+    printf("\t|3.- Volver. |\n");
+    printf("\t|____________|\n");
+    printf("\t|Opcion: ");
+    scanf("%d", &opcionSecun);
+    printf("\t|_____________|\n");
+    system("clear");
+    return opcionSecun;
+}
+
+int menu_secundario_estatica(void)
+{
+    int opcionSecun;
+    printf("\t|____________.\n");
+    printf("\t|1.- Cola.   |\n");
+    printf("\t|2.- Pila.  |\n");
     printf("\t|3.- Volver. |\n");
     printf("\t|____________|\n");
     printf("\t|Opcion: ");

@@ -44,7 +44,6 @@ void dolist_insert_node(Node **dlist, Node *node)
                     
                 } else if (node->value <= actual->value)
                 {
-                    
                     if (cont == 0)
                     {
                         temporal = actual;
@@ -52,7 +51,6 @@ void dolist_insert_node(Node **dlist, Node *node)
                         actual->previous = node;
                         node->next = temporal;
                         *dlist = node;
-
                     } else {
                         temporal = actual;
                         node->previous = prev;
@@ -60,11 +58,8 @@ void dolist_insert_node(Node **dlist, Node *node)
                         node->next = temporal;
                         prev->next = node;
                     }
-                
                     listo = 1;
-
                 }
-                
             }
 
             if (listo < 1)
@@ -84,11 +79,8 @@ void dolist_insert_node(Node **dlist, Node *node)
                     node->next = NULL;
                 }
             }
- 
-        }
-        
+        } 
     }
-
 }
 
 //Imprime

@@ -118,9 +118,24 @@ int main(void)
                         {
                         case 1:
                             //Agregar
+                            printf("\t|________________________________.\n");
+                            printf("\t|_____________Agregar____________|\n");
+                            printf("\t| Ingrese el valor del nodo: ");
+                            scanf("%d", &id);
+                            slist_insert_node(&slist, snode_new(id));
+                            system("clear");
                             break;
                         case 2:
                             //Quitar
+                            sdeleted = slist_extract_node(&sstack);
+                            if (sdeleted == NULL)
+                            {
+                                printf("No hay nada.\n");
+                            } else
+                            {
+                                printf("Se eliminó: %d\n", sdeleted->value);
+                                snode_delete(&sdeleted);
+                            }
                             break;
                         case 3: 
                             //Imprimir

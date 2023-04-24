@@ -33,15 +33,15 @@ main(void)
     printf("Escribe el numerito a buscarrrrr: ");
     scanf("%d", &numerito);
     busquita = dlist_search_node(&listita, node_new(numerito));
-    if (busquita < 0)
+    if (busquita == -2)
     {
         printf("Está vacío :(\n");
-    } else if (busquita == 0)
+    } else if (busquita == -1)
     {
         printf("No se encotró :(\n");
-    } else if (busquita >= 1)
+    } else if (busquita >= 0)
     {
-        printf("Sí está, yeiiiii :D\n");
+        printf("Sí está, yeiiiii :D, %d \n", busquita);
     }
     
     

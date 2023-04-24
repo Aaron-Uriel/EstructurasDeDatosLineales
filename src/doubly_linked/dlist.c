@@ -151,20 +151,21 @@ Node *dlist_delete_node(Node **dlist, int id)
 int dlist_search_node(Node **dlist, Node* node)
 {
     Node *actual = *dlist;
-    int cont = 0;
+    int cont = -1;
     if (*dlist == NULL || node == NULL)
     {
-        return -1;
+        return -2;
     } else
     {
         while (actual != NULL)
         {
             if (actual->value == node->value)
             {
-                cont++;
-                return cont;
+                //cont++;
+                return cont + 1;
             }else
             {
+                cont++;
                 actual = actual->next;
             }
         }

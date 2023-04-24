@@ -80,9 +80,8 @@ int menu_lista (void)
     printf("| 2.- Quitar (Extraer + Eliminar) |\n");
     printf("| 3.- Imprimir                    |\n");
     printf("| 4.- Buscar                      |\n");
-    printf("| 3.- Comparar                    |\n");
-    printf("| 6.- Copiar                      |\n");
-    printf("| 4.- Volver                      |\n");
+    printf("| 5.- Copiar                      |\n");
+    printf("| 6.- Volver                      |\n");
     printf("|_________________________________|\n");
     printf("| Opcion: ");
     scanf ("%d", &opcion);

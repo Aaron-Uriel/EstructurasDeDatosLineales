@@ -6,9 +6,9 @@
 
 int main(void)
 {
-    SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snode = NULL, *sdeleted = NULL; 
+    SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snodecpy = NULL, *sdeleted = NULL; 
     Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL, *deleted = NULL; 
-    int opcion, opcionSecun, tercerOpcion, id;
+    int opcion, opcionSecun, tercerOpcion, id, search;
     do
     {
         opcion = menu_principal();  
@@ -57,6 +57,7 @@ int main(void)
                             break;    
                         
                         default:
+                            system("clear");
                             printf("\tOpcion invalida.\n");
                             break;
                         }
@@ -122,33 +123,82 @@ int main(void)
                             printf("\t|_____________Agregar____________|\n");
                             printf("\t| Ingrese el valor del nodo: ");
                             scanf("%d", &id);
-                            slist_insert_node(&slist, snode_new(id));
+                            slist_insert_snode(&slist, snode_new(id));
                             system("clear");
                             break;
                         case 2:
                             //Quitar
-                            sdeleted = slist_extract_node(&sstack);
+                            system("clear");
+                            printf("\t|_________________________________________.\n");
+                            printf("\t|__________________Quitar_________________|\n");
+                            printf("\t| Esta función requiere el índice de lista|\n");
+                            printf("\t| Ingrese el indice del nodo a eliminar: ");
+                            scanf("%d", &id);
+                            sdeleted = slist_extract_node(&slist, id);
                             if (sdeleted == NULL)
                             {
-                                printf("No hay nada.\n");
+                                printf("\t| + No se encontró el nodo. +\n");
                             } else
                             {
-                                printf("Se eliminó: %d\n", sdeleted->value);
-                                snode_delete(&sdeleted);
+                                printf("\t| Se elimino: %d\n", sdeleted->value);
+                                free(sdeleted);
                             }
                             break;
                         case 3: 
                             //Imprimir
+                             system("clear");
+                            printf("|________Lista__________ _ _  _  _   _    _\n| ");
+                            slist_print(slist);
                             break;
                         case 4: 
-                            break;    
+                            //Buscar
+                            printf("\t|_________________________________________.\n");
+                            printf("\t|__________________Buscar_________________|\n");
+                            printf("\t| Ingrese el valor del nodo a buscar: ");
+                            scanf("%d", &id);
+
+                            search = slist_search_snode(&slist, snode_new(id));
+                            if (search == -1)
+                            {
+                                printf("\t| + Está vacío. +\n");
+                            } else if (search == -2)
+                            {
+                                printf("\t|El nodo que busca no se encuentra en la lista. \n");
+                            }  else if (search >= 0)
+                            {
+                                printf("\t|El nodo se encuentra en la lista.\n");
+                            }
+                            break;  
+                        case 5:
+                            //Copiar
+                            printf("\t|_________________________________________.\n");
+                            printf("\t|__________________Copiar_________________|\n");
+                            printf("\t| Ingrese el nodo que quiere copiar: ");
+                            scanf("%d", &id);
+
+                            search = slist_search_snode(&slist, snode_new(id));
+                            if (search == -1)
+                            {
+                                printf("\t| + Está vacío. +\n");
+                            } else if (search == -2)
+                            {
+                                printf("\t|El nodo que busca no se encuentra en la lista. \n");
+                            }  else if (search >= 0)
+                            {
+                                snodecpy = snode_clone(snode_new(id));
+                                slist_insert_snode(&slist, snodecpy);
+                            }
+
+                            break;  
+                        case 6:
+                            break;
                         
                         default:
                             printf("\tOpcion invalida.\n");
                             break;
                         }
 
-                        } while (tercerOpcion != 4);
+                        } while (tercerOpcion != 6);
 
                     break;
                 case 4: 
@@ -324,9 +374,16 @@ int main(void)
                         case 3: 
                             //Imprimir
                             break;
-                        case 4: 
+                        case 4:
+                            //Buscar 
                             break;  
-                        
+                        case 5: 
+                            //Copiar
+                            break;      
+                        case 6:
+                            //Salis 
+                            break;  
+
                         default:
                             printf("\tOpcion invalida.\n");
                             break;

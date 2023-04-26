@@ -7,7 +7,7 @@
 int main(void)
 {
     SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snodecpy = NULL, *sdeleted = NULL; 
-    Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL, *deleted = NULL; 
+    Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL, *deleted = NULL, *nodecpy = NULL; 
     List *hlist = NULL;
     int opcion, opcionSecun, tercerOpcion, id, search, cont = 0;
     do
@@ -161,12 +161,15 @@ int main(void)
                             search = slist_search_snode(&slist, snode_new(id));
                             if (search == -1)
                             {
+                                system("clear");
                                 printf("\t| + Está vacío. +\n");
                             } else if (search == -2)
                             {
+                                system("clear");
                                 printf("\t| El nodo que busca no se encuentra en la lista %d. \n", search);
                             }  else if (search >= 0)
                             {
+                                system("clear");
                                 printf("\t| El nodo está en en índice %d.\n", search);
                             }
                             break;  
@@ -176,8 +179,8 @@ int main(void)
                             printf("\t|__________________Copiar_________________|\n");
                             printf("\t| Ingrese el índice que quiere copiar: ");
                             scanf("%d", &id);
-                            snodecpy = snode_jump_to_n(slist, id);
-                            slist_insert_snode(&slist, snode_clone(snodecpy));
+                            snodecpy = snode_clone(snode_jump_to_n(slist, id));
+                            slist_insert_snode(&slist, snodecpy);
                             break;  
                         case 6:
                             break;
@@ -245,7 +248,7 @@ int main(void)
                             printf("\t|_____________Agregar____________|\n");
                             printf("\t| Ingrese el valor del nodo: ");
                             scanf("%d", &id);
-                            dolist_insert_node(&list, node_new(id));
+                            dlist_insert_node(&list, node_new(id));
                             system("clear");
                             break;
                         case 2:
@@ -257,9 +260,11 @@ int main(void)
                             deleted = dlist_delete_node(&list, id);
                             if (deleted == NULL)
                             {
+                                system("clear");
                                 printf("No se encontró el nodo. \n");
                             } else
                             {
+                                system("clear");
                                 printf("Se elimino: %d", deleted->value);
                                 free(deleted);
                             }
@@ -280,17 +285,26 @@ int main(void)
                             search = dlist_search_node(&list, node_new(id));
                             if (search == -2)
                             {
+                                system("clear");
                                 printf("\t| + Está vacío. +\n");
                             } else if (search == -1)
                             {
+                                system("clear");
                                 printf("\t| El nodo que busca no se encuentra en la lista %d. \n", search);
                             }  else if (search >= 0)
                             {
+                                system("clear");
                                 printf("\t| El nodo está en en índice %d.\n", search);
                             }
                             break; 
                         case 5: 
                             //Copiar
+                            printf("\t|_________________________________________.\n");
+                            printf("\t|__________________Copiar_________________|\n");
+                            printf("\t| Ingrese el índice que quiere copiar: ");
+                            scanf("%d", &id);
+                            nodecpy = node_clone(node_jump_to_n(list, id));
+                            dlist_insert_node(&list, nodecpy);
                             break;        
                         case 6: 
                             break; 

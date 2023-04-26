@@ -10,7 +10,7 @@ no sea 0: Si el nodo que se va a ingresar es mayor que el actual, se recorre al 
 Pero si es menor o igual lo inserta en ese lugar.
 
 */
-void dolist_insert_node(Node **dlist, Node *node)
+void dlist_insert_node(Node **dlist, Node *node)
 {
     int listo = 0, cont = 0; 
     Node *actual = *dlist;

@@ -33,7 +33,7 @@ main(void)
     printf("Escribe el numerito a copiaarrrrr: ");
     scanf("%d", &numerito);
     copia = snode_clone(snode_jump_to_n(listita, numerito));
-    slist_insert_snode(&listita, snode_new(copia->value));
+    slist_insert_snode(&listita, copia);
     slist_print(listita);
 
     /* busquita = slist_search_snode(&listita,snode_new(numerito));

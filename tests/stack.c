@@ -16,25 +16,26 @@ main(void)
     int numerito, busquita;
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    sstack_insert_node(&listita, snode_new(numerito));
+    slist_insert_snode(&listita, snode_new(numerito));
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    sstack_insert_node(&listita, snode_new(numerito));
+    slist_insert_snode(&listita, snode_new(numerito));
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    sstack_insert_node(&listita, snode_new(numerito));
+    slist_insert_snode(&listita, snode_new(numerito));
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    sstack_insert_node(&listita, snode_new(numerito));
+    slist_insert_snode(&listita, snode_new(numerito));
     printf("Escribe el númerito: ");
     scanf("%d", &numerito);
-    sstack_insert_node(&listita, snode_new(numerito));
-    sstack_imprimir(&listita);
+    slist_insert_snode(&listita, snode_new(numerito));
+    slist_print(listita);
     printf("Escribe el numerito a copiaarrrrr: ");
     scanf("%d", &numerito);
-    copia = snode_jump_to_n(listita, numerito);
-    sstack_insert_node(&listita, snode_clone(copia));
-    sstack_imprimir(&listita);
+    copia = snode_clone(snode_jump_to_n(listita, numerito));
+    slist_insert_snode(&listita, snode_new(copia->value));
+    slist_print(listita);
+
     /* busquita = slist_search_snode(&listita,snode_new(numerito));
     if (busquita == -1)
     {

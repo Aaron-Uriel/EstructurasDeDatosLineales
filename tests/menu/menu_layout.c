@@ -299,16 +299,16 @@ int main(void)
                             break;
                         }
 
-                    } while (tercerOpcion != 4);
+                    } while (tercerOpcion != 6);
                     break;
-                case 4: 
+                case 3: 
                     break;
                 
                 default:
                     printf("\tOpcion invalida.\n");
                     break;
                 }
-            } while (opcionSecun != 4);
+            } while (opcionSecun != 3);
             break;
 
         case 3:  //Con cabecera
@@ -381,7 +381,7 @@ int main(void)
                             printf("\t|_____________Agregar____________|\n");
                             printf("\t| Ingrese el valor del nodo: ");
                             scanf("%d", &id);
-                            //list_insert_node(&hlist, list_new());
+                            
                             break;
                         case 2:
                             //Quitar
@@ -551,7 +551,7 @@ int main(void)
 
             break;
         case 5:
-            opcionSecun = menu_secundario_estatica(void)
+            opcionSecun = menu_secundario_estatica();
             
             break;
         case 6:

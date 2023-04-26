@@ -6,7 +6,7 @@
 #include <libdstruct.h>
 #include <report.h>
 
-/*
+/**
  * Inserta un nodo de forma ordenada en la lista. Los nodos se acomodan de
  * forma ascendente.
  */
@@ -20,6 +20,17 @@ slist_insert_snode(SNode **slist, SNode *snode)
     /* Cuando la lista está vacía, ponemos el nodo como el primer elemento de la lista. */
     if (*slist == NULL) {
         report(__func__, INFO, EMPTY_DATA_STRUCT);
+        *slist = snode;
+        return;
+    }
+
+    /*
+     * Cuando el elemento que vamos a ingresar ya es menor que el menor
+     * (el primer elemento), nos ahorramos toda la lógica que está en el
+     * resto del programa.
+     */
+    if (snode->value < (*slist)->value) {
+        snode_append(snode, *slist);
         *slist = snode;
         return;
     }
@@ -42,14 +53,16 @@ slist_insert_snode(SNode **slist, SNode *snode)
         return;
     }
 
-    while (current_snode->next != NULL) {
+    while (current_snode != NULL) {
         /* 
          * Caso: encontramos un nodo que tiene un valor mayor al que queremos
          * insertar; se insertará al interior de la Lista.
          */
-        if (snode->value < current_snode->value) {
-            prev_snode->next = snode;
-            snode->next = current_snode;
+        if (current_snode->value > snode->value) {
+            snode_append(prev_snode, snode);
+            snode_append(snode, current_snode);
+            //prev_snode->next = snode;
+            //snode->next = current_snode;
             return;
         }
         prev_snode = current_snode;
@@ -59,10 +72,10 @@ slist_insert_snode(SNode **slist, SNode *snode)
      * Se sale del while solo si llegamos al final sin encontrar un nodo de mayor
      * valor, por lo que este se va a poner al final.
      */
-    current_snode->next = snode;
+    prev_snode->next = snode;
 }
 
-/*
+/**
  * Busca si existe el nodo recibido dentro de la lista, si este existe se regresa
  * el índice de ese nodo.
  * La función regresa -1 cuando ocurre algún error relacionado a las variables
@@ -97,7 +110,7 @@ slist_search_snode(SNode **const slist, SNode *const snode) {
     return -2;
 }
 
-/*
+/**
  * Extrae un nodo de una posición arbitraria dentro de los confines de la lista.
  * En caso de intentar extraer un nodo fuera de los límites, la función
  * regresa NULL.
@@ -136,7 +149,7 @@ slist_extract_node(SNode **const slist, const uint32_t index)
     return extracted_node;
 }
 
-/*
+/**
  * Imprime la lista.
  */
 void

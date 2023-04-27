@@ -3,52 +3,32 @@
 #include <libdstruct.h>
 
 
-
-
-
-
-
-
 int
 main(void)
 {
-    SNode *listita = NULL, *copia = NULL;
-    int numerito, busquita;
-    printf("Escribe el númerito: ");
-    scanf("%d", &numerito);
-    slist_insert_snode(&listita, snode_new(numerito));
-    printf("Escribe el númerito: ");
-    scanf("%d", &numerito);
-    slist_insert_snode(&listita, snode_new(numerito));
-    printf("Escribe el númerito: ");
-    scanf("%d", &numerito);
-    slist_insert_snode(&listita, snode_new(numerito));
-    printf("Escribe el númerito: ");
-    scanf("%d", &numerito);
-    slist_insert_snode(&listita, snode_new(numerito));
-    printf("Escribe el númerito: ");
-    scanf("%d", &numerito);
-    slist_insert_snode(&listita, snode_new(numerito));
-    slist_print(listita);
-    printf("Escribe el numerito a copiaarrrrr: ");
-    scanf("%d", &numerito);
-    copia = snode_clone(snode_jump_to_n(listita, numerito));
-    slist_insert_snode(&listita, copia);
-    slist_print(listita);
-
-    /* busquita = slist_search_snode(&listita,snode_new(numerito));
-    if (busquita == -1)
-    {
-        printf("Está vacío :(, se regresa %d \n", busquita);
-    } else if (busquita == -2)
-    {
-        printf("No se encotró :(, se regresa %d\n", busquita);
-    } else if (busquita >= 0)
-    {
-        printf("Sí está, yeiiiii :D, se regresa %d \n", busquita);
-    }
+    /*List *headlist = list_new(); 
+    Node *hlist = NULL;
+    int numero;
+    printf("Un número: ");
+    scanf("%d", &numero);
+    hlist = node_new(numero);
+    list_insert_node(headlist, hlist);
+    list_print(headlist);
     */
 
+   List *headqueue = list_new();
+   Node *queue = NULL; 
+   int numero;
+   printf("Numero: ");
+   scanf("%d", &numero);
+   queue = node_new(numero);
+   hqueue_insert(headqueue, queue);
+   hqueue_print(headqueue);
 
+   printf("Numero: ");
+   scanf("%d", &numero);
+   queue = node_new(numero);
+   hqueue_insert(headqueue, queue);
+   hqueue_print(headqueue);
     return 0;
 }

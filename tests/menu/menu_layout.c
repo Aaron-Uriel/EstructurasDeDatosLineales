@@ -6,9 +6,14 @@
 
 int main(void)
 {
+    //Simplemente ligadas.
     SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snodecpy = NULL, *sdeleted = NULL; 
+    //Doblemente ligadas.
     Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL, *deleted = NULL, *nodecpy = NULL; 
-    List *hlist = NULL;
+    //Lista con cabecera.
+    List *headlist = list_new();
+    Node *hlist;
+    //Variables enteras a usar.
     int opcion, opcionSecun, tercerOpcion, id, search, cont = 0;
     do
     {

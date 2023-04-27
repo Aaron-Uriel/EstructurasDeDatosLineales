@@ -97,4 +97,10 @@ PUBLIC void dlist_imprimir(Node **list);
 PUBLIC Node *dlist_delete_node(Node **dlist, int id);
 PUBLIC int  dlist_search_node(Node **dlist, Node* node);
 /*Fin lista*/
+
+
+/*Cola con cabecera*/
+PUBLIC  void hqueue_insert(List *headqueue, Node *queue);
+PUBLIC  void hqueue_print(List *headqueue);
+/*fin cola*/
 #endif

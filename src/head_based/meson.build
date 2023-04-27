@@ -1,1 +1,1 @@
-source_files = files('queue.c', 'list.c')
+source_files = files('queue.c', 'list.c', 'hqueue.c')

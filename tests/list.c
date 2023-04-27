@@ -30,5 +30,9 @@ int main(void) {
     assert(mylist->first->value == -15);
     list_print(mylist);
 
+    list_insert_node(mylist, node_new(5));
+    list_insert_node(mylist, node_new(5));
+    list_print(mylist);
+
     return 0;
 }

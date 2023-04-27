@@ -57,6 +57,11 @@ PUBLIC int32_t  slist_search_snode(SNode **const slist, SNode *const snode);
 PUBLIC SNode    *slist_extract_node(SNode **const slist, const uint32_t index);
 PUBLIC void     slist_print(SNode *slist);
 
+PUBLIC void dolist_insert_node(Node **dlist, Node *node);
+PUBLIC void dlist_imprimir(Node **list);
+PUBLIC Node *dlist_delete_node(Node **dlist, int id);
+PUBLIC int  dlist_search_node(Node **dlist, Node* node);
+
 typedef struct List List;
 struct List {
     Node *first;
@@ -91,10 +96,4 @@ PUBLIC void sstack_imprimir(SNode **sstack);
 
 /* Fin de pila. */
 
-/*Lista doblemente ligada*/
-PUBLIC void dolist_insert_node(Node **dlist, Node *node);
-PUBLIC void dlist_imprimir(Node **list);
-PUBLIC Node *dlist_delete_node(Node **dlist, int id);
-PUBLIC int  dlist_search_node(Node **dlist, Node* node);
-/*Fin lista*/
 #endif

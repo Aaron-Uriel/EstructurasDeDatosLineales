@@ -94,17 +94,19 @@ list_insert_node(List *const list, Node *const node)
      * Cuando no se cumple ningún caso espacial, buscamos el lugar
      * donde insertar el nodo dentro de la lista.
      */
-    int32_t i;
+    uint32_t i;
     Node *current_node;
     for (current_node = list->first, i = 0;
          current_node != NULL && i < list->size;
          current_node = current_node->next, i += 1) {
-        printf("Entró\n");
         /* 
          * Cuando encontramos el lugar donde insertar el nodo dentro 
-         * de la lista.
+         * de la lista, colocamos el nodo antes del actual y después
+         * del anterior.
          */
         if (node->value < current_node->value) {
+            Node *prev_node = current_node->previous;
+            node_append(prev_node, node);
             node_prepend(current_node, node);
             list->size += 1;
 
@@ -171,7 +173,7 @@ list_print(List *const list)
 
     printf("Tamaño: %d.\n", list->size);
     Node *current_node;
-    int32_t i;
+    uint32_t i;
     for (current_node = list->first, i = 0;
          current_node != NULL && i < list->size;
          current_node = current_node->next, i += 1) {

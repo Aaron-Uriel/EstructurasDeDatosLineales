@@ -97,8 +97,8 @@ SNode
  * Te devuelve un apuntador al n-ésimo nodo hacia adelante, respecto al nodo ingresado.
  * Si el valor n está más allá de la cadena de nodos se devuelve NULL.
  */
-SNode
-*snode_jump_to_n(SNode *const self, const uint32_t n)
+SNode *
+snode_jump_to_n(SNode *const self, const uint32_t n)
 {
     if (self == NULL) {
         report(__func__, ERROR, NULL_NODE);

@@ -4,6 +4,7 @@ subdir('node')
 subdir('report')
 subdir('doubly_linked')
 
+
 # These arguments are only used to build the shared library
 # not the executables that use the library.
 lib_args = ['-DBUILDING_LIBDSTRUCT']

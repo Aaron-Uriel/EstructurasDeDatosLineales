@@ -19,7 +19,6 @@ struct SNode {
 	int32_t  value;
 	SNode    *next;
 };
-
 PUBLIC SNode    *snode_new(int32_t value);
 PUBLIC void     snode_delete(SNode **self);
 PUBLIC SNode    *snode_clone(SNode *self);
@@ -35,7 +34,6 @@ struct Node {
     Node    *previous;
     Node    *next;
 };
-
 PUBLIC Node *node_new(int32_t value);
 PUBLIC void node_delete(Node **const self);
 PUBLIC Node *node_clone(Node *self);
@@ -47,6 +45,22 @@ PUBLIC Node *node_jump_to_first(Node *const self);
 PUBLIC Node *node_jump_to_n(Node *const self, const uint32_t n);
 PUBLIC void node_print_all_linked_nodes(Node *const self);
 PUBLIC void node_print_debug(const Node *const self);
+
+typedef struct PNode PNode;
+struct PNode {
+    int32_t value;
+    uint8_t priority;
+    PNode *previous;
+    PNode *next;
+};
+PUBLIC PNode   *pnode_new(int32_t value, uint8_t priority);
+PUBLIC PNode   *pnode_new_from_node(Node *node, uint8_t priority);
+PUBLIC void    pnode_delete(PNode **self);
+PUBLIC PNode   *pnode_clone(PNode *self);
+PUBLIC void    pnode_append(PNode *self, PNode *pnode);
+PUBLIC void    pnode_prepend(PNode *self, PNode *pnode);
+PUBLIC void    pnode_unlink(PNode *self);
+
 
 /* Fin de nodos. */
 
@@ -85,6 +99,18 @@ typedef struct HQueue HQueue;
 PUBLIC SNode *squeue_dequeue(SNode **const squeue);
 PUBLIC void squeue_enqueue(SNode **squeue, SNode *snode);
 PUBLIC void squeue_print(SNode *squeue);
+
+typedef struct PQueue PQueue;
+struct PQueue {
+    PNode *first;
+    PNode *last;
+    uint32_t size;
+};
+
+PUBLIC PQueue   *pqueue_new(void);
+PUBLIC void     pqueue_enqueue(PQueue *pqueue, PNode *pnode);
+PUBLIC PNode    *pqueue_dequeue(PQueue *pqueue);
+PUBLIC void     pqueue_print(PQueue *pequeue);
 
 /* Fin de colas. */
 

@@ -33,3 +33,8 @@ nodes_test = executable('nodes_test', 'nodes.c',
 )
 test('nodes_test', nodes_test)
 
+pqueue_test = executable('pqueue_test', 'pqueue.c',
+  link_with : libdstruct,
+  include_directories : includes,
+)
+test('pqueue_test', pqueue_test)

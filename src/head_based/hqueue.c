@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <libdstruct.h>
 
-
+#include <report.h>
 
 HQueue *
 hqueue_new(void) {
@@ -18,16 +18,16 @@ hqueue_new(void) {
     return new_hqueue;
 }
 
-void hqueue_insert(HQueue *headqueue, Node *queue)
+void hqueue_insert(HQueue *headqueue, Node *node)
 {
     if (headqueue->size == 0) {
-        headqueue->first = queue;
-        headqueue->last = queue;
+        headqueue->first = node;
+        headqueue->last = node;
         headqueue->size = 1;
     } else
     {
-        headqueue->last = queue;
-        node_append(headqueue->last, queue);
+        node_append(headqueue->last, node);
+        headqueue->last = node;
         headqueue->size += 1;
     }
 }
@@ -38,13 +38,14 @@ void hqueue_print(HQueue *headqueue)
     
     if (headqueue == NULL)
     {
-        printf("\t| + Esta vacia. +\n");
+        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
     } else
     {
     Node *actual = headqueue->first;
     uint32_t i;
-    for (i = 0; actual != NULL && i <= headqueue->size; i++) {
-        printf(" tamanio: %d, %d  -> ", headqueue->size, actual->value);
+    printf("Tamaño: %d %p\n", headqueue->size, (void *)actual->next);
+    for (i = 0; actual != NULL && i < headqueue->size; i++) {
+        printf("%d  -> ", actual->value);
         actual = actual->next;
     }
           }

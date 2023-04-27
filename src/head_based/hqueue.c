@@ -27,10 +27,9 @@ void hqueue_print(List *headqueue)
         printf("\t| + Esta vacia. +\n");
     } else
     {
-        for (actual = headqueue->first, i = 0;
-         actual != NULL && i < headqueue->size;
-         actual = actual->next, i += 1) {
+        for (i = 0; actual != NULL && i < headqueue->size; i += 1) {
         printf("%d -> Tamanio %d ", actual->value, headqueue->size);
+        actual = actual->next;
           }
         printf("NULL.\n");
     }

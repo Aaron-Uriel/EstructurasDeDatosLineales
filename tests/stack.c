@@ -16,7 +16,7 @@ main(void)
     list_print(headlist);
     */
 
-   List *headqueue = list_new();
+   HQueue *headqueue = hqueue_new();
    Node *queue = NULL; 
    int numero;
    printf("Numero: ");
@@ -26,6 +26,12 @@ main(void)
    hqueue_print(headqueue);
 
    printf("Numero: ");
+   scanf("%d", &numero);
+   queue = node_new(numero);
+   hqueue_insert(headqueue, queue);
+   hqueue_print(headqueue);
+
+    printf("Numero: ");
    scanf("%d", &numero);
    queue = node_new(numero);
    hqueue_insert(headqueue, queue);

@@ -125,8 +125,16 @@ PUBLIC int  dlist_search_node(Node **dlist, Node* node);
 /*Fin lista*/
 
 
+typedef struct HQueue HQueue;
+struct HQueue {
+    Node *first;
+    Node *last;
+    uint32_t size;
+};
+
 /*Cola con cabecera*/
-PUBLIC  void hqueue_insert(List *headqueue, Node *queue);
-PUBLIC  void hqueue_print(List *headqueue);
+PUBLIC  HQueue *hqueue_new(void);
+PUBLIC  void hqueue_insert(HQueue *headqueue, Node *queue);
+PUBLIC  void hqueue_print(HQueue *headqueue);
 /*fin cola*/
 #endif

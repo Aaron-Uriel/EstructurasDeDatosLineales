@@ -8,7 +8,7 @@
 StaticQueue *
 static_queue_new(int size)
 {
-    StaticQueue *queue    = malloc(sizeof(StaticQueue));
+    StaticQueue *queue = malloc(sizeof(StaticQueue));
     queue->array = malloc(size * sizeof(int)); 
     queue->first = 0;
     queue->last = 0;

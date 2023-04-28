@@ -3,7 +3,11 @@
 #include <stdbool.h>
 
 #include <libdstruct.h>
+#include <report.h>
 
+/*
+ * Reserva el espacio de memoria para el uso de una pila estática.
+ */
 StaticStack *
 static_stack_new(int size)
 {
@@ -16,7 +20,9 @@ static_stack_new(int size)
 	return stack;
 }
 
-
+/*
+ * Inserta un valor en la pila.
+ */
 void
 static_stack_insert(StaticStack *self, int value)
 {
@@ -24,36 +30,55 @@ static_stack_insert(StaticStack *self, int value)
         printf("La Pila está llena.\n");
         return;
     }
-
+    
     self->array[self->last] = value;
-    self->last = (self->last + 1);
-    if (self->first == self->last) 
-    {
+    self->last += 1;
+    /*
+     * Marcamos a la pila como llena cuando el índice del siguiente
+     * nodo es igual (excede) al tamaño de la pila.
+     */
+    if (self->last == self->size) {
         self->is_full = true;
+        return;
     }
 }
 
-void
+/*
+ * Extrae el último elemento de la pila.
+ * Regresa -1 si la pila apunta a NULL o está vacía.
+ */
+int
 static_stack_extract(StaticStack *self)
 {
-    StaticStack *temp = NULL; 
-    int extract;
-    for (int i = self->first; i < self->last; i++) {
-        extract = i;
+    if (self == NULL) {
+        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
+        return -1;
     }
-    temp = self;
-    temp->last = (extract) % self->size;
+    if (self->size == 0) {
+        report(__func__, ERROR, EMPTY_DATA_STRUCT);
+        return -1;
+    }
 
-    printf("\n");
+    /* Cuando la pila es de tamaño 1, va a estar vacía después. */
+    if (self->size == 1) {
+        report(__func__, INFO, DATA_STRUCT_WILL_BE_EMPTY);
+    }
+
+    int extract = self->array[self->last];
+    self->last -= 1;
+    return extract;
 }
 
+/*
+ * Imprime los elementos insertados en la pila.
+ */
 void
 static_stack_print(StaticStack *self)
 {
+    printf("Tamaño máximo: %d\n", self->size);
     for (int i = self->first; i < self->last; i++) {
         printf("%d ", self->array[i]);
     }
     printf("\n");
-
 }
 

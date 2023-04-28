@@ -177,7 +177,7 @@ struct StaticStack {
 
 PUBLIC StaticStack *static_stack_new(int size);
 PUBLIC void static_stack_insert(StaticStack *self, int value);
-PUBLIC void static_stack_extract(StaticStack *self);
+PUBLIC int static_stack_extract(StaticStack *self);
 PUBLIC void static_stack_print(StaticStack *self);
 
 #endif

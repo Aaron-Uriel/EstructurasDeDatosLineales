@@ -38,7 +38,7 @@ list_search_node(List *const list, Node *const node) {
     Node *current_node;
     int32_t i;
     for (current_node = list->first, i = 0;
-         current_node->next != NULL;
+         current_node != NULL;
          current_node = current_node->next, i++) {
         if (current_node->value == node->value) {
             return i;
@@ -85,9 +85,9 @@ list_insert_node(List *const list, Node *const node)
     }
 
     /*
-     * Cuando el nodo es mayor que el mayor (el último).
+     * Cuando el nodo es mayor o igual que el mayor (el último).
      */
-    if (node->value > list->last->value) {
+    if (node->value >= list->last->value) {
         node_append(list->last, node);
         list->last = node;
         list->size += 1;

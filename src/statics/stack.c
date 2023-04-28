@@ -38,7 +38,6 @@ static_stack_insert(StaticStack *self, int value)
      * nodo es igual (excede) al tamaño de la pila.
      */
     if (self->last == self->size) {
-        self->last = (self->last - 1);
         self->is_full = true;
         return;
     }
@@ -77,8 +76,7 @@ void
 static_stack_print(StaticStack *self)
 {
     printf("Tamaño máximo: %d\n", self->size);
-    /* first y last conforman un rango inclusivo. */
-    for (int i = self->first; i <= self->last; i++) {
+    for (int i = self->first; i < self->last; i++) {
         printf("%d ", self->array[i]);
     }
     printf("\n");

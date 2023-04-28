@@ -466,7 +466,13 @@ int main(void)
                             break;  
                         case 5: 
                             //Copiar
-                            printf("Falta \n");
+                            printf("\t|_________________________________________.\n");
+                            printf("\t|__________________Copiar_________________|\n");
+                            printf("\t| Ingrese el índice que quiere copiar: ");
+                            scanf("%d", &id);
+                            nodecpy = node_clone(node_jump_to_n(headlist->first, id));
+                            list_insert_node(headlist, nodecpy);
+                            system("clear");
                             break;      
                         case 6:
                             //Salir

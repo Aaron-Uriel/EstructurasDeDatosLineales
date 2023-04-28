@@ -10,7 +10,7 @@ int main(void)
     //Simplemente ligadas.
     SNode *squeue = NULL, *sstack = NULL, *slist = NULL, *snodecpy = NULL, *sdeleted = NULL; 
     //Doblemente ligadas.
-    Node *queue = NULL, *stack = NULL, *list = NULL, *node = NULL, *deleted = NULL, *nodecpy = NULL; 
+    Node *queue = NULL, *list = NULL, *deleted = NULL, *nodecpy = NULL; 
     //Cola con cabecera
     HQueue *headqueue = hqueue_new(); 
     //Lista con cabecera.
@@ -26,7 +26,7 @@ int main(void)
     int sta_stack_deleted;
 
     //Variables enteras a usar.
-    int opcion, opcionSecun, tercerOpcion, id, search, cont = 0, prioridad;
+    int opcion, opcionSecun, tercerOpcion, id, search, prioridad;
     do
     {
         opcion = menu_principal();  

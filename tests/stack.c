@@ -15,52 +15,38 @@ main(void)
     list_insert_node(headlist, hlist);
     list_print(headlist);
     */
-
-   HQueue *headqueue = hqueue_new();
-   Node *queue = NULL; 
+   StaticQueue *queue = static_queue_new(15);
    int numero;
-   printf("Numero: ");
-   scanf("%d", &numero);
-   queue = node_new(numero);
-   hqueue_insert(headqueue, queue);
-   hqueue_print(headqueue);
 
-   printf("Numero: ");
+   printf("Ingrese un numero: ");
    scanf("%d", &numero);
-   queue = node_new(numero);
-   hqueue_insert(headqueue, queue);
-   hqueue_print(headqueue);
+   static_queue_insert(queue, numero);
+   static_queue_print(queue);
 
-    printf("Numero: ");
+   printf("Ingrese un numero: ");
    scanf("%d", &numero);
-   queue = node_new(numero);
-   hqueue_insert(headqueue, queue);
-   hqueue_print(headqueue);
+   static_queue_insert(queue, numero);
+   static_queue_print(queue);
 
-   printf("Numero: ");
+   printf("Ingrese un numero: ");
    scanf("%d", &numero);
-   queue = node_new(numero);
-   hqueue_insert(headqueue, queue);
-   hqueue_print(headqueue);
+   static_queue_insert(queue, numero);
+   static_queue_print(queue);
 
-    printf("Indice del extraerr: ");
-   scanf("%d", &numero);
-   hqueue_extract(headqueue, numero);
+   static_queue_extract(queue);
+   static_queue_print(queue);
 
-   printf("Numero: ");
+   printf("Ingrese un numero: ");
    scanf("%d", &numero);
-   queue = node_new(numero);
-   hqueue_insert(headqueue, queue);
-   hqueue_print(headqueue);
+   static_queue_insert(queue, numero);
+   static_queue_print(queue);
+   
+   printf("Ingrese un numero: ");
+   scanf("%d", &numero);
+   static_queue_insert(queue, numero);
+   static_queue_print(queue);
 
-   printf("Numero: ");
-   scanf("%d", &numero);
-   queue = node_new(numero);
-   hqueue_insert(headqueue, queue);
-   hqueue_print(headqueue);
-
-    printf("Indice del extraerr: ");
-   scanf("%d", &numero);
-   hqueue_extract(headqueue, numero);
+   static_queue_extract(queue);
+   static_queue_print(queue);
     return 0;
 }

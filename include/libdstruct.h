@@ -84,9 +84,10 @@ struct HQueue {
     Node *last;
     uint32_t size;
 };
-PUBLIC HQueue *hqueue_new(void);
-PUBLIC void hqueue_insert(HQueue *headqueue, Node *queue);
-PUBLIC void hqueue_print(HQueue *headqueue);
+PUBLIC  HQueue *hqueue_new(void);
+PUBLIC  void    hqueue_insert(HQueue *headqueue, Node *queue);
+PUBLIC  void    hqueue_print(HQueue *headqueue);
+PUBLIC  Node    *hqueue_extract(HQueue *headqueue, int indice);
 
 /* Cola con prioridad. */
 typedef struct PQueue PQueue;
@@ -99,6 +100,22 @@ PUBLIC PQueue   *pqueue_new(void);
 PUBLIC void     pqueue_enqueue(PQueue *pqueue, PNode *pnode);
 PUBLIC PNode    *pqueue_dequeue(PQueue *pqueue);
 PUBLIC void     pqueue_print(PQueue *pequeue);
+
+/*Cola estática.*/
+typedef struct StaticQueue StaticQueue;
+struct StaticQueue {
+	int *array;
+	int size;
+	int first;
+	int last;
+    bool is_full;
+};
+PUBLIC StaticQueue *static_queue_new(int size);
+PUBLIC void static_queue_insert(StaticQueue *self, int value);
+PUBLIC void static_queue_extract(StaticQueue *self);
+PUBLIC void static_queue_print(StaticQueue *self);
+
+
 
 /* Fin de colas. */
 
@@ -148,18 +165,4 @@ PUBLIC Node *dlist_delete_node(Node **dlist, int id);
 PUBLIC int  dlist_search_node(Node **dlist, Node* node);
 /*Fin lista*/
 
-
-typedef struct HQueue HQueue;
-struct HQueue {
-    Node *first;
-    Node *last;
-    uint32_t size;
-};
-
-/*Cola con cabecera*/
-PUBLIC  HQueue *hqueue_new(void);
-PUBLIC  void hqueue_insert(HQueue *headqueue, Node *queue);
-PUBLIC  void hqueue_print(HQueue *headqueue);
-PUBLIC  Node *hqueue_extract(HQueue *headqueue, int indice);
-/*fin cola*/
 #endif

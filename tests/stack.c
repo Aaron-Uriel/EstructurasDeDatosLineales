@@ -15,38 +15,38 @@ main(void)
     list_insert_node(headlist, hlist);
     list_print(headlist);
     */
-   StaticQueue *queue = static_queue_new(15);
+   StaticStack *queue = static_stack_new(15);
    int numero;
 
    printf("Ingrese un numero: ");
    scanf("%d", &numero);
-   static_queue_insert(queue, numero);
-   static_queue_print(queue);
+   static_stack_insert(queue, numero);
+   static_stack_print(queue);
 
    printf("Ingrese un numero: ");
    scanf("%d", &numero);
-   static_queue_insert(queue, numero);
-   static_queue_print(queue);
+   static_stack_insert(queue, numero);
+   static_stack_print(queue);
 
    printf("Ingrese un numero: ");
    scanf("%d", &numero);
-   static_queue_insert(queue, numero);
-   static_queue_print(queue);
+   static_stack_insert(queue, numero);
+   static_stack_print(queue);
 
-   static_queue_extract(queue);
-   static_queue_print(queue);
+   static_stack_extract(queue);
+   static_stack_print(queue);
 
    printf("Ingrese un numero: ");
    scanf("%d", &numero);
-   static_queue_insert(queue, numero);
-   static_queue_print(queue);
+   static_stack_insert(queue, numero);
+   static_stack_print(queue);
    
    printf("Ingrese un numero: ");
    scanf("%d", &numero);
-   static_queue_insert(queue, numero);
-   static_queue_print(queue);
+   static_stack_insert(queue, numero);
+   static_stack_print(queue);
 
-   static_queue_extract(queue);
-   static_queue_print(queue);
+   static_stack_extract(queue);
+   static_stack_print(queue);
     return 0;
 }

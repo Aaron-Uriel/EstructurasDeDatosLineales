@@ -62,7 +62,7 @@ int menu_secundario_estatica(void)
     int opcionSecun;
     printf("\t|____________.\n");
     printf("\t|1.- Cola.   |\n");
-    printf("\t|2.- Pila.  |\n");
+    printf("\t|2.- Pila.   |\n");
     printf("\t|3.- Volver. |\n");
     printf("\t|____________|\n");
     printf("\t|Opcion: ");

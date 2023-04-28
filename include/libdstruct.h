@@ -87,7 +87,7 @@ struct HQueue {
 PUBLIC  HQueue *hqueue_new(void);
 PUBLIC  void    hqueue_insert(HQueue *headqueue, Node *queue);
 PUBLIC  void    hqueue_print(HQueue *headqueue);
-PUBLIC  Node    *hqueue_extract(HQueue *headqueue, int indice);
+PUBLIC  Node    *hqueue_extract(HQueue *headqueue);
 
 /* Cola con prioridad. */
 typedef struct PQueue PQueue;
@@ -164,5 +164,20 @@ PUBLIC void dlist_imprimir(Node **list);
 PUBLIC Node *dlist_delete_node(Node **dlist, int id);
 PUBLIC int  dlist_search_node(Node **dlist, Node* node);
 /*Fin lista*/
+
+/*Pila estática.*/
+typedef struct StaticStack StaticStack;
+struct StaticStack {
+	int *array;
+	int size;
+	int first;
+	int last;
+    bool is_full;
+};
+
+PUBLIC StaticStack *static_stack_new(int size);
+PUBLIC void static_stack_insert(StaticStack *self, int value);
+PUBLIC void static_stack_extract(StaticStack *self);
+PUBLIC void static_stack_print(StaticStack *self);
 
 #endif

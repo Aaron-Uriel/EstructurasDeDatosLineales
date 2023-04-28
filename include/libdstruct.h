@@ -141,4 +141,25 @@ PUBLIC void sstack_imprimir(SNode **sstack);
 
 /* Fin de pila. */
 
+/*Lista doblemente ligada*/
+PUBLIC void dlist_insert_node(Node **dlist, Node *node);
+PUBLIC void dlist_imprimir(Node **list);
+PUBLIC Node *dlist_delete_node(Node **dlist, int id);
+PUBLIC int  dlist_search_node(Node **dlist, Node* node);
+/*Fin lista*/
+
+
+typedef struct HQueue HQueue;
+struct HQueue {
+    Node *first;
+    Node *last;
+    uint32_t size;
+};
+
+/*Cola con cabecera*/
+PUBLIC  HQueue *hqueue_new(void);
+PUBLIC  void hqueue_insert(HQueue *headqueue, Node *queue);
+PUBLIC  void hqueue_print(HQueue *headqueue);
+PUBLIC  Node *hqueue_extract(HQueue *headqueue, int indice);
+/*fin cola*/
 #endif

@@ -36,5 +36,31 @@ main(void)
    queue = node_new(numero);
    hqueue_insert(headqueue, queue);
    hqueue_print(headqueue);
+
+   printf("Numero: ");
+   scanf("%d", &numero);
+   queue = node_new(numero);
+   hqueue_insert(headqueue, queue);
+   hqueue_print(headqueue);
+
+    printf("Indice del extraerr: ");
+   scanf("%d", &numero);
+   hqueue_extract(headqueue, numero);
+
+   printf("Numero: ");
+   scanf("%d", &numero);
+   queue = node_new(numero);
+   hqueue_insert(headqueue, queue);
+   hqueue_print(headqueue);
+
+   printf("Numero: ");
+   scanf("%d", &numero);
+   queue = node_new(numero);
+   hqueue_insert(headqueue, queue);
+   hqueue_print(headqueue);
+
+    printf("Indice del extraerr: ");
+   scanf("%d", &numero);
+   hqueue_extract(headqueue, numero);
     return 0;
 }

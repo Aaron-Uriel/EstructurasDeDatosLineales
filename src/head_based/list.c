@@ -17,6 +17,13 @@ list_new(void) {
     return new_list;
 }
 
+/*
+ * Busca el nodo dentro de la lista.
+ * Se regresa un valor positivo indicando el índice del nodo, si se regresa
+ * un valor menor que 0 quiere decir que ocurrió un error.
+ * Para saber si el nodo que se busca en la lista se encontró, comparamos el
+ * valor dentro de los nodos. No se realiza ninguna comparación profunda.
+ */
 int32_t
 list_search_node(List *const list, Node *const node) {
     if (node == NULL) {
@@ -33,10 +40,7 @@ list_search_node(List *const list, Node *const node) {
     for (current_node = list->first, i = 0;
          current_node->next != NULL;
          current_node = current_node->next, i++) {
-        bool deep_cmp = memcmp((void *)current_node, 
-                               (void *)node,
-                               sizeof(*current_node));
-        if (deep_cmp == 0) {
+        if (current_node->value == node->value) {
             return i;
         }
     }

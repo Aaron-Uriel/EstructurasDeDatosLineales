@@ -75,13 +75,13 @@ slist_insert_snode(SNode **slist, SNode *snode)
     prev_snode->next = snode;
 }
 
-/**
+/*
  * Busca si existe el nodo recibido dentro de la lista, si este existe se regresa
  * el índice de ese nodo.
  * La función regresa -1 cuando ocurre algún error relacionado a las variables
  * pasadas a la funciín, se regresa -2 si no se encontró el nodo en la lista.
- * Para saber si el nodo es el mismo, se hace una comparación profunda, si ambos
- * nodos tienen el mismo valor en memoria se considera encontrado.
+ * Para saber si el nodo es el mismo, se compara únicamente el valor dentro de
+ * los nodos, no se hace ninguna comparación profunda.
  */
 int32_t
 slist_search_snode(SNode **const slist, SNode *const snode) {
@@ -99,10 +99,7 @@ slist_search_snode(SNode **const slist, SNode *const snode) {
     for (current_snode = *slist, i = 0;
          current_snode != NULL;
          current_snode = current_snode->next, i++) {
-        bool deep_cmp = memcmp((void *)current_snode, 
-                               (void *)snode,
-                               sizeof(*current_snode));
-        if (deep_cmp == 0) {
+        if (current_snode->value == snode->value) {
             return i;
         }
     }

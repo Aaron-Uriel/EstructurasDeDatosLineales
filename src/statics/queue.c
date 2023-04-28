@@ -47,7 +47,9 @@ static_queue_extract(StaticQueue *self)
 void
 static_queue_print(StaticQueue *self)
 {
-    for (int i = self->first; i < self->last; i++) {
+    for (int i = self->first;
+         i != self->last;
+         i = (i + 1) % self->size) {
         printf("%d ", self->array[i]);
     }
     printf("\n");

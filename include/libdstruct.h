@@ -72,6 +72,10 @@ PUBLIC SNode *squeue_dequeue(SNode **const squeue);
 PUBLIC void squeue_enqueue(SNode **squeue, SNode *snode);
 PUBLIC void squeue_print(SNode *squeue);
 
+/* Cola doblemente enlazada. */
+PUBLIC void dqueue_enqueue(Node **dqueue, Node *node);
+PUBLIC Node *dqueue_dequeue(Node **const dqueue);
+PUBLIC void dqueue_print(Node *dqueue);
 
 /* Cola con cabecera. */
 typedef struct HQueue HQueue;

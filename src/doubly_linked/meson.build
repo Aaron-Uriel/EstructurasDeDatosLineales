@@ -1,1 +1,1 @@
-source_files += files('dlist.c')
+source_files += files('dlist.c', 'dqueue.c')

@@ -199,7 +199,7 @@ node_print_all_linked_nodes(Node *const self)
     }
     const Node *current_node = node_jump_to_first(self);
     while (current_node != NULL) {
-        printf("%d ", current_node->value);
+        printf("%d -> ", current_node->value);
         current_node = current_node->next;
     }
     printf("NULL\n");

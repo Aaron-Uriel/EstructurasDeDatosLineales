@@ -16,8 +16,8 @@ squeue_dequeue(SNode **const squeue)
     }
 
     SNode *const extracted_node = *squeue;
-    extracted_node->next = NULL;
     SNode *const new_first_node = (*squeue)->next;
+    extracted_node->next = NULL;
     if (new_first_node == NULL) {
         report(__func__, INFO, DATA_STRUCT_WILL_BE_EMPTY);
     }
@@ -39,7 +39,7 @@ squeue_enqueue(SNode **squeue, SNode *snode)
     }
 
     SNode *const last_node_in_squeue = snode_jump_to_last(*squeue);
-    last_node_in_squeue->next = snode;
+    snode_append(last_node_in_squeue, snode);
 }
 
 /*

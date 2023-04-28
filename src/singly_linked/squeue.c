@@ -39,7 +39,7 @@ squeue_enqueue(SNode **squeue, SNode *snode)
     }
 
     SNode *const last_node_in_squeue = snode_jump_to_last(*squeue);
-    last_node_in_squeue->next = snode;
+    snode_append(last_node_in_squeue, snode);
 }
 
 /*

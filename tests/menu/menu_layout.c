@@ -548,9 +548,10 @@ int main(void)
             } while (tercerOpcion != 4);
             break;
         case 5:
-            opcionSecun = menu_secundario_estatica();
+           
             do
             {
+                opcionSecun = menu_secundario_estatica();
                 switch (opcionSecun)
                 {
                 case 1: //Cola -------------------------------
@@ -583,7 +584,7 @@ int main(void)
                         default:
                             printf("Opcion invalida.\n");
                             break;
-                        }
+                        } 
                      } while (tercerOpcion != 4);
                      
                     break;
@@ -600,7 +601,7 @@ int main(void)
                             printf("\t|_____________Agregar____________|\n");
                             printf("\t| Ingrese el valor del nodo: ");
                             scanf("%d", &id);
-                            squeue_enqueue(&squeue, snode_new(id));
+                            static_queue_insert(staqueue, id);
                             system("clear");
                             break;
                         case 2:

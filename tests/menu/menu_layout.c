@@ -618,16 +618,14 @@ int main(void)
                             break;
                         case 2:
                             //Quitar.
-                            static_stack_extract(stastack);
-                           /* deleted = static_stack_extract(stastack);
-                            if (deleted == NULL)
+                            sta_stack_deleted = static_stack_extract(stastack);
+                            if (sta_stack_deleted == -1)
                             {
                                 printf("No hay nada.\n");
                             } else
                             {
-                                printf("Se eliminó: %d\n", deleted->value);
-                                snode_delete(&deleted);
-                            }*/
+                                printf("Se eliminó: %d\n", sta_stack_deleted);
+                            }
                             break;
                          case 3:
                             //Imprimir

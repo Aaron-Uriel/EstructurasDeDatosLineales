@@ -136,5 +136,6 @@ struct HQueue {
 PUBLIC  HQueue *hqueue_new(void);
 PUBLIC  void hqueue_insert(HQueue *headqueue, Node *queue);
 PUBLIC  void hqueue_print(HQueue *headqueue);
+PUBLIC  Node *hqueue_extract(HQueue *headqueue, int indice);
 /*fin cola*/
 #endif

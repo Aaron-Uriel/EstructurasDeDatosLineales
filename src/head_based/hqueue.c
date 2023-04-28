@@ -43,12 +43,50 @@ void hqueue_print(HQueue *headqueue)
     {
     Node *actual = headqueue->first;
     uint32_t i;
-    printf("Tamaño: %d %p\n", headqueue->size, (void *)actual->next);
     for (i = 0; actual != NULL && i < headqueue->size; i++) {
         printf("%d  -> ", actual->value);
         actual = actual->next;
     }
           }
         printf("NULL.\n");
+    }
+
+
+    Node *hqueue_extract(HQueue *headqueue, int indice)
+    {
+        Node *actual = headqueue->first;
+        Node *nuevo_inicio_final;
+        int i;
+        if (headqueue != NULL)
+        {
+            for (i = 0; i < indice && actual != NULL; i++)
+            {
+                actual = actual->next;        
+            }
+            
+            if (headqueue->first == actual)
+            {
+                nuevo_inicio_final = actual->next;
+                headqueue->first = nuevo_inicio_final;
+                nuevo_inicio_final->previous = NULL;
+            
+            } else if (headqueue->last == actual)
+            {
+                nuevo_inicio_final = actual->previous;
+                headqueue->last = nuevo_inicio_final;
+                nuevo_inicio_final->next = NULL;
+            }
+
+            actual->previous = NULL;
+            actual->next = NULL;
+            return actual;
+            
+
+
+        } else 
+        {
+             report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
+        }
+        
     }
     

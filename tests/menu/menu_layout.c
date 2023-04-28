@@ -492,27 +492,24 @@ int main(void)
             break;
 
         case 4: //Con prioridad
-            
-            switch (opcionSecun)
+        system("clear");
+            do   
             {
-                case 1: //Cola ----------------------------
-                    do
-                    {
-                        tercerOpcion = menu_cola_pila();
-                        printf("|________Cola__________ _ _  _  _   _    _\n| ");
-                        switch (tercerOpcion)
-                        {
-                        case 1:
-                            //Agregar
-                            printf("\t|________________________________.\n");
-                            printf("\t|_____________Agregar____________|\n");
-                            printf("\t| Ingrese el valor del nodo: ");
-                            scanf("%d", &id);
-                            printf("\t| Ingrese su prioridad: ");
-                            scanf("%d", &prioridad);
-                            pqueue_enqueue(prioqueue, pnode_new(id, prioridad));
-                            system("clear");
-                            break;
+                printf("\n|________Cola__________ _ _  _  _   _    _\n");
+                tercerOpcion = menu_cola_pila();
+                switch (tercerOpcion)
+                   {
+                    case 1:     
+                       //Agregar
+                        printf("\t|________________________________.\n");
+                        printf("\t|_____________Agregar____________|\n");
+                        printf("\t| Ingrese el valor del nodo: ");
+                        scanf("%d", &id);
+                        printf("\t| Ingrese su prioridad: ");
+                        scanf("%d", &prioridad);
+                        pqueue_enqueue(prioqueue, pnode_new(id, prioridad));
+                        system("clear");
+                        break;
                         case 2:
                             //Quitar
                            //Funcion para extraer
@@ -538,13 +535,8 @@ int main(void)
                         default:
                             printf("\tOpcion invalida.\n");
                             break;
-                        }
-
-                    } while (tercerOpcion != 4);
-                    
-                break;
-                }
-
+                 }
+            } while (tercerOpcion != 4);
             break;
         case 5:
             opcionSecun = menu_secundario_estatica();

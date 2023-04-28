@@ -17,6 +17,9 @@ int main(void)
     //Cola con prioridad.
     PQueue *prioqueue = pqueue_new();
     PNode *pdeleted;
+    //Cola estática
+    StaticQueue *staqueue = static_queue_new(10);
+
     //Variables enteras a usar.
     int opcion, opcionSecun, tercerOpcion, id, search, cont = 0, prioridad;
     do
@@ -546,6 +549,96 @@ int main(void)
             break;
         case 5:
             opcionSecun = menu_secundario_estatica();
+            do
+            {
+                switch (opcionSecun)
+                {
+                case 1: //Cola -------------------------------
+                     do
+                     {
+                        tercerOpcion = menu_cola_pila();
+                        switch (tercerOpcion)
+                        {
+                        case 1:
+                            //Agregar
+                            printf("\t|________________________________.\n");
+                            printf("\t|_____________Agregar____________|\n");
+                            printf("\t| Ingrese el valor del nodo: ");
+                            scanf("%d", &id);
+                            static_queue_insert(staqueue, id);
+                            system("clear");
+                            break;
+                        case 2:
+                            //Quitar.
+                            static_queue_extract(staqueue);
+                            break;
+                         case 3:
+                            //Imprimir
+                            system("clear");
+                            printf("|________Cola__________ _ _  _  _   _    _\n| ");
+                            static_queue_print(staqueue);
+                            break;
+                        case 4: //Salir
+                            break;       
+                        default:
+                            printf("Opcion invalida.\n");
+                            break;
+                        }
+                     } while (tercerOpcion != 4);
+                     
+                    break;
+                
+                case 2: //Pila ----------------------------------
+                    do
+                     {
+                        tercerOpcion = menu_cola_pila();
+                        switch (tercerOpcion)
+                        {
+                        case 1:
+                            //Agregar
+                            printf("\t|________________________________.\n");
+                            printf("\t|_____________Agregar____________|\n");
+                            printf("\t| Ingrese el valor del nodo: ");
+                            scanf("%d", &id);
+                            squeue_enqueue(&squeue, snode_new(id));
+                            system("clear");
+                            break;
+                        case 2:
+                            //Quitar.
+                            sdeleted = squeue_dequeue(&squeue);
+                            if (sdeleted == NULL)
+                            {
+                                printf("No hay nada.\n");
+                            } else
+                            {
+                                printf("Se eliminó: %d\n", sdeleted->value);
+                                snode_delete(&sdeleted);
+                            }
+                            break;
+                         case 3:
+                            //Imprimir
+                            system("clear");
+                            printf("|________Cola__________ _ _  _  _   _    _\n| ");
+                            squeue_print(squeue);
+                            break;
+                        case 4: //Salir
+                            break;       
+                        default:
+                        
+                            break;
+                        }
+                     } while (tercerOpcion != 4);
+
+
+                    break;
+                
+                case 3: //Salir 
+
+                    break;
+                default:
+                    break;
+                }
+            } while (opcionSecun != 3);
             
             break;
         case 6:

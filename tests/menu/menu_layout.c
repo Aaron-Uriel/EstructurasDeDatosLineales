@@ -624,7 +624,7 @@ int main(void)
                         case 4: //Salir
                             break;       
                         default:
-                        
+
                             break;
                         }
                      } while (tercerOpcion != 4);

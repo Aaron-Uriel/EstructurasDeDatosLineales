@@ -19,6 +19,7 @@ int main(void)
     PNode *pdeleted;
     //Cola estática
     StaticQueue *staqueue = static_queue_new(10);
+    StaticStack *stastack = static_stack_new(10);
 
     //Variables enteras a usar.
     int opcion, opcionSecun, tercerOpcion, id, search, cont = 0, prioridad;
@@ -578,7 +579,7 @@ int main(void)
                             system("clear");
                             printf("|________Cola__________ _ _  _  _   _    _\n| ");
                             static_queue_print(staqueue);
-                            break;
+                        break;
                         case 4: //Salir
                             break;       
                         default:
@@ -601,26 +602,27 @@ int main(void)
                             printf("\t|_____________Agregar____________|\n");
                             printf("\t| Ingrese el valor del nodo: ");
                             scanf("%d", &id);
-                            static_queue_insert(staqueue, id);
+                            static_stack_insert(stastack, id);
                             system("clear");
                             break;
                         case 2:
                             //Quitar.
-                            sdeleted = squeue_dequeue(&squeue);
-                            if (sdeleted == NULL)
+                            static_stack_extract(stastack);
+                           /* deleted = static_stack_extract(stastack);
+                            if (deleted == NULL)
                             {
                                 printf("No hay nada.\n");
                             } else
                             {
-                                printf("Se eliminó: %d\n", sdeleted->value);
-                                snode_delete(&sdeleted);
-                            }
+                                printf("Se eliminó: %d\n", deleted->value);
+                                snode_delete(&deleted);
+                            }*/
                             break;
                          case 3:
                             //Imprimir
                             system("clear");
-                            printf("|________Cola__________ _ _  _  _   _    _\n| ");
-                            squeue_print(squeue);
+                            printf("|________Pila__________ _ _  _  _   _    _\n| ");
+                            static_stack_print(stastack);
                             break;
                         case 4: //Salir
                             break;       

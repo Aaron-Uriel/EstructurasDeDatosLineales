@@ -55,3 +55,4 @@ pqueue_test = executable('pqueue_test', 'pqueue.c',
   include_directories : includes,
 )
 test('pqueue_test', pqueue_test)
+

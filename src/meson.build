@@ -3,6 +3,7 @@ subdir('singly_linked')
 subdir('node')
 subdir('report')
 subdir('doubly_linked')
+subdir('statics')
 
 
 # These arguments are only used to build the shared library

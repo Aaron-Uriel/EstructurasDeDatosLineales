@@ -112,7 +112,7 @@ struct StaticQueue {
 };
 PUBLIC StaticQueue *static_queue_new(int size);
 PUBLIC void static_queue_insert(StaticQueue *self, int value);
-PUBLIC void static_queue_extract(StaticQueue *self);
+PUBLIC int static_queue_extract(StaticQueue *self);
 PUBLIC void static_queue_print(StaticQueue *self);
 
 

@@ -36,12 +36,17 @@ static_queue_insert(StaticQueue *self, int value)
 }
 
 
-void
-static_queue_extract(StaticQueue *self)
+int static_queue_extract(StaticQueue *self)
 {
-    printf("Extraido: %d", self->array[self->first]);
-    printf("\n");
+    int extraer;
+    if (self->last == self->first)
+    {
+        return -1;
+    }
+    
+    extraer = self->array[self->first];
     self->first = (self->first + 1) % self->size;
+    return extraer;
 }
 
 void

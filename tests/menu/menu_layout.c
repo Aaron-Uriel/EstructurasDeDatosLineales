@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <libdstruct.h>
-
+#include <stdlib.h>
+#include <stdbool.h>
 #include "menu_functions.c"
 
 int main(void)
@@ -19,7 +20,10 @@ int main(void)
     PNode *pdeleted;
     //Cola estática
     StaticQueue *staqueue = static_queue_new(10);
+    int sta_queue_deleted;
+    //Pila estática
     StaticStack *stastack = static_stack_new(10);
+    int sta_stack_deleted;
 
     //Variables enteras a usar.
     int opcion, opcionSecun, tercerOpcion, id, search, cont = 0, prioridad;
@@ -548,7 +552,7 @@ int main(void)
                  }
             } while (tercerOpcion != 4);
             break;
-        case 5:
+        case 5: //Eatática -----------------------
            
             do
             {
@@ -572,7 +576,14 @@ int main(void)
                             break;
                         case 2:
                             //Quitar.
-                            static_queue_extract(staqueue);
+                            sta_queue_deleted = static_queue_extract(staqueue);
+                            if (sta_queue_deleted == -1)
+                            {
+                                 printf("Está vacía \n");
+                            } else
+                            {
+                                printf("%d extraído. \n", sta_queue_deleted);
+                            }
                             break;
                          case 3:
                             //Imprimir

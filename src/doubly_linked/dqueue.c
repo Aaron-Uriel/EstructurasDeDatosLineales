@@ -1,5 +1,4 @@
 #include <stdlib.h>
-
 #include <libdstruct.h>
 #include <report.h>
 

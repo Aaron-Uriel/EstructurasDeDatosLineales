@@ -3,7 +3,6 @@
 #include <stdio.h>
 
 #include <libdstruct.h>
-#include <report.h>
 #include <string.h>
 
 /*
@@ -15,7 +14,6 @@ pnode_new(int32_t value, uint8_t priority)
 {
 	PNode *const new_pnode = malloc(sizeof(*new_pnode));
 	if (new_pnode == NULL) {
-        report(__func__, ERROR, OUT_OF_MEMORY);
     }
 
     new_pnode->value    = value;
@@ -36,7 +34,6 @@ pnode_new_from_node(Node *node, uint8_t priority)
 {
 	PNode *const new_pnode = malloc(sizeof(*new_pnode));
 	if (new_pnode == NULL) {
-        report(__func__, ERROR, OUT_OF_MEMORY);
     }
 
     new_pnode->value    = node->value;
@@ -65,7 +62,6 @@ PNode *
 pnode_clone(PNode *self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
@@ -75,7 +71,6 @@ pnode_clone(PNode *self)
      */
     PNode *cloned_pnode = malloc(sizeof(*cloned_pnode));
     if (cloned_pnode == NULL) {
-        report(__func__, ERROR, OUT_OF_MEMORY);
         return NULL;
     }
     memcpy(cloned_pnode, self, sizeof(*cloned_pnode));
@@ -94,7 +89,6 @@ void
 pnode_append(PNode *self, PNode *pnode)
 {
     if (self == NULL || pnode == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -113,7 +107,6 @@ void
 pnode_prepend(PNode *self, PNode *pnode)
 {
     if (self == NULL || pnode == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -129,7 +122,6 @@ pnode_prepend(PNode *self, PNode *pnode)
 void
 pnode_unlink(PNode *const self) {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
     }
 
     PNode *const previous_pnode = self->previous;

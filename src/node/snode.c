@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include <libdstruct.h>
-#include <report.h>
 
 /*
  * Devuelve un apuntador que contiene la dirección de un nodo recién creado,
@@ -14,7 +13,6 @@ snode_new(int32_t value)
 {
 	SNode *const new_snode = malloc(sizeof(SNode));
     if (new_snode == NULL) {
-        report(__func__, ERROR, OUT_OF_MEMORY);
         return NULL;
     }
 
@@ -43,14 +41,12 @@ SNode *
 snode_clone(SNode *self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
     /* Reservamos el espacio en memoria que ocupará el nodo clonado */
     SNode *cloned_node = malloc(sizeof(*cloned_node));
     if (cloned_node == NULL) {
-        report(__func__, ERROR, OUT_OF_MEMORY);
         return NULL;
     }
     memcpy(cloned_node, self, sizeof(*cloned_node));
@@ -67,7 +63,6 @@ void
 snode_append(SNode *const self, SNode *const snode)
 {
     if (self == NULL || snode == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -81,7 +76,6 @@ SNode
 *snode_jump_to_last(SNode *const self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
@@ -101,7 +95,6 @@ SNode *
 snode_jump_to_n(SNode *const self, const uint32_t n)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
@@ -109,7 +102,6 @@ snode_jump_to_n(SNode *const self, const uint32_t n)
     uint32_t i;
     for (i = 0; i < n; i++) {
         if (node->next == NULL) {
-            report(__func__, ERROR, OUT_OF_BOUNDS);
             return NULL;
         }
         node = node->next;
@@ -128,7 +120,6 @@ void
 snode_print_all_linked_nodes(const SNode *const self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -147,7 +138,6 @@ void
 snode_print_debug(const SNode *const self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
 

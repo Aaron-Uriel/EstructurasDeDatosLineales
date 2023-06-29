@@ -3,7 +3,6 @@
 #include <stdbool.h>
 
 #include <libdstruct.h>
-#include <report.h>
 
 /*
  * Reserva el espacio de memoria para el uso de una pila estática.
@@ -51,17 +50,14 @@ int
 static_stack_extract(StaticStack *self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
         return -1;
     }
     if (self->size == 0) {
-        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return -1;
     }
 
     /* Cuando la pila es de tamaño 1, va a estar vacía después. */
     if (self->size == 1) {
-        report(__func__, INFO, DATA_STRUCT_WILL_BE_EMPTY);
     }
 
     int extract = self->array[self->last];

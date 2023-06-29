@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <libdstruct.h>
 
-#include <report.h>
-
 HQueue *
 hqueue_new(void) {
     HQueue *new_hqueue = malloc(sizeof(*new_hqueue));
@@ -24,8 +22,7 @@ void hqueue_insert(HQueue *headqueue, Node *node)
         headqueue->first = node;
         headqueue->last = node;
         headqueue->size = 1;
-    } else
-    {
+    } else {
         node_append(headqueue->last, node);
         headqueue->last = node;
         headqueue->size += 1;
@@ -35,44 +32,29 @@ void hqueue_insert(HQueue *headqueue, Node *node)
 
 void hqueue_print(HQueue *headqueue)
 {
-    
-    if (headqueue == NULL)
-    {
-        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
-    } else
-    {
-    Node *actual = headqueue->first;
-    uint32_t i;
-    for (i = 0; actual != NULL && i < headqueue->size; i++) {
-        printf("%d  -> ", actual->value);
-        actual = actual->next;
-    }
-          }
-        printf("NULL.\n");
-    }
-
-
-    Node *hqueue_extract(HQueue *headqueue)
-    {
+    if (headqueue) {
         Node *actual = headqueue->first;
-        Node *nuevo_inicio_final;
-        int i;
-        if (headqueue != NULL)
-        {
-           
-            nuevo_inicio_final = actual->next;
-            headqueue->first = nuevo_inicio_final;
-
-            actual->previous = NULL;
-            actual->next = NULL;
-            return actual;
-            
-
-
-        } else 
-        {
-             report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
+        uint32_t i;
+        for (i = 0; actual != NULL && i < headqueue->size; i++) {
+            printf("%d  -> ", actual->value);
+            actual = actual->next;
         }
-        
     }
-    
+    printf("NULL.\n");
+}
+
+
+Node *hqueue_extract(HQueue *headqueue)
+{
+    Node *actual = headqueue->first;
+    Node *nuevo_inicio_final;
+    int i;
+    if (headqueue != NULL) {
+        nuevo_inicio_final = actual->next;
+        headqueue->first = nuevo_inicio_final;
+
+        actual->previous = NULL;
+        actual->next = NULL;
+        return actual;
+    }
+}

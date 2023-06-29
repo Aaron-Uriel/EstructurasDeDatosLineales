@@ -4,22 +4,19 @@
 #include <string.h>
 
 #include <libdstruct.h>
-#include <report.h>
 
-/**
+/*
  * Inserta un nodo de forma ordenada en la lista. Los nodos se acomodan de
  * forma ascendente.
  */
 void
 slist_insert_snode(SNode **slist, SNode *snode)
 {
-    if (snode == NULL) {
-        report(__func__, ERROR, NULL_NODE);
+    if (snode == NULL ) {
         return;
     }
     /* Cuando la lista está vacía, ponemos el nodo como el primer elemento de la lista. */
     if (*slist == NULL) {
-        report(__func__, INFO, EMPTY_DATA_STRUCT);
         *slist = snode;
         return;
     }
@@ -86,11 +83,9 @@ slist_insert_snode(SNode **slist, SNode *snode)
 int32_t
 slist_search_snode(SNode **const slist, SNode *const snode) {
     if (snode == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return -1;
     }
     if (*slist == NULL) {
-        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return -1;
     }
 
@@ -116,7 +111,6 @@ SNode *
 slist_extract_node(SNode **const slist, const uint32_t index)
 {
     if (*slist == NULL) {
-        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return NULL;
     }
 
@@ -130,13 +124,11 @@ slist_extract_node(SNode **const slist, const uint32_t index)
     
     SNode *const node_before_index = snode_jump_to_n(*slist, index - 1);
     if (node_before_index == NULL) {
-        report(__func__, ERROR, OUT_OF_BOUNDS);
         return NULL;
     }
 
     SNode *const node_at_index = node_before_index->next;
     if (node_at_index == NULL) {
-        report(__func__, ERROR, OUT_OF_BOUNDS);
         return NULL;
     }
 
@@ -146,14 +138,13 @@ slist_extract_node(SNode **const slist, const uint32_t index)
     return extracted_node;
 }
 
-/**
+/*
  * Imprime la lista.
  */
 void
 slist_print(SNode *slist)
 {
     if (slist == NULL) {
-        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return;
     }
     snode_print_all_linked_nodes(slist);

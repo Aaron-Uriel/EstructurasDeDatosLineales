@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 #include <libdstruct.h>
-#include <report.h>
 
 /*
  * Asigna la dirección de memoria para usar una cola con prioridad.
@@ -14,7 +13,6 @@ PQueue *
 pqueue_new(void) {
     PQueue *new_pqueue = malloc(sizeof(*new_pqueue));
     if (new_pqueue == NULL) {
-        report(__func__, ERROR, OUT_OF_MEMORY);
         return NULL;
     }
 
@@ -34,11 +32,9 @@ pqueue_new(void) {
 void
 pqueue_enqueue(PQueue *pqueue, PNode *pnode) {
     if (pnode == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
     if (pqueue == NULL) {
-        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
         return;
     }
 
@@ -97,7 +93,6 @@ pqueue_enqueue(PQueue *pqueue, PNode *pnode) {
     }
 
     /* Nunca se debería llegar hasta aquí. */
-    report(__func__, ERROR, OUT_OF_BOUNDS);
 }
 
 /*
@@ -109,12 +104,10 @@ pqueue_enqueue(PQueue *pqueue, PNode *pnode) {
 PNode *
 pqueue_dequeue(PQueue *pqueue) {
     if (pqueue == NULL) {
-        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
         return NULL;
     }
     /* Cuando la estructura está vacía, no podemos extraer nada. */
     if (pqueue->size == 0) {
-        report(__func__, ERROR, EMPTY_DATA_STRUCT);
         return NULL;
     }
 
@@ -123,7 +116,6 @@ pqueue_dequeue(PQueue *pqueue) {
      * cola.
      */
     if (pqueue->size == 1) {
-        report(__func__, INFO, DATA_STRUCT_WILL_BE_EMPTY);
         PNode *const extracted_pnode = pqueue->first;
         pqueue->first = NULL;
         pqueue->last = NULL;
@@ -147,7 +139,6 @@ pqueue_dequeue(PQueue *pqueue) {
 void
 pqueue_print(PQueue *pqueue) {
     if (pqueue == NULL) {
-        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
         return;
     }
 

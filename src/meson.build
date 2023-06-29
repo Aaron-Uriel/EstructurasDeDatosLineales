@@ -1,7 +1,6 @@
 subdir('head_based')
 subdir('singly_linked')
 subdir('node')
-subdir('report')
 subdir('doubly_linked')
 subdir('statics')
 

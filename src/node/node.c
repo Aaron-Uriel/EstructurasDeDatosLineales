@@ -3,7 +3,6 @@
 #include <stdio.h>
 
 #include <libdstruct.h>
-#include <report.h>
 #include <string.h>
 
 /*
@@ -14,9 +13,6 @@ Node *
 node_new(int32_t value)
 {
 	Node *const new_node = malloc(sizeof(Node));
-	if (new_node == NULL) {
-        report(__func__, ERROR, OUT_OF_MEMORY);
-    }
 
     new_node->value     = value;
     new_node->next      = NULL;
@@ -44,14 +40,12 @@ Node *
 node_clone(Node *self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
     /* Reservamos el espacio en memoria que ocupará el nodo clonado */
     Node *cloned_node = malloc(sizeof(*cloned_node));
     if (cloned_node == NULL) {
-        report(__func__, ERROR, OUT_OF_MEMORY);
         return NULL;
     }
     memcpy(cloned_node, self, sizeof(*cloned_node));
@@ -70,7 +64,6 @@ void
 node_append(Node *const self, Node *const node)
 {
     if (self == NULL || node == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -89,7 +82,6 @@ void
 node_prepend(Node *const self, Node *const node)
 {
     if (self == NULL || node == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
 
@@ -105,7 +97,6 @@ node_prepend(Node *const self, Node *const node)
 void
 node_unlink(Node *const self) {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
     }
 
     Node *const previous_node = self->previous;
@@ -132,7 +123,6 @@ Node
 *node_jump_to_last(Node *const self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
@@ -151,7 +141,6 @@ Node
 *node_jump_to_first(Node *const self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
@@ -170,7 +159,6 @@ Node
 *node_jump_to_n(Node *const self, const uint32_t n)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return NULL;
     }
 
@@ -178,7 +166,6 @@ Node
     uint32_t i;
     for (i = 0; i < n; i++) {
         if (node->next == NULL) {
-            report(__func__, ERROR, OUT_OF_BOUNDS);
             return NULL;
         }
         node = node->next;
@@ -194,7 +181,6 @@ void
 node_print_all_linked_nodes(Node *const self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
     const Node *current_node = node_jump_to_first(self);
@@ -212,7 +198,6 @@ void
 node_print_debug(const Node *const self)
 {
     if (self == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
 

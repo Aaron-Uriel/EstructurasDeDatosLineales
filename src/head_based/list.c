@@ -4,7 +4,6 @@
 #include <string.h>
 
 #include <libdstruct.h>
-#include <report.h>
 
 /* 
  * Crea una nueva lista con cabecera.
@@ -27,11 +26,9 @@ list_new(void) {
 int32_t
 list_search_node(List *const list, Node *const node) {
     if (node == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return -1;
     }
     if (list == NULL) {
-        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
         return -1;
     }
 
@@ -56,17 +53,14 @@ void
 list_insert_node(List *const list, Node *const node)
 {
     if (node == NULL) {
-        report(__func__, ERROR, NULL_NODE);
         return;
     }
     if (list == NULL) {
-        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
         return;
     }
 
     /* Cuando la lista está vacía. */
     if (list->size == 0) {
-        report(__func__, INFO, EMPTY_DATA_STRUCT);
         list->first = node;
         list->last = node;
         list->size = 1;
@@ -119,7 +113,6 @@ list_insert_node(List *const list, Node *const node)
     }
 
     /* Nunca se debería llegar hasta aquí. */
-    report(__func__, ERROR, OUT_OF_BOUNDS);
 }
 
 /*
@@ -130,7 +123,6 @@ Node *
 list_extract_node(List *const list, const uint32_t n)
 {
     if (list == NULL) {
-        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
         return NULL;
     }
 
@@ -139,7 +131,6 @@ list_extract_node(List *const list, const uint32_t n)
      * de los nodos de la lista. 
      */
     if (n > list->size - 1) {
-        report(__func__, ERROR, OUT_OF_BOUNDS);
         return NULL;
     }
 
@@ -171,7 +162,6 @@ void
 list_print(List *const list)
 {
     if (list == NULL) {
-        report(__func__, ERROR, NULL_HEAD_DATA_STRUCT);
         return;
     }
 

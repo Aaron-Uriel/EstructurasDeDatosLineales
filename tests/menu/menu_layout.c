@@ -149,8 +149,7 @@ int main(void)
                             system("clear");
                             printf("\t|_________________________________________.\n");
                             printf("\t|__________________Quitar_________________|\n");
-                            printf("\t| Esta función requiere el índice de lista|\n");
-                            printf("\t| Ingrese el indice del nodo a eliminar: ");
+                            printf("\t| Ingrese el valor del nodo a eliminar: ");
                             scanf("%d", &id);
                             sdeleted = slist_extract_node(&slist, id);
                             if (sdeleted == NULL)
@@ -175,7 +174,7 @@ int main(void)
                             printf("\t| Ingrese el valor del nodo a buscar: ");
                             scanf("%d", &id);
 
-                            search = slist_search_snode(&slist, snode_new(id));
+                            search = slist_search_snode(&slist, id);
                             if (search == -1)
                             {
                                 system("clear");
@@ -292,7 +291,7 @@ int main(void)
                             printf("\t|__________________Quitar_________________|\n");
                             printf("\t| Ingrese el valor del nodo a eliminar: ");
                             scanf("%d", &id);
-                            deleted = dlist_delete_node(&list, id);
+                            deleted = dlist_extract_node(&list, id);
                             if (deleted == NULL)
                             {
                                 system("clear");
@@ -317,20 +316,9 @@ int main(void)
                             printf("\t| Ingrese el valor del nodo a buscar: ");
                             scanf("%d", &id);
 
-                            search = dlist_search_node(&list, node_new(id));
-                            if (search == -2)
-                            {
-                                system("clear");
-                                printf("\t| + Está vacío. +\n");
-                            } else if (search == -1)
-                            {
-                                system("clear");
-                                printf("\t| El nodo que busca no se encuentra en la lista. \n");
-                            }  else if (search >= 0)
-                            {
-                                system("clear");
-                                printf("\t| El nodo está en en índice %d.\n", search);
-                            }
+                            search = dlist_search_node(&list, id);
+                            system("clear");
+                            printf("\t| El nodo %s en la lista.\n", (search)?"existe":"no existe");
                             break; 
                         case 5: 
                             //Copiar
@@ -457,7 +445,7 @@ int main(void)
                             printf("\t| Ingrese el indice del nodo a buscar: ");
                             scanf("%d", &id);
 
-                            search = list_search_node(headlist, node_new(id));
+                            search = list_search_node(headlist, id);
                             if (search == -1)
                             {
                                 system("clear");

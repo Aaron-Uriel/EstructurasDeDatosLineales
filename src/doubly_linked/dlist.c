@@ -1,173 +1,97 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <libdstruct.h>
 
-
 /*
-No regresa nada y recibe una dirección de un Node * y un Node *
-Mientras el nodo que sigue del nodo actual sea distinto de NULL y "Listo"
-no sea 0: Si el nodo que se va a ingresar es mayor que el actual, se recorre al siguiente
-Pero si es menor o igual lo inserta en ese lugar.
-
-*/
-void dlist_insert_node(Node **dlist, Node *node)
+ * Inserta un nodo en orden en la lista que se le pasa, no hace nada en caso
+ * de recibir argumentos nulos.
+ */
+void
+dlist_insert_node(Node **lista, Node *nodo)
 {
-    int listo = 0, cont = 0; 
-    Node *actual = *dlist;
-    Node *prev, *temporal = node; 
+    if (nodo && lista) {
+        if (*lista) {
+            uint32_t conteo = 0;
+            Node *nodo_actual = *lista; 
+            while (nodo_actual->next &&
+                   nodo_actual->value <= nodo->value)
+            {
+                nodo_actual = nodo_actual->next;
+                conteo++;
+            }
 
-    if (node != NULL)
-    {
-        if (*dlist == NULL) {
-        *dlist = node;
-
+            /* Cuando es mayor que todos. */
+            if (nodo_actual->value <= nodo->value) {
+                node_append(nodo_actual, nodo);
+            } else {
+                node_prepend(nodo_actual, nodo);
+                /* Cuando es menor que todos. */
+                if (conteo == 0) { *lista = nodo; }
+            }
         } else {
-            actual = *dlist; 
-            while (actual->next != NULL && listo == 0) 
-            {
-                if (node->value > actual->value) 
-                {
-                    cont ++;
-                    prev = actual;
-                    actual = actual->next;
-                    actual->previous = prev;
-
-                    if (actual->next == NULL && node->value <= actual->value)
-                    {
-                        temporal = actual;
-                        node->previous = prev;
-                        actual->previous = node;
-                        node->next = temporal;
-                        prev->next = node;
-                        listo = 1;
-                    }
-                    
-                } else if (node->value <= actual->value)
-                {
-                    if (cont == 0)
-                    {
-                        temporal = actual;
-                        node->previous = NULL;
-                        actual->previous = node;
-                        node->next = temporal;
-                        *dlist = node;
-                    } else {
-                        temporal = actual;
-                        node->previous = prev;
-                        actual->previous = node;
-                        node->next = temporal;
-                        prev->next = node;
-                    }
-                    listo = 1;
-                }
-            }
-
-            if (listo < 1)
-            {
-                if (node->value <= actual->value)
-                {
-                    temporal = actual;
-                    node->previous = NULL;
-                    actual->previous = node;
-                    node->next = temporal;
-                    *dlist = node;
-
-                } else
-                {
-                    actual->next = node;
-                    node->previous = actual;
-                    node->next = NULL;
-                }
-            }
-        } 
-    }
-}
-
-//Imprime
-void dlist_imprimir(Node **list)
-{
-    node_print_all_linked_nodes(*list);
-}
-
-
-
-
-/*
-Se hace el recorrido por los nodos, si en el nodo actual
-su valor es igual al id ingresado se rompe el ciclo, si no
-sigue avanzando hasta llegar al final.
-Si sí se encontró lo extrae y regresa el extraido, si no, regresa
-un Node * = NULL 
-*/
-Node *dlist_delete_node(Node **dlist, int id)
-{
-    Node *actual = *dlist, *prev = NULL, *next = NULL, *deleted = NULL;
-    int cont = 0;
-    if (actual != NULL)
-    {
-        while (actual->next != NULL)
-        {
-            if (actual->value == id)
-            {
-                break;
-            } else
-            {
-                cont ++;
-                actual = actual->next;
-                
-            }
-        }
-        if (actual->value != id)
-        {
-            deleted = NULL;
-        } else{
-            deleted = actual;
-            prev = actual->previous;
-            next = actual->next;
-            if (prev != NULL)
-            {
-                prev->next = next;
-            }
-            
-            
-            if (next != NULL)
-            {
-                next->previous = prev;
-            }
-            actual->previous = NULL;
-            actual->next = NULL;
-            if (cont == 0)
-            {
-                *dlist = next;
-            }
+            *lista = nodo;
         }
     }
-        return deleted;
 }
 
 /*
-
-*/
-int dlist_search_node(Node **dlist, Node* node)
+ * Extrae un nodo de una lista doblemente enlazada.
+ * Realiza una busqueda lineal para encontrar un nodo, lo desenlaza y
+ * regresa su dirección en memoria.
+ */
+Node *
+dlist_extract_node(Node **lista, int32_t id)
 {
-    Node *actual = *dlist;
-    int cont = 0;
-    if (*dlist == NULL || node == NULL)
-    {
-        return -2;
-    } else
-    {
-        while (actual != NULL)
-        {
-            if (actual->value == node->value)
-            {
-                return cont;
-            }else
-            {
-                cont++;
-                actual = actual->next;
-            }
+    Node *nodo_extraido = NULL;
+    if (lista && *lista) {
+        Node *nodo_actual = *lista;
+        while (nodo_actual->next && nodo_actual->value != id) {
+            nodo_actual = nodo_actual->next;
         }
-        return cont; 
-    }    
+
+        if (nodo_actual->value == id) {
+            if (nodo_actual->previous) {
+                nodo_actual->previous->next = nodo_actual->next;
+            } else {
+                *lista = nodo_actual->next;
+            }
+            if (nodo_actual->next) {
+                nodo_actual->next->previous = nodo_actual->previous;
+            }
+            nodo_actual->previous = nodo_actual->next = NULL;
+            nodo_extraido = nodo_actual;
+        }
+    }
+    return nodo_extraido;
+}
+
+/*
+ * Comprueba si existe un nodo dentro de una lista doblemente enlazada.
+ * En caso de encontrarlo regresa verdadero, caso contrario regresa falso.
+ */
+bool
+dlist_search_node(Node **lista, int32_t id)
+{
+    if (lista && *lista) {
+        Node *nodo_actual = *lista;
+        while (nodo_actual->next && nodo_actual->value != id) {
+            nodo_actual = nodo_actual->next;
+        }
+        if (nodo_actual->value == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/*
+ * Imprime todos los elementos de la lista.
+ */
+void
+dlist_imprimir(Node **lista)
+{
+    if (lista && *lista) {
+        node_print_all_linked_nodes(*lista);
+    }
 }

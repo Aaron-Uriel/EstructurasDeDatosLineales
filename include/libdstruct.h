@@ -123,15 +123,15 @@ PUBLIC void static_queue_print(StaticQueue *self);
 
 /* Lista simplemente ligada. */
 PUBLIC void     slist_insert_snode(SNode **const slist, SNode *const snode);
-PUBLIC int32_t  slist_search_snode(SNode **const slist, SNode *const snode);
-PUBLIC SNode    *slist_extract_node(SNode **const slist, const uint32_t index);
+PUBLIC bool     slist_search_snode(SNode **const slist, int32_t id);
+PUBLIC SNode    *slist_extract_node(SNode **const slist, int32_t id);
 PUBLIC void     slist_print(SNode *slist);
 
 /* Lista doblemente ligada. */
 PUBLIC void dlist_insert_node(Node **dlist, Node *node);
+PUBLIC Node *dlist_extract_node(Node **dlist, int32_t id);
+PUBLIC bool dlist_search_node(Node **dlist, int32_t id);
 PUBLIC void dlist_imprimir(Node **list);
-PUBLIC Node *dlist_delete_node(Node **dlist, int id);
-PUBLIC int  dlist_search_node(Node **dlist, Node* node);
 
 /* Lista con cabecera. */
 typedef struct List List;
@@ -142,8 +142,8 @@ struct List {
 };
 PUBLIC List     *list_new(void);
 PUBLIC void     list_insert_node(List *const list, Node *const node);
-PUBLIC int32_t  list_search_node(List *const list, Node *const node);
-PUBLIC Node     *list_extract_node(List *const list, const uint32_t n);
+PUBLIC Node     *list_extract_node(List *const list, int32_t id);
+PUBLIC bool     list_search_node(List *const list, int32_t id);
 PUBLIC void     list_print(List *const list);
 
 
@@ -158,11 +158,6 @@ PUBLIC void sstack_imprimir(SNode **sstack);
 
 /* Fin de pila. */
 
-/*Lista doblemente ligada*/
-PUBLIC void dlist_insert_node(Node **dlist, Node *node);
-PUBLIC void dlist_imprimir(Node **list);
-PUBLIC Node *dlist_delete_node(Node **dlist, int id);
-PUBLIC int  dlist_search_node(Node **dlist, Node* node);
 /*Fin lista*/
 
 /*Pila estática.*/

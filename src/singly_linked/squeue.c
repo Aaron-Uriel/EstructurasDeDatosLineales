@@ -4,47 +4,44 @@
 #include <libdstruct.h>
 
 /*
- * Extrae el primer nodo de la Cola.
- */
-SNode *
-squeue_dequeue(SNode **const squeue)
-{
-    if (*squeue == NULL) {
-        return NULL;
-    }
-
-    SNode *const extracted_node = *squeue;
-    SNode *const new_first_node = (*squeue)->next;
-    extracted_node->next = NULL;
-    *squeue = new_first_node;
-
-    return extracted_node; 
-}
-
-/*
  * Coloca un nodo al final de la cola.
  */
 void
-squeue_enqueue(SNode **squeue, SNode *snode)
+squeue_enqueue(SNode **cola, SNode *nodo)
 {
-    if (*squeue == NULL) {
-        *squeue = snode;
-        return;
+    if (cola && nodo) {
+        if (*cola) {
+            SNode *const nodo_final_cola = snode_jump_to_last(*cola);
+            nodo_final_cola->next = nodo;
+        } else {
+            *cola = nodo;
+        }
     }
+}
 
-    SNode *const last_node_in_squeue = snode_jump_to_last(*squeue);
-    snode_append(last_node_in_squeue, snode);
+/*
+ * Extrae el primer nodo de la Cola.
+ */
+SNode *
+squeue_dequeue(SNode **const cola)
+{
+    SNode *nodo_extraido = NULL;
+    if (cola && *cola) {
+        nodo_extraido = *cola;
+        *cola = (*cola)->next;
+        nodo_extraido->next = NULL;
+    }
+    return nodo_extraido; 
 }
 
 /*
  * Imprime todos los nodos relacionados en la cola.
  */
 void
-squeue_print(SNode *squeue)
+squeue_print(SNode *cola)
 {
-    if (squeue == NULL) {
-        return;
+    if (cola) {
+        snode_print_all_linked_nodes(cola);
     }
-    snode_print_all_linked_nodes(squeue);
 }
 

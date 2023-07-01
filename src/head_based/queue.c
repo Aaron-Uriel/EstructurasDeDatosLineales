@@ -2,59 +2,62 @@
 #include <stdlib.h>
 #include <libdstruct.h>
 
+/*
+ * Asigna el espacio en memoria para una cola con cabecera, la cola está
+ * inicialmente vacía.
+ */
 HQueue *
 hqueue_new(void) {
-    HQueue *new_hqueue = malloc(sizeof(*new_hqueue));
-    if (new_hqueue == NULL) {
-        return NULL;
-    }
-
-    new_hqueue->first = NULL;
-    new_hqueue->last = NULL;
-    new_hqueue->size = 0;
-
-    return new_hqueue;
+    HQueue *nueva_cola = calloc(1, sizeof(*nueva_cola));
+    return nueva_cola;
 }
 
-void hqueue_insert(HQueue *headqueue, Node *node)
+/*
+ * Inserta un nodo al final de la cola.
+ */
+void
+hqueue_insert(HQueue *cola, Node *nodo)
 {
-    if (headqueue->size == 0) {
-        headqueue->first = node;
-        headqueue->last = node;
-        headqueue->size = 1;
-    } else {
-        node_append(headqueue->last, node);
-        headqueue->last = node;
-        headqueue->size += 1;
-    }
-}
-
-
-void hqueue_print(HQueue *headqueue)
-{
-    if (headqueue) {
-        Node *actual = headqueue->first;
-        uint32_t i;
-        for (i = 0; actual != NULL && i < headqueue->size; i++) {
-            printf("%d  -> ", actual->value);
-            actual = actual->next;
+    if (cola && nodo) {
+        if (cola->size) {
+            node_append(cola->last, nodo);
+        } else {
+            cola->first = nodo;
         }
+        cola->last = nodo;
+        cola->size += 1;
     }
-    printf("NULL.\n");
 }
 
-
-Node *hqueue_extract(HQueue *headqueue)
+/*
+ * Extrae un nodo del principio de la cola.
+ */
+Node *
+hqueue_extract(HQueue *cola)
 {
-    Node *actual = headqueue->first;
-    Node *nuevo_inicio_final;
-    int i;
-    if (headqueue != NULL) {
-        nuevo_inicio_final = actual->next;
-        headqueue->first = nuevo_inicio_final;
+    Node *nodo_extraido = NULL;
+    if (cola && cola->size) {
+        nodo_extraido = cola->first;
+        cola->first = cola->first->next;
+        if (cola->first) {
+            cola->first->previous = NULL;
+        } else {
+            cola->last = NULL;
+        }
+        cola->size -= 1;
+        nodo_extraido->next = nodo_extraido->previous = NULL;
+    }
+    return nodo_extraido;
+}
 
-        actual->previous = NULL;
-        actual->next = NULL;
-        return actual;
+/*
+ * Imprime todos los nodos dentro de la cola.
+ */
+void
+hqueue_print(HQueue *cola)
+{
+    if (cola) {
+        node_print_all_linked_nodes(cola->first);
     }
 }
+

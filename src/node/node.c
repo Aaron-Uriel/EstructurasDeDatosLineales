@@ -54,39 +54,39 @@ node_clone(Node *self)
 }
 
 /*
- * Crea una relación entre los dos nodos:
- * - El primer nodo (self) ahora dirá que su siguiente nodo 
- *   es el segundo nodo (node).
- * - El segundo nodo (node) ahora dirá que su nodo anterior
- *   es el primer nodo (self).
+ * Inserta un nodo enfrende del otro.
+ * Se toma en cuenta también al nodo que ya está puesto como siguiente
+ * para que registre también al nuevo nodo.
  */
 void 
-node_append(Node *const self, Node *const node)
+node_append(Node *const nodo, Node *const nodo_a_insertar)
 {
-    if (self == NULL || node == NULL) {
-        return;
+    if (nodo && nodo_a_insertar) {
+        if (nodo->next) {
+            nodo->next->previous = nodo_a_insertar;
+            nodo_a_insertar->next = nodo->next;
+        }
+        nodo->next = nodo_a_insertar;
+        nodo_a_insertar->previous = nodo;
     }
-
-	self->next = node;
-    node->previous = self;
 }
 
 /*
- * Crea una relación entre los dos nodos:
- * - El primer nodo (self) ahora dirá que su nodo anterior
- *   es el segundo nodo (node).
- * - El segundo nodo (node) ahora dirá que su siguiente nodo
- *   es el primer nodo (self).
+ * Inserta un nodo atrás respecto a otro.
+ * Se toma en cuenta al nodo anterior al nodo que se le antepondrá 
+ * otro nodo, en dicho caso se inserta entre ellos dos.
  */
 void
-node_prepend(Node *const self, Node *const node)
+node_prepend(Node *const nodo, Node *const nodo_a_insertar)
 {
-    if (self == NULL || node == NULL) {
-        return;
+    if (nodo && nodo_a_insertar) {
+        if (nodo->previous) {
+            nodo->previous->next = nodo_a_insertar;
+            nodo_a_insertar->previous = nodo->previous;
+        }
+        nodo->previous = nodo_a_insertar;
+        nodo_a_insertar->next = nodo;
     }
-
-    self->previous = node;
-    node->next = self;
 }
 
 /*
@@ -119,19 +119,18 @@ node_unlink(Node *const self) {
 /*
  * Devuelve un apuntador al último nodo de todos los nodos enlazados.
  */
-Node
-*node_jump_to_last(Node *const self)
+Node *
+node_jump_to_last(Node *const self)
 {
-    if (self == NULL) {
-        return NULL;
+    Node *nodo_final = NULL;
+    if (self) {
+        Node *nodo_actual = self;
+        while(nodo_actual->next) {
+            nodo_actual = nodo_actual->next;
+        }
+        nodo_final = nodo_actual;
     }
-
-    Node *current_node = self;
-    while(current_node->next != NULL) {
-         current_node = current_node->next;
-    }
-
-    return current_node;
+    return nodo_final;
 }
 
 /*
@@ -180,15 +179,14 @@ Node
 void
 node_print_all_linked_nodes(Node *const self)
 {
-    if (self == NULL) {
-        return;
+    if (self) {
+        const Node *current_node = node_jump_to_first(self);
+        while (current_node != NULL) {
+            printf("%d -> ", current_node->value);
+            current_node = current_node->next;
+        }
+        printf("NULL\n");
     }
-    const Node *current_node = node_jump_to_first(self);
-    while (current_node != NULL) {
-        printf("%d -> ", current_node->value);
-        current_node = current_node->next;
-    }
-    printf("NULL\n");
 }
 
 /*

@@ -79,39 +79,36 @@ pnode_clone(PNode *self)
 }
 
 /*
- * Crea una relación entre los dos nodos:
- * - El primer nodo (self) ahora dirá que su siguiente nodo 
- *   es el segundo nodo (node).
- * - El segundo nodo (node) ahora dirá que su nodo anterior
- *   es el primer nodo (self).
+ * Inserta un nodo enfrende del otro.
+ * Se toma en cuenta también al nodo que ya está puesto como siguiente
+ * para que registre también al nuevo nodo.
  */
 void 
-pnode_append(PNode *self, PNode *pnode)
+pnode_append(PNode *nodo, PNode *nodo_a_insertar)
 {
-    if (self == NULL || pnode == NULL) {
-        return;
+    if (nodo && nodo_a_insertar) {
+        if (nodo->next) {
+            nodo->next->previous = nodo_a_insertar;
+            nodo_a_insertar->next = nodo->next;
+        }
+        nodo->next = nodo_a_insertar;
+        nodo_a_insertar->previous = nodo;
     }
-
-	self->next = pnode;
-    pnode->previous = self;
 }
 
 /*
- * Crea una relación entre los dos nodos:
- * - El primer nodo (self) ahora dirá que su nodo anterior
- *   es el segundo nodo (node).
- * - El segundo nodo (node) ahora dirá que su siguiente nodo
- *   es el primer nodo (self).
  */
 void
-pnode_prepend(PNode *self, PNode *pnode)
+pnode_prepend(PNode *nodo, PNode *nodo_a_insertar)
 {
-    if (self == NULL || pnode == NULL) {
-        return;
+    if (nodo && nodo_a_insertar) {
+        if (nodo->previous) {
+            nodo->previous->next = nodo_a_insertar;
+            nodo_a_insertar->previous = nodo->previous;
+        }
+        nodo->previous = nodo_a_insertar;
+        nodo_a_insertar->next = nodo;
     }
-
-    self->previous = pnode;
-    pnode->next = self;
 }
 
 /*

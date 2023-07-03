@@ -1,83 +1,81 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
 
-#include <libdstruct.h>
+#define TAMAÑO 8
 
+int cola[TAMAÑO];
 
-StaticQueue *
-static_queue_new(int size)
+int main(void)
 {
-    StaticQueue *queue = malloc(sizeof(StaticQueue));
-    queue->array = malloc(size * sizeof(int)); 
-    queue->first = 0;
-    queue->last = 0;
-    queue->size = size;
-    queue->is_full = false;
+	int inicio = 0, final = 0;	
+	int llena = 0, indice = 0, opcion;
+	
+	do{
+		printf("═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
+            "x x ⁞ Menú. x x\n"
+            "═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
+            "▒┊1.- Agregar. (Crear + Insertar)\n"
+            "▒┊2.- Quitar. (Extraer + Eliminar)\n"
+            "▒┊3.- Imprimir.\n"
+            "▒┊4.- Salir.\n"
+            "═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
+            "➫ ");
+    	scanf("%d", &opcion);
+		switch(opcion){
+			case 1:
+				if(!llena){
+					printf("Igrese un numero: ");
+					scanf("%d", &cola[final]);
+					final = (final + 1) % TAMAÑO;
+					indice++;
+				
+					if(final % TAMAÑO == inicio)
+					{
+						llena = 1;
+					}
+					break;
+				}
+				printf("\nCola llena.\n");
+				break;
 
-    return queue;
-}
-
-
-void
-static_queue_insert(StaticQueue *self, int value)
-{
-    if (self->is_full) {
-        printf("La cola está llena.\n");
-        return;
-    }
-    self->array[self->last] = value;
-    self->last = (self->last + 1) % self->size;
-
-    if (self->first == self->last) 
-    {
-        self->is_full = true;
-
-    }
-}
-
-
-int static_queue_extract(StaticQueue *self)
-{
-    int extraer;
-    if (self->last == self->first && self->is_full == false)
-    {
-        return -1;
-    }
+			case 2:
+				if (final == inicio && llena == 0)
+				{
+					printf("Está vacía.\n");
+					break;
+				}
+				inicio = (inicio + 1) % TAMAÑO;
+				if (llena)
+				{
+					llena = 0;
+				}
+				break;
+				
+			case 3:
+				printf("Cola: \n");
+				if (llena)
+    			{
+        			int condicParo = (TAMAÑO - 1 + inicio) % TAMAÑO, i;
+        			for (i = inicio;i != condicParo; i = (i + 1) % TAMAÑO) {
+            			printf("%d ", cola[i]);
+        			}
+        			printf("%d \n", cola[i]);
+    			}
     
-    extraer = self->array[self->first];
-    self->first = (self->first + 1) % self->size;
-    if (self->is_full)
-    {
-        self->is_full = false;
-    }
-    
-    return extraer;
+				for (int i = inicio; i != final; i = (i + 1) % TAMAÑO) {
+					printf("%d ", cola[i]);
+				}
+				printf("\n");
+				printf("Arreglo:\n");
+				for (int i = 0; i < TAMAÑO; i++) {
+					printf("%d ", cola[i]);
+				}
+				printf("\n");
+				break;
+			case 4:
+				break;
+			default:
+				printf("\nOpción no válida.\n\n");
+				break;
+		}
+	}while(opcion != 4);	
 }
-
-void
-static_queue_print(StaticQueue *self)
-{
-
-    if (self->is_full)
-    {
-        int condic_paro = (self->size - 1 + self->first) % self->size, i;
-        for (i = self->first;
-            i != condic_paro;
-            i = (i + 1) % self->size) {
-            printf("%d ", self->array[i]);
-        }
-        printf("%d \n", self->array[i]);
-
-        return;
-    }
-    
-    for (int i = self->first;
-         i != self->last;
-         i = (i + 1) % self->size) {
-        printf("%d ", self->array[i]);
-    }
-
-    printf("\n");
-}
-

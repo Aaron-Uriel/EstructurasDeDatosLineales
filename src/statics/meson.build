@@ -1,1 +1,1 @@
-source_files += files('queue.c', 'stack.c')
+source_files += files('queue.c', 'stack.c', 'colaCircular.c','listaCircular.c')

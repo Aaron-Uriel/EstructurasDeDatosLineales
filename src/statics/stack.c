@@ -4,77 +4,73 @@
 
 #include <libdstruct.h>
 
-/*
- * Reserva el espacio de memoria para el uso de una pila estática.
- */
-StaticStack *
-static_stack_new(int size)
+#define TAMAÑO 8
+
+int pila[TAMAÑO];
+
+int main(void)
 {
-	StaticStack *stack = malloc(sizeof(StaticStack));
-	stack->array = malloc(size * sizeof(int)); 
-	stack->first = 0;
-	stack->last = 0;
-	stack->size = size;
-    stack->is_full = false;
-	return stack;
+	int inicio = 0, final = 0;	
+	int llena = 0, indice = 0, opcion;
+	
+	do{
+		printf("═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
+            "x x ⁞ Menú. x x\n"
+            "═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
+            "▒┊1.- Agregar. (Crear + Insertar)\n"
+            "▒┊2.- Quitar. (Extraer + Eliminar)\n"
+            "▒┊3.- Imprimir.\n"
+            "▒┊4.- Salir.\n"
+            "═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
+            "➫ ");
+    	scanf("%d", &opcion);
+		switch(opcion){
+			case 1:
+				if(!llena){
+					printf("Igrese un numero: ");
+					scanf("%d", &pila[final]);
+					final++;
+				
+					if(final == TAMAÑO)
+					{
+						llena = 1;
+					}
+					break;
+				}
+				printf("\nPila llena.\n");
+				break;
+
+			case 2:
+				if (final ==  0)
+				{
+					printf("Está vacía.\n");
+					break;
+				}
+				final--;
+				if (llena)
+				{
+					llena = 0;
+				}
+				break;
+				
+			case 3:
+				printf("Pila: \n");
+        			for (int i = 0; i < final; i ++) {
+            			printf("%d ", pila[i]);
+        			}
+
+                printf("\n");
+				printf("Arreglo:\n");
+				for (int i = 0; i < TAMAÑO; i++) {
+					printf("%d ", pila[i]);
+				}
+				printf("\n");
+				break;
+			case 4:
+				break;
+			default:
+				printf("\nOpción no válida.\n\n");
+				break;
+		}
+	}while(opcion != 4);	
 }
-
-/*
- * Inserta un valor en la pila.
- */
-void
-static_stack_insert(StaticStack *self, int value)
-{
-    if (self->is_full) {
-        printf("La Pila está llena.\n");
-        return;
-    }
-    
-    self->array[self->last] = value;
-    self->last += 1;
-    /*
-     * Marcamos a la pila como llena cuando el índice del siguiente
-     * nodo es igual (excede) al tamaño de la pila.
-     */
-    if (self->last == self->size) {
-        self->is_full = true;
-        return;
-    }
-}
-
-/*
- * Extrae el último elemento de la pila.
- * Regresa -1 si la pila apunta a NULL o está vacía.
- */
-int
-static_stack_extract(StaticStack *self)
-{
-    if (self == NULL) {
-        return -1;
-    }
-    if (self->size == 0) {
-        return -1;
-    }
-
-    /* Cuando la pila es de tamaño 1, va a estar vacía después. */
-    if (self->size == 1) {
-    }
-
-    int extract = self->array[self->last];
-    self->last -= 1;
-    return extract;
-}
-
-/*
- * Imprime los elementos insertados en la pila.
- */
-void
-static_stack_print(StaticStack *self)
-{
-    printf("Tamaño máximo: %d\n", self->size);
-    for (int i = self->first; i < self->last; i++) {
-        printf("%d ", self->array[i]);
-    }
-    printf("\n");
-}
-

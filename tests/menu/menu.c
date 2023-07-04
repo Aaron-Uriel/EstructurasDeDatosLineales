@@ -20,11 +20,9 @@ main(void)
     //Cola con prioridad.
     PQueue *cola_prioridad = NULL;
     PNode *nodo_prioridad_temporal;
-    //Cola estática
-    StaticQueue *cola_estatica = static_queue_new(10);
+    
     int valor_estatico_temporal;
-    //Pila estática
-    StaticStack *pila_estatica = static_stack_new(10);
+   
     int sta_stack_deleted;
 
     const char *menu_principal_opciones_cortas = "sdcpex";
@@ -465,7 +463,7 @@ main(void)
                         case 'c': //Cola -------------------------------
                             do {
                                 system("clear");
-                                static_queue_print(cola_estatica);
+                                
                                 opcion = menu_crear("Cola estática.",
                                         menu_cola_pila_opciones_cortas,
                                         menu_cola_pila_opciones_largas);
@@ -475,14 +473,14 @@ main(void)
                                         printf("\t|_____________Agregar____________|\n");
                                         printf("\t| Ingrese el valor del nodo: ");
                                         scanf("%d", &id);
-                                        static_queue_insert(cola_estatica, id);
+                                        
                                         break;
                                     case 'q':
-                                        if ((valor_estatico_temporal = static_queue_extract(cola_estatica))) {
+                                       /* if ((valor_estatico_temporal = static_queue_extract(cola_estatica))) {
                                             printf("%d extraído. \n", valor_estatico_temporal);
                                         } else {
                                             printf("Está vacía \n");
-                                        }
+                                        }*/
                                         break;
                                     case 'x':
                                         break;       
@@ -494,7 +492,7 @@ main(void)
                         case 'p': // Pila ----------------------------------
                             do {
                                 system("clear");
-                                static_stack_print(pila_estatica);
+                                
                                 opcion = menu_crear("Pila estática.",
                                         menu_cola_pila_opciones_cortas,
                                         menu_cola_pila_opciones_largas);
@@ -504,14 +502,14 @@ main(void)
                                         printf("\t|_____________Agregar____________|\n");
                                         printf("\t| Ingrese el valor del nodo: ");
                                         scanf("%d", &id);
-                                        static_stack_insert(pila_estatica, id);
+                                        
                                         break;
                                     case 'q':
-                                        if ((sta_stack_deleted = static_stack_extract(pila_estatica))) {
+                                       /* if ((sta_stack_deleted = static_stack_extract(pila_estatica))) {
                                             printf("Se eliminó: %d\n", sta_stack_deleted);
                                         } else {
                                             printf("No hay nada.\n");
-                                        }
+                                        }*/
                                         break;
                                     case 'x':
                                         break;       

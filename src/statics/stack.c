@@ -7,11 +7,11 @@
 #define TAMAÑO 8
 
 int pila[TAMAÑO];
-
+/*
 int main(void)
 {
-	int inicio = 0, final = 0;	
-	int llena = 0, indice = 0, opcion;
+	int final = 0;	
+	int llena = 0, opcion;
 	
 	do{
 		printf("═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
@@ -73,4 +73,4 @@ int main(void)
 				break;
 		}
 	}while(opcion != 4);	
-}
+}*/

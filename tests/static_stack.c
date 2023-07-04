@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdint.h>
 #include <assert.h>
 
@@ -14,3 +14,4 @@ main(void) {
     printf("%d\n", static_stack_extract(my_static_stack));
     static_stack_print(my_static_stack);
 }
+*/

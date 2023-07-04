@@ -3,7 +3,7 @@
 #define TAMAÑO 8
 
 int cola[TAMAÑO];
-
+/*
 int main(void)
 {
 	int inicio = 0, final = 0;	
@@ -78,4 +78,4 @@ int main(void)
 				break;
 		}
 	}while(opcion != 4);	
-}
+}*/

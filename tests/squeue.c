@@ -1,4 +1,4 @@
-#include <stdlib.h>
+/*#include <stdlib.h>
 #include <stdint.h>
 
 #include <libdstruct.h>
@@ -11,18 +11,19 @@ int main(void) {
         squeue_enqueue(&squeue, snode_new(i * 10));
     }
 
-    /* 0 -> 10 -> 20 -> 30 -> 40 -> 50 */
+     0 -> 10 -> 20 -> 30 -> 40 -> 50 
     squeue_print(squeue);
 
-    /* 20 -> 30 -> 40 -> 50 */
+     20 -> 30 -> 40 -> 50 
     squeue_dequeue(&squeue);
     squeue_dequeue(&squeue);
     squeue_print(squeue);
 
-    /* 20 -> 30 -> 40 -> 50 -> 60 -> 70 */
+     20 -> 30 -> 40 -> 50 -> 60 -> 70 
     squeue_enqueue(&squeue, snode_new(60));
     squeue_enqueue(&squeue, snode_new(70));
     squeue_print(squeue);
 
     return 0;
 }
+*/

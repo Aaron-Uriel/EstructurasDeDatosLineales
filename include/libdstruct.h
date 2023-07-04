@@ -102,21 +102,6 @@ PUBLIC PNode    *pqueue_dequeue(PQueue *pqueue);
 PUBLIC void     pqueue_free(PQueue **cola);
 PUBLIC void     pqueue_print(PQueue *pequeue);
 
-/*Cola estática.*/
-typedef struct StaticQueue StaticQueue;
-struct StaticQueue {
-	int *array;
-	int size;
-	int first;
-	int last;
-    bool is_full;
-};
-PUBLIC StaticQueue *static_queue_new(int size);
-PUBLIC void static_queue_insert(StaticQueue *self, int value);
-PUBLIC int static_queue_extract(StaticQueue *self);
-PUBLIC void static_queue_print(StaticQueue *self);
-
-
 
 /* Fin de colas. */
 
@@ -165,34 +150,20 @@ PUBLIC void sstack_imprimir(SNode **sstack);
 
 /*Fin lista*/
 
-/*Pila estática.*/
-typedef struct StaticStack StaticStack;
-struct StaticStack {
-	int *array;
-	int size;
-	int first;
-	int last;
-    bool is_full;
-};
-
-PUBLIC StaticStack *static_stack_new(int size);
-PUBLIC void static_stack_insert(StaticStack *self, int value);
-PUBLIC int static_stack_extract(StaticStack *self);
-PUBLIC void static_stack_print(StaticStack *self);
 
 /*Cola circular*/
-PUBLIC SNode   *nueva_cola_circular(int value);
-PUBLIC void    insertar_cola_circular(SNode **inicio, SNode **final, SNode *nodo);
-PUBLIC SNode    extraer_cola_circular(SNode *self);
-PUBLIC void    imprimir_cola_circular(SNode *inicio);
-PUBLIC void    eliminar_cola_circular(SNode *nodo);
+PUBLIC SNode *nueva_cola_circular(int value);
+PUBLIC void insertar_cola_circular(SNode **inicio, SNode **final, SNode *nodo);
+PUBLIC SNode *extraer_cola_circular (SNode **inicio, SNode **final);
+PUBLIC void eliminar_cola_circular (SNode *extraido);
+PUBLIC void imprimir_cola_circular(SNode *inicio);
 
 /*Lista circular*/
-PUBLIC SNode     *nuevo_lista_circular(int valor);
-PUBLIC void     insertar_lista_circular(SNode *lista, SNode node);
-PUBLIC SNode     *extraer_lista_circular(SNode *lista, int valor);
-PUBLIC SNode     buscar_lista_circular(SNode *lista, int valor);
-PUBLIC void     copiar_lista_circular(SNode *lista);
+PUBLIC SNode    *nuevo_lista_circular(int valor);
+PUBLIC void     insertar_lista_circular(SNode **lista, SNode *node);
+PUBLIC SNode    *extraer_lista_circular(SNode **lista, int valor);
+PUBLIC SNode    *buscar_lista_circular(SNode *lista, int valor);
+PUBLIC SNode     *copiar_lista_circular(SNode *lista, int valor);
 PUBLIC void     eliminar_lista_circular(SNode *nodo);
 
 #endif

@@ -16,8 +16,9 @@ SNode *nueva_cola_circular(int value)
 	return nodo;
 }
 
-void insertar_cola_circular(SNode **inicio, SNode **final, SNode *nodo){
-        SNode *tempUno = NULL, *tempDos = NULL, *actual = NULL;
+void insertar_cola_circular(SNode **inicio, SNode **final, SNode *nodo)
+{
+        SNode *tempUno = NULL, *tempDos = NULL;
 
 	
 	if (*inicio == NULL){					

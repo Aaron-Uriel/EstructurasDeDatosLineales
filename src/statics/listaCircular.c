@@ -4,9 +4,9 @@
 
 #include <libdstruct.h>
 
-listaCircular *nueva_lista_circular(int valor)
+SNode *nueva_lista_circular(int valor)
 {
-	listaCircular *nodo = (listaCircular*) malloc(sizeof(listaCircular));
+	SNode *nodo = (SNode*) malloc(sizeof(SNode));
 	if(nodo != NULL){
 		nodo -> valor = valor;
 		nodo -> siguiente = nodo; 
@@ -15,9 +15,9 @@ listaCircular *nueva_lista_circular(int valor)
 	return nodo;
 }
 	   	
-void insertar_lista_circular(listaCircular **lista, listaCircular *nodo)
+void insertar_lista_circular(SNode **lista, SNode *nodo)
 {
-    listaCircular *actual, *previo;
+    SNode *actual, *previo;
 	if (*lista == NULL){
 		*lista = nodo;
 		nodo -> siguiente = *lista;
@@ -50,9 +50,9 @@ void insertar_lista_circular(listaCircular **lista, listaCircular *nodo)
 }
 
 
-listaCircular *extraer_lista_circular(listaCircular **inicio, int valor)
+SNode *extraer_lista_circular(SNode **inicio, int valor)
 {
-	listaCircular *actual, *previo = NULL ,*final = NULL;
+	SNode *actual, *previo = NULL ,*final = NULL;
 	int encontrado = 0;
 	actual = *inicio;
 	if(*inicio != NULL){
@@ -90,15 +90,15 @@ listaCircular *extraer_lista_circular(listaCircular **inicio, int valor)
 	return NULL;
 }
 
-void eliminar_lista_circular(listaCircular *nodo)
+void eliminar_lista_circular(SNode *nodo)
 {
 	free(nodo);
 }
 
 
-listaCircular* buscar_lista_circular(listaCircular *inicio, int valor)
+SNode* buscar_lista_circular(SNode *inicio, int valor)
 {
-	listaCircular *indice;
+	SNode *indice;
 	
 	if(inicio != NULL){
 		for(indice = inicio; indice -> siguiente != inicio; indice = indice -> siguiente){
@@ -114,9 +114,9 @@ listaCircular* buscar_lista_circular(listaCircular *inicio, int valor)
 	return NULL;
 }
 
-listaCircular *copiar_lista_circular(listaCircular *inicio, int valor)
+SNode *copiar_lista_circular(SNode *inicio, int valor)
 {
-	listaCircular *nodo;
+	SNode *nodo;
 	
 	nodo = buscar_lista_circular(inicio, valor);
 	if(nodo != NULL){
@@ -127,9 +127,9 @@ listaCircular *copiar_lista_circular(listaCircular *inicio, int valor)
 		return NULL;
 }
 
-void imprimir_lista_circular(listaCircular *lista)	// 0 -> cabecera 1 -> 5 -> 5 -> 7 -> 0
+void imprimir_lista_circular(SNode *lista)	// 0 -> cabecera 1 -> 5 -> 5 -> 7 -> 0
 {
-	listaCircular *nodoImprimir = lista;
+	SNode *nodoImprimir = lista;
 	if(lista != NULL){
 		while(nodoImprimir -> siguiente != lista){
 			printf("%d -> ", nodoImprimir -> valor);

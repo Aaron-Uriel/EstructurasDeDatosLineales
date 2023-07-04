@@ -67,10 +67,19 @@ dlist_extract_node(Node **lista, int32_t id)
 }
 
 /*
- * Comprueba si existe un nodo dentro de una lista doblemente enlazada.
- * En caso de encontrarlo regresa verdadero, caso contrario regresa falso.
+ * Libera toda la memoria asociada con la lista.
  */
-bool
+void
+dlist_free(Node **lista)
+{
+    node_free_group(lista);
+}
+
+/*
+ * Busca un nodo en la lista, en caso de existir se regresa la dirección
+ * en memoria del nodo.
+ */
+Node *
 dlist_search_node(Node **lista, int32_t id)
 {
     if (lista && *lista) {
@@ -79,10 +88,10 @@ dlist_search_node(Node **lista, int32_t id)
             nodo_actual = nodo_actual->next;
         }
         if (nodo_actual->value == id) {
-            return true;
+            return nodo_actual;
         }
     }
-    return false;
+    return NULL;
 }
 
 /*

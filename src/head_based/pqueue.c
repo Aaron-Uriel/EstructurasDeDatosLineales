@@ -76,6 +76,20 @@ pqueue_dequeue(PQueue *cola) {
 }
 
 /*
+ * Libera toda la memoria relacionada con la cola de prioridad, incluyendo
+ * a la cabecera.
+ */
+void
+pqueue_free(PQueue **cola)
+{
+    if (cola && *cola) {
+        pnode_free_group(&(*cola)->first);
+        free(*cola);
+        *cola = NULL;
+    }
+}
+
+/*
  * Imprime todos los nodos dentro de la cola con prioridad, incluyendo sus
  * prioridades asociadas.
  */

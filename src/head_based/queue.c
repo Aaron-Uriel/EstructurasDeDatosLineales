@@ -51,12 +51,27 @@ hqueue_extract(HQueue *cola)
 }
 
 /*
+ * Libera toda la memoria relacionada con la cola con cabecera, incluyendo
+ * a los miembros de la estructura y a toda la estructura.
+ */
+void
+hqueue_free(HQueue **cola)
+{
+    if (cola && *cola) {
+        node_free_group(&(*cola)->first);
+        free(*cola);
+        *cola = NULL;
+    }
+}
+
+/*
  * Imprime todos los nodos dentro de la cola.
  */
 void
 hqueue_print(HQueue *cola)
 {
-    if (cola) {
+    if (cola && cola->size) {
+        printf("Tamaño: %d.\n", cola->size);
         node_print_all_linked_nodes(cola->first);
     }
 }

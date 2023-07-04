@@ -38,6 +38,12 @@ dqueue_dequeue(Node **const cola)
     return nodo_extraido; 
 }
 
+void
+dqueue_free(Node **cola)
+{
+    node_free_group(cola);
+}
+
 /*
  * Imprime todos los nodos relacionados en la cola.
  */

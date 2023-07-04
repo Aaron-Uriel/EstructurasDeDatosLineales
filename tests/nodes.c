@@ -28,11 +28,6 @@ void node_test(void) {
     Node *myclone = node_clone(mynode);
     assert(memcmp((void *)mynode, (void *)myclone, sizeof(*myclone)) == 0);
 
-    /* Probamos la función para quitar enlaces. */
-    node_unlink(mynode);
-    assert(mynode->previous == NULL && mynode->next == NULL);
-    assert(node_array[7]->next == node_array[3] && node_array[3]->previous == node_array[7]);
-
     /* Probamos que el clon ya es diferente del original. */
     assert(memcmp((void *)mynode, (void *)myclone, sizeof(*mynode)) != 0);
 }

@@ -35,6 +35,16 @@ squeue_dequeue(SNode **const cola)
 }
 
 /*
+ * Libera toda la memoria asignada por la cola y hace que la cola apunte a
+ * NULL dejandola vacía.
+ */
+void
+squeue_free(SNode **cola)
+{
+    snode_free_group(cola);
+}
+
+/*
  * Imprime todos los nodos relacionados en la cola.
  */
 void

@@ -31,6 +31,12 @@ sstack_delete(SNode **pila)
     return nodo_extraido;
 }
 
+void
+sstack_free(SNode **pila)
+{
+    snode_free_group(pila);
+}
+
 /*
  * Imprime todos los nodos dentro de la pila.
  */

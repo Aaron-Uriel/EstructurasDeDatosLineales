@@ -34,23 +34,43 @@ node_delete(Node **self)
 }
 
 /*
- * Se encarga de hacer una copia exacta del nodo original.
+ * Libera la memoria de este nodo y de todos los nodos asociados con el.
+ * La idea es que esta función solo sea usada por las estructuras de datos
+ * y no directamente a los nodos.
+ */
+void
+node_free_group(Node **self)
+{
+    /* Esta función puede eliminar mejor los nodos. */
+    if (self && *self) {
+        Node *nodo_actual, *nodo_anterior;
+        nodo_actual = node_jump_to_first(*self);
+        while (nodo_actual->next) {
+            nodo_anterior = nodo_actual;
+            nodo_actual = nodo_actual->next;
+            node_delete(&nodo_anterior);
+        }
+        node_delete(&nodo_actual);
+        *self = NULL;
+    }
+}
+
+/*
+ * Se encarga de hacer una copia del nodo original, sin preservar las
+ * conexiones del nodo original.
  */
 Node *
-node_clone(Node *self)
+node_clone(Node *nodo)
 {
-    if (self == NULL) {
-        return NULL;
+    Node *nodo_clonado = NULL;
+    if (nodo) {
+        nodo_clonado = malloc(sizeof(*nodo_clonado));
+        if (nodo_clonado) {
+            memcpy(nodo_clonado, nodo, sizeof(*nodo_clonado));
+            nodo_clonado->next = nodo_clonado->previous = NULL;
+        }
     }
-
-    /* Reservamos el espacio en memoria que ocupará el nodo clonado */
-    Node *cloned_node = malloc(sizeof(*cloned_node));
-    if (cloned_node == NULL) {
-        return NULL;
-    }
-    memcpy(cloned_node, self, sizeof(*cloned_node));
-
-    return cloned_node;
+    return nodo_clonado;
 }
 
 /*
@@ -90,33 +110,6 @@ node_prepend(Node *const nodo, Node *const nodo_a_insertar)
 }
 
 /*
- * Desprende al nodo de los nodos relacionados con el y viceversa.
- * Si existen dos nodos conectados a este, estos se van a relacionar entre si,
- * ya sin involucrar al nodo pasado a esta función.
- */
-void
-node_unlink(Node *const self) {
-    if (self == NULL) {
-    }
-
-    Node *const previous_node = self->previous;
-    Node *const next_node = self->next;
-    if (previous_node != NULL && next_node != NULL) {
-        node_append(previous_node, next_node);
-        self->previous = NULL;
-        self->next = NULL;
-    }
-    else if (previous_node != NULL) {
-        previous_node->next = NULL;
-        self->previous = NULL;
-    }
-    else if (next_node != NULL) {
-        next_node->previous = NULL;
-        self->next = NULL;
-    }
-}
-
-/*
  * Devuelve un apuntador al último nodo de todos los nodos enlazados.
  */
 Node *
@@ -139,38 +132,14 @@ node_jump_to_last(Node *const self)
 Node
 *node_jump_to_first(Node *const self)
 {
-    if (self == NULL) {
-        return NULL;
-    }
-
-    Node *current_node = self;
-    while(current_node->previous != NULL) {
-         current_node = current_node->previous;
-    }
-    return current_node;
-}
-
-/*
- * Te devuelve un apuntador al n-ésimo nodo hacia adelante, respecto al nodo ingresado.
- * Si el valor n está más allá de la cadena de nodos se devuelve NULL.
- */
-Node
-*node_jump_to_n(Node *const self, const uint32_t n)
-{
-    if (self == NULL) {
-        return NULL;
-    }
-
-    Node *node = self;
-    uint32_t i;
-    for (i = 0; i < n; i++) {
-        if (node->next == NULL) {
-            return NULL;
+    if (self) {
+        Node *nodo_actual = self;
+        while (nodo_actual->previous) {
+            nodo_actual = nodo_actual->previous;
         }
-        node = node->next;
+        return nodo_actual;
     }
-
-    return node; 
+    return NULL;
 }
 
 /*
@@ -189,19 +158,3 @@ node_print_all_linked_nodes(Node *const self)
     }
 }
 
-/*
- * La función imprime una representación textual del nodo, útil para depuración.
- */
-void
-node_print_debug(const Node *const self)
-{
-    if (self == NULL) {
-        return;
-    }
-
-    fprintf(stderr,
-            "\t(Node) { .value = %d; .next = %p; .previous = %p };\n",
-            self->value,
-            (void *)self->next,
-            (void *)self->previous);
-}

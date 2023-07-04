@@ -56,26 +56,58 @@ pnode_delete(PNode **self)
 }
 
 /*
- * Se encarga de hacer una copia exacta del nodo original.
+ * Libera la memoria de este nodo y de todos los nodos asociados con el.
+ * La idea es que esta función solo sea usada por las estructuras de datos
+ * y no directamente a los nodos.
+ */
+void
+pnode_free_group(PNode **self)
+{
+    /* Esta función puede eliminar mejor los nodos. */
+    if (self && *self) {
+        PNode *nodo_actual, *nodo_anterior;
+        nodo_actual = pnode_jump_to_first(*self);
+        while (nodo_actual->next) {
+            nodo_anterior = nodo_actual;
+            nodo_actual = nodo_actual->next;
+            pnode_delete(&nodo_anterior);
+        }
+        pnode_delete(&nodo_actual);
+        *self = NULL;
+    }
+}
+
+/*
+ * Devuelve un apuntador al primer nodo de todos los nodos enlazados.
  */
 PNode *
-pnode_clone(PNode *self)
+pnode_jump_to_first(PNode *const nodo)
 {
-    if (self == NULL) {
-        return NULL;
+    if (nodo) {
+        PNode *nodo_actual = nodo;
+        while (nodo_actual->previous) {
+            nodo_actual = nodo_actual->previous;
+        }
+        return nodo_actual;
     }
-
-    /* 
-     * Reservamos el espacio en memoria que ocupará el nodo
-     * clonado.
-     */
-    PNode *cloned_pnode = malloc(sizeof(*cloned_pnode));
-    if (cloned_pnode == NULL) {
-        return NULL;
+    return NULL;
+}
+/*
+ * Se encarga de hacer una copia del nodo original, sin preservar las
+ * conexiones del nodo original.
+ */
+PNode *
+pnode_clone(PNode *nodo)
+{
+    PNode *nodo_clonado = NULL;
+    if (nodo) {
+        nodo_clonado = malloc(sizeof(*nodo_clonado));
+        if (nodo_clonado) {
+            memcpy(nodo_clonado, nodo, sizeof(*nodo_clonado));
+            nodo_clonado->next = nodo_clonado->previous = NULL;
+        }
     }
-    memcpy(cloned_pnode, self, sizeof(*cloned_pnode));
-
-    return cloned_pnode;
+    return nodo_clonado;
 }
 
 /*
@@ -111,29 +143,3 @@ pnode_prepend(PNode *nodo, PNode *nodo_a_insertar)
     }
 }
 
-/*
- * Desprende al nodo de los nodos relacionados con el y viceversa.
- * Si existen dos nodos conectados a este, estos se van a relacionar entre
- * si, ya sin involucrar al nodo pasado a esta función.
- */
-void
-pnode_unlink(PNode *const self) {
-    if (self == NULL) {
-    }
-
-    PNode *const previous_pnode = self->previous;
-    PNode *const next_pnode = self->next;
-    if (previous_pnode != NULL && next_pnode != NULL) {
-        pnode_append(previous_pnode, next_pnode);
-        self->previous = NULL;
-        self->next = NULL;
-    }
-    else if (previous_pnode != NULL) {
-        previous_pnode->next = NULL;
-        self->previous = NULL;
-    }
-    else if (next_pnode != NULL) {
-        next_pnode->previous = NULL;
-        self->next = NULL;
-    }
-}

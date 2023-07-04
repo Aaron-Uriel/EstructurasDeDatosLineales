@@ -60,8 +60,9 @@ slist_extract_node(SNode **const lista, int32_t id)
     if (lista && *lista) {
         uint32_t conteo = 0;
         SNode *nodo_actual, *nodo_anterior;
-        nodo_actual = nodo_anterior = *lista;
+        nodo_actual = *lista;
         while (nodo_actual->next && nodo_actual->value != id) {
+            nodo_anterior = nodo_actual;
             nodo_actual = nodo_actual->next;
             conteo++;
         }
@@ -80,23 +81,30 @@ slist_extract_node(SNode **const lista, int32_t id)
 }
 
 /*
- * Comprueba si existe un nodo con el id pasado como argumento
- * dentro de la lista.
- * Regresa verdadero si existe hay al menos un nodo con el mismo id.
+ * Busca un nodo en la lista, en caso de existir se regresa la dirección
+ * en memoria del nodo.
  */
-bool
+SNode *
 slist_search_snode(SNode **const lista, int32_t id) {
     if (lista && *lista) {
-        /* ¿Se puede mejorar la búsqueda? */
         SNode *nodo_actual = *lista;
         while (nodo_actual->next && nodo_actual->value != id) {
             nodo_actual = nodo_actual->next;
         }
         if (nodo_actual->value == id) {
-            return true;
+            return nodo_actual;
         }
     }
-    return false;
+    return NULL;
+}
+
+/*
+ * Libera la memoria asignada por la lista.
+ */
+void
+slist_free(SNode **lista)
+{
+    snode_free_group(lista);
 }
 
 /*

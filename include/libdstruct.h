@@ -180,4 +180,19 @@ PUBLIC void static_stack_insert(StaticStack *self, int value);
 PUBLIC int static_stack_extract(StaticStack *self);
 PUBLIC void static_stack_print(StaticStack *self);
 
+/*Cola circular*/
+PUBLIC SNode   *nueva_cola_circular(int value);
+PUBLIC void    insertar_cola_circular(SNode **inicio, SNode **final, SNode *nodo);
+PUBLIC SNode    extraer_cola_circular(SNode *self);
+PUBLIC void    imprimir_cola_circular(SNode *inicio);
+PUBLIC void    eliminar_cola_circular(SNode *nodo);
+
+/*Lista circular*/
+PUBLIC SNode     *nuevo_lista_circular(int valor);
+PUBLIC void     insertar_lista_circular(SNode *lista, SNode node);
+PUBLIC SNode     *extraer_lista_circular(SNode *lista, int valor);
+PUBLIC SNode     buscar_lista_circular(SNode *lista, int valor);
+PUBLIC void     copiar_lista_circular(SNode *lista);
+PUBLIC void     eliminar_lista_circular(SNode *nodo);
+
 #endif

@@ -5,79 +5,88 @@
 #include <libdstruct.h>
 
 
-colaCircular *
-nueva_cola_circular(int size)
+SNode *nueva_cola_circular(int value)
 {
-    colaCircular *queue = malloc(sizeof(ColaCircular));
-    queue->array = malloc(size * sizeof(int)); 
-    queue->first = 0;
-    queue->last = 0;
-    queue->size = size;
-    queue->is_full = false;
-
-    return queue;
+	SNode *nodo = (SNode*) malloc(sizeof(SNode));
+	if(nodo != NULL){
+		nodo -> value = value;
+		nodo -> next = nodo; 
+	}
+	
+	return nodo;
 }
 
+void insertar_cola_circular(SNode **inicio, SNode **final, SNode *nodo){
+        SNode *tempUno = NULL, *tempDos = NULL, *actual = NULL;
 
-void
-insertar_cola_circular(colaCircular *self, int value)
-{
-    if (self->is_full) {
-        printf("La cola está llena.\n");
-        return;
-    }
-    self->array[self->last] = value;
-    self->last = (self->last + 1) % self->size;
-
-    if (self->first == self->last) 
-    {
-        self->is_full = true;
-
-    }
+	
+	if (*inicio == NULL){					
+		*inicio = nodo;
+		*final = nodo;					
+		(*inicio) -> next = *inicio;
+    }else{								
+		tempUno = *inicio;				
+		if((tempUno -> next) == (*inicio)){
+			tempUno-> next = nodo;		
+			tempDos = nodo;
+			tempDos -> next = tempUno;		
+			*final = tempDos; 			
+		}
+		else{								
+			tempDos = *inicio;			
+			while((tempUno-> next) != tempDos){
+				tempUno = tempUno-> next;
+			}
+			tempUno-> next = nodo;		
+			*final = nodo;			
+			(*final) -> next = *inicio;
+		}
+	}
 }
 
+SNode *extraer_cola_circular (SNode **inicio, SNode **final){
 
-int extraer_cola_circular(colaCircular *self)
-{
-    int extraer;
-    if (self->last == self->first && self->is_full == false)
-    {
-        return -1;
-    }
-    
-    extraer = self->array[self->first];
-    self->first = (self->first + 1) % self->size;
-    if (self->is_full)
-    {
-        self->is_full = false;
-    }
-    
-    return extraer;
+	SNode *extraido = NULL, *tempUno = NULL, *tempDos = NULL;
+	
+    	if(*inicio != NULL){
+        	extraido = *inicio;		
+        	tempUno = *inicio;				
+        	tempDos = *final;
+        	if((tempUno-> next != NULL) && (tempUno -> next != tempUno)){			
+        	    *inicio = extraido -> next;			
+        	    tempDos -> next = *inicio;
+        	    extraido -> next = NULL;
+
+        	}
+        	else{
+        		extraido -> next = NULL;
+        		*inicio = NULL;
+   			*final = NULL;
+        	}
+	    } else{
+		return extraido;
+	}
+	
+	return extraido;
 }
 
-void
-imprimir_cola_circular(colaCircular *self)
-{
-
-    if (self->is_full)
-    {
-        int condic_paro = (self->size - 1 + self->first) % self->size, i;
-        for (i = self->first;
-            i != condic_paro;
-            i = (i + 1) % self->size) {
-            printf("%d ", self->array[i]);
-        }
-        printf("%d \n", self->array[i]);
-
-        return;
-    }
-    
-    for (int i = self->first;
-         i != self->last;
-         i = (i + 1) % self->size) {
-        printf("%d ", self->array[i]);
-    }
-
-    printf("\n");
+void eliminar_cola_circular (SNode *extraido){
+    free (extraido);
 }
 
+void imprimir_cola_circular(SNode *inicio){
+
+	SNode *actual, *temp;
+	if(inicio == NULL){
+		printf("\nNo hay elementos en la cola\n");
+	}
+	else{
+		actual = inicio;
+		temp = inicio;
+		while (actual -> next != temp){
+			printf ("%d -> ", actual -> value);
+			actual = actual -> next;
+		}
+		printf("%d -> ", actual -> value);
+	}
+}

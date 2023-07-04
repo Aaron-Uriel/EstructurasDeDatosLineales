@@ -28,52 +28,55 @@ snode_new(int32_t value)
  * de ser liberado.
  */
 void
-snode_delete(SNode **self)
+snode_free(SNode **self)
 {
 	free(*self);
     *self = NULL; 
 }
 
 /*
- * Se encarga de hacer una copia exacta del nodo original.
+ * Libera la memoria de este nodo y de todos los nodos asociados con el.
+ * La idea es que esta función solo sea usada por las estructuras de datos
+ * y no directamente a los nodos.
  */
-SNode *
-snode_clone(SNode *self)
+void
+snode_free_group(SNode **self)
 {
-    if (self == NULL) {
-        return NULL;
+    if (self && *self) {
+        SNode *nodo_actual, *nodo_anterior;
+        nodo_actual = *self;
+        while (nodo_actual->next) {
+            nodo_anterior = nodo_actual;
+            nodo_actual = nodo_actual->next;
+            snode_free(&nodo_anterior);
+        }
+        snode_free(&nodo_actual);
+        *self = NULL;
     }
-
-    /* Reservamos el espacio en memoria que ocupará el nodo clonado */
-    SNode *cloned_node = malloc(sizeof(*cloned_node));
-    if (cloned_node == NULL) {
-        return NULL;
-    }
-    memcpy(cloned_node, self, sizeof(*cloned_node));
-
-    return cloned_node;
 }
 
 /*
- * Crea una relación unidireccional entre los dos nodos:
- * - El primer nodo (self) ahora dirá que su siguiente nodo es
- *   el segundo nodo (snode).
+ * Crea una copia de un nodo, sin preservar las conexiones del nodo original.
  */
-void 
-snode_append(SNode *const self, SNode *const snode)
+SNode *
+snode_clone(SNode *nodo)
 {
-    if (self == NULL || snode == NULL) {
-        return;
+    SNode *nodo_clonado = NULL;
+    if (nodo) {
+        nodo_clonado = malloc(sizeof(*nodo_clonado));
+        if (nodo_clonado) {
+            memcpy(nodo_clonado, nodo, sizeof(*nodo_clonado));
+            nodo_clonado->next = NULL;
+        }
     }
-
-	self->next = snode;
+    return nodo_clonado;
 }
 
 /*
  * Devuelve un apuntador al último nodo de todos los nodos enlazados.
  */
-SNode
-*snode_jump_to_last(SNode *const self)
+SNode *
+snode_jump_to_last(SNode *const self)
 {
     if (self == NULL) {
         return NULL;
@@ -85,29 +88,6 @@ SNode
     }
 
     return current_node;
-}
-
-/*
- * Te devuelve un apuntador al n-ésimo nodo hacia adelante, respecto al nodo ingresado.
- * Si el valor n está más allá de la cadena de nodos se devuelve NULL.
- */
-SNode *
-snode_jump_to_n(SNode *const self, const uint32_t n)
-{
-    if (self == NULL) {
-        return NULL;
-    }
-
-    SNode *node = self;
-    uint32_t i;
-    for (i = 0; i < n; i++) {
-        if (node->next == NULL) {
-            return NULL;
-        }
-        node = node->next;
-    }
-
-    return node;     
 }
 
 /*
@@ -131,18 +111,3 @@ snode_print_all_linked_nodes(const SNode *const self)
     printf("NULL\n");
 }
 
-/*
- * La función imprime una representación textual del nodo, útil para depuración.
- */
-void
-snode_print_debug(const SNode *const self)
-{
-    if (self == NULL) {
-        return;
-    }
-
-    fprintf(stderr,
-            "\t(SNode) { .value = %d; .next = %p };\n",
-            self->value,
-            (void *)self->next);
-}

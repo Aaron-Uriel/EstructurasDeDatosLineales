@@ -66,25 +66,26 @@ list_insert_node(List *const lista, Node *const nodo)
  * regresa su dirección en memoria.
  */
 Node *
-list_extract_node(List *const list, int32_t id)
+list_extract_node(List *const lista, int32_t id)
 {
     /* ¿Debería de cambiarlo para aprovechar la cabecera? */
     Node *nodo_extraido = NULL;
-    if (list && list->size) {
-        Node *nodo_actual = list->first;
+    if (lista && lista->size) {
+        Node *nodo_actual = lista->first;
         while (nodo_actual->next && nodo_actual->value != id) {
             nodo_actual = nodo_actual->next;
         }
         if (nodo_actual->value == id) {
+            lista->size -= 1;
             if (nodo_actual->previous) {
                 nodo_actual->previous->next = nodo_actual->next;
             } else {
-                list->first = list->first->next;
+                lista->first = lista->first->next;
             }
             if (nodo_actual->next) {
                 nodo_actual->next->previous = nodo_actual->previous;
             } else {
-                list->last = list->last->previous;
+                lista->last = lista->last->previous;
             }
             nodo_actual->previous = nodo_actual->next = NULL;
             nodo_extraido = nodo_actual;
@@ -94,10 +95,24 @@ list_extract_node(List *const list, int32_t id)
 }
 
 /*
- * Busca si existe dicho nodo dentro de la lista.
- * En caso de existir se regresa verdadero, si no existe se regresa falso.
+ * Libera la memoria relacionada a la lista con cabecera, incluyendo a 
+ * la cabecera.
  */
-bool
+void
+list_free(List **lista)
+{
+    if (lista && *lista) {
+        node_free_group(&(*lista)->first);
+        free(*lista);
+        *lista = NULL;
+    }
+}
+
+/*
+ * Busca un nodo en la lista, en caso de existir se regresa la dirección
+ * en memoria del nodo.
+ */
+Node *
 list_search_node(List *const lista, int32_t id)
 {
     if (lista && lista->size) {
@@ -109,10 +124,10 @@ list_search_node(List *const lista, int32_t id)
             conteo++;
         }
         if (conteo < lista->size) {
-            return true;
+            return nodo_actual;
         }
     }
-    return false;
+    return NULL;
 }
 
 

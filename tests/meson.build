@@ -1,4 +1,4 @@
-menu = executable('menu', 'menu/menu_layout.c',
+menu = executable('menu', 'menu/menu.c', 'menu/utilidades.c',
   link_with : libdstruct,
   include_directories : includes,
 )

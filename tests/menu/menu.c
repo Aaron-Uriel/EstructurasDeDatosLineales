@@ -20,9 +20,16 @@ main(void)
     //Cola con prioridad.
     PQueue *cola_prioridad = NULL;
     PNode *nodo_prioridad_temporal;
-
     //Cola circular
     SNode *primero = NULL, *final = NULL;
+    //Cola estática
+    #define TAMAÑO 8
+    int cola[TAMAÑO] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int inicio = 0, finalEstatico = 0;	
+	int llena = 0;
+
+    //Pila estática
+    int pila[TAMAÑO] = {0, 0, 0, 0, 0, 0, 0, 0};
 
     const char *menu_principal_opciones_cortas = "sdcpeix";
     const char *menu_principal_opciones_largas[] = {
@@ -462,26 +469,69 @@ main(void)
                         case 'c': //Cola -------------------------------
                             do {
                                 system("clear");
-                                
+                                //Imprimir la cola y el arreglo de la cola.
+                                printf("Cola: \n");
+				                if (llena)
+    			                {
+        			                int condicParo = (TAMAÑO - 1 + inicio) % TAMAÑO, i;
+        			                for (i = inicio;i != condicParo; i = (i + 1) % TAMAÑO) {
+            			                printf("%d ", cola[i]);
+        			                }
+        			                printf("%d \n", cola[i]);
+    			                }
+    
+                                for (int i = inicio; i != finalEstatico; i = (i + 1) % TAMAÑO) {
+                                    printf("%d ", cola[i]);
+                                }
+                                printf("\n");
+                                printf("Arreglo:\n");
+                                for (int i = 0; i < TAMAÑO; i++) {
+                                    printf("%d ", cola[i]);
+                                }
+                                printf("\n");
+
                                 opcion = menu_crear("Cola estática.",
                                         menu_cola_pila_opciones_cortas,
                                         menu_cola_pila_opciones_largas);
                                 switch (opcion) {
                                     case 'a':
-                                        printf("\t|________________________________.\n");
+
+                                        if(!llena){
+					                    printf("\t|________________________________.\n");
                                         printf("\t|_____________Agregar____________|\n");
                                         printf("\t| Ingrese el valor del nodo: ");
-                                        scanf("%d", &id);
-                                        
-                                        break;
+					                    scanf("%d", &cola[finalEstatico]);
+					                    finalEstatico = (finalEstatico + 1) % TAMAÑO;
+					                    if(finalEstatico % TAMAÑO == inicio)
+					                    {
+						                    llena = 1;
+					                    }
+					                    break;
+				                        }
+				                        printf("\nCola llena.\n");
+				                        break;
+
                                     case 'q':
-                                       /* if ((valor_estatico_temporal = static_queue_extract(cola_estatica))) {
-                                            printf("%d extraído. \n", valor_estatico_temporal);
-                                        } else {
-                                            printf("Está vacía \n");
-                                        }*/
+                                       if (finalEstatico == inicio && llena == 0)
+				                        {
+					                        printf("Está vacía.\n");
+					                        break;
+				                        }
+				                        inicio = (inicio + 1) % TAMAÑO;
+                                        if (llena)
+                                        {
+                                            llena = 0;
+                                        }
                                         break;
+
                                     case 'x':
+                                    inicio = 0;
+                                    finalEstatico = 0;
+                                    llena = 0;
+                                    for (int i = 0; i < TAMAÑO; i++)
+                                    {
+                                        cola[i] = 0;
+                                    }
                                         break;       
                                 } 
                             } while (opcion != 'x');
@@ -491,26 +541,59 @@ main(void)
                         case 'p': // Pila ----------------------------------
                             do {
                                 system("clear");
-                                
+                                //Imprimir la pila
+                                printf("Pila: \n");
+                                for (int i = 0; i < finalEstatico; i ++) {
+                                    printf("%d ", pila[i]);
+                                }
+
+                                printf("\n");
+                                printf("Arreglo:\n");
+                                for (int i = 0; i < TAMAÑO; i++) {
+                                    printf("%d ", pila[i]);
+                                }
+                                printf("\n");
                                 opcion = menu_crear("Pila estática.",
                                         menu_cola_pila_opciones_cortas,
                                         menu_cola_pila_opciones_largas);
                                 switch (opcion) {
                                     case 'a':
-                                        printf("\t|________________________________.\n");
-                                        printf("\t|_____________Agregar____________|\n");
-                                        printf("\t| Ingrese el valor del nodo: ");
-                                        scanf("%d", &id);
                                         
+                                        if(!llena){
+                                            printf("\t|________________________________.\n");
+                                            printf("\t|_____________Agregar____________|\n");
+                                            printf("\t| Ingrese el valor del nodo: ");
+                                            scanf("%d", &pila[finalEstatico]);
+                                            finalEstatico++;
+                                        
+                                            if(finalEstatico == TAMAÑO)
+                                            {
+                                                llena = 1;
+                                            }
+                                            break;
+                                        }
+                                        printf("\nPila llena.\n");
                                         break;
+
                                     case 'q':
-                                       /* if ((sta_stack_deleted = static_stack_extract(pila_estatica))) {
-                                            printf("Se eliminó: %d\n", sta_stack_deleted);
-                                        } else {
-                                            printf("No hay nada.\n");
-                                        }*/
+                                       if (finalEstatico ==  0)
+                                        {
+                                            printf("Está vacía.\n");
+                                            break;
+                                        }
+                                        finalEstatico--;
+                                        if (llena)
+                                        {
+                                            llena = 0;
+                                        }
                                         break;
                                     case 'x':
+                                    finalEstatico = 0;
+                                    llena = 0;
+                                    for (int i = 0; i < TAMAÑO; i++)
+                                    {
+                                        pila[i] = 0;
+                                    }
                                         break;       
                                 }
                             } while (opcion != 'x');
@@ -570,12 +653,13 @@ main(void)
                             do {
                                 system("clear");
                                 imprimir_lista_circular(lista_simple);
+                                printf("\n");
                                 opcion = menu_crear("Lista Circular.",
                                         menu_lista_opciones_cortas,
                                         menu_lista_opciones_largas);
                                 switch (opcion) {
                                     case 'a':
-                                        printf("\n\t|________________________________.\n");
+                                        printf("\t|________________________________.\n");
                                         printf("\t|_____________Agregar____________|\n");
                                         printf("\t| Ingrese el valor del nodo: ");
                                         scanf("%d", &id);

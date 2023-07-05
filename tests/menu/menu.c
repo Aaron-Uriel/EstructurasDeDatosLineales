@@ -20,15 +20,14 @@ main(void)
     //Cola con prioridad.
     PQueue *cola_prioridad = NULL;
     PNode *nodo_prioridad_temporal;
-    
-    int valor_estatico_temporal;
-   
-    int sta_stack_deleted;
 
-    const char *menu_principal_opciones_cortas = "sdcpex";
+    //Cola circular
+    SNode *final = NULL;
+
+    const char *menu_principal_opciones_cortas = "sdcpeix";
     const char *menu_principal_opciones_largas[] = {
         "Simplemente ligadas.", "Doblemente ligadas.", "Con cabecera.",
-        "Con prioridad.", "Estáticas.", "Salir.", NULL
+        "Con prioridad.", "Estáticas.", "Circulares.", "Salir.", NULL
     };
 
     const char *menu_secundario_opciones_cortas = "cplx";
@@ -525,8 +524,118 @@ main(void)
                 opcion = 0;
                 break;
 
+            case 'i': //Circular
+                do {
+                    system("clear");
+                    opcion = menu_crear("Circulares.",
+                            menu_secundario_doblemente_opciones_cortas,
+                            menu_secundario_doblemente_opciones_largas);
+                    switch (opcion) {
+                        case 'c': // Cola. --------------------------------
+                            do {
+                                system("clear");
+                                imprimir_cola_circular(cola_simple);
+                                opcion = menu_crear("Cola circular",
+                                        menu_cola_pila_opciones_cortas,
+                                        menu_cola_pila_opciones_largas);
+                                switch (opcion) {
+                                    case 'a':
+                                        printf("\t|________________________________.\n");
+                                        printf("\t|_____________Agregar____________|\n");
+                                        printf("\t| Ingrese el valor del nodo: ");
+                                        scanf("%d", &id);
+                                        insertar_cola_circular(&cola_simple, &final, nueva_cola_circular(id));
+                                        break;
+                                    case 'q':
+                                        if ((nodo_simple_temporal = extraer_cola_circular(&cola_simple, &final))) {
+                                            printf("| Se eliminó: %d\n", nodo_simple_temporal->value);
+                                            eliminar_cola_circular(nodo_simple_temporal);
+                                        } else {
+                                            printf("No hay nada.\n");
+                                        }
+                                        pausar();
+                                        break;
+                                    case 'x': 
+                                        eliminar_cola_circular(cola_simple);
+                                        eliminar_cola_circular(final);
+                                        break;    
+                                }
+
+                            } while (opcion != 'x');
+                            opcion = 0;
+                            break;
+
+                        case 'l':  // Lista. ---------------------------
+                            do {
+                                system("clear");
+                                imprimir_lista_circular(lista_simple);
+                                opcion = menu_crear("Lista Circular.",
+                                        menu_lista_opciones_cortas,
+                                        menu_lista_opciones_largas);
+                                switch (opcion) {
+                                    case 'a':
+                                        printf("\n\t|________________________________.\n");
+                                        printf("\t|_____________Agregar____________|\n");
+                                        printf("\t| Ingrese el valor del nodo: ");
+                                        scanf("%d", &id);
+                                        getchar();
+                                        insertar_lista_circular(&lista_simple, nueva_lista_circular(id));
+                                        break;
+                                    case 'q':
+                                        printf("\n\t|_________________________________________.\n");
+                                        printf("\t|__________________Quitar_________________|\n");
+                                        printf("\t| Ingrese el valor del nodo a eliminar: ");
+                                        scanf("%d", &id);
+                                        getchar();
+                                        if ((nodo_simple_temporal = extraer_lista_circular(&lista_simple, id))) {
+                                            printf("Se elimino: %d \n", nodo_simple_temporal->value);
+                                            eliminar_lista_circular(nodo_simple_temporal);
+                                        } else {
+                                            printf("No se encontró el nodo. \n");
+                                        }
+                                        pausar();
+                                        break;
+                                    case 'b': 
+                                        printf("\n\t|_________________________________________.\n");
+                                        printf("\t|__________________Buscar_________________|\n");
+                                        printf("\t| Ingrese el valor del nodo a buscar: ");
+                                        scanf("%d", &id);
+                                        getchar();
+                                        printf("\t| El nodo %s en la lista.\n",
+                                                (buscar_lista_circular(lista_simple, id))? "existe": "no existe");
+                                        pausar();
+                                        break; 
+                                    case 'c': 
+                                        printf("\n\t|_________________________________________.\n");
+                                        printf("\t|__________________Copiar_________________|\n");
+                                        printf("\t| Ingrese el id del nodo a copiar: ");
+                                        scanf("%d", &id);
+                                        nodo_simple_temporal = copiar_lista_circular(lista_simple, id);
+                                        if (nodo_simple_temporal) {
+                                            insertar_lista_circular(&lista_simple, nodo_simple_temporal);
+                                        } else {
+                                            printf("No existe el nodo con id: %d.\n", id);
+                                            getchar();
+                                            pausar();
+                                        }
+                                        break;        
+                                    case 'x': 
+                                        eliminar_lista_circular(lista_simple);
+                                        break; 
+                                }
+                            } while (opcion != 'x');
+                            opcion = 0;
+                            break;
+                        case 'x': 
+                            break;
+                    }
+                } while (opcion != 'x');
+                opcion = 0;
+                break;
+
             case 'x':
-                break;    
+                break;
+
         } //Fin del menú principal
     } while (opcion != 'x');
     return 0;

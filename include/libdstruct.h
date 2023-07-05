@@ -159,11 +159,12 @@ PUBLIC void eliminar_cola_circular (SNode *extraido);
 PUBLIC void imprimir_cola_circular(SNode *inicio);
 
 /*Lista circular*/
-PUBLIC SNode    *nuevo_lista_circular(int valor);
+PUBLIC SNode    *nueva_lista_circular(int valor);
 PUBLIC void     insertar_lista_circular(SNode **lista, SNode *node);
 PUBLIC SNode    *extraer_lista_circular(SNode **lista, int valor);
 PUBLIC SNode    *buscar_lista_circular(SNode *lista, int valor);
-PUBLIC SNode     *copiar_lista_circular(SNode *lista, int valor);
+PUBLIC SNode    *copiar_lista_circular(SNode *lista, int valor);
 PUBLIC void     eliminar_lista_circular(SNode *nodo);
+PUBLIC void     imprimir_lista_circular(SNode *lista);
 
 #endif

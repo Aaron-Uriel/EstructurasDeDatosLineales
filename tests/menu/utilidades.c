@@ -54,7 +54,7 @@ menu_crear(const char *nombre_menu, const char *opciones_cortas,
     uint8_t tamano_contenido, prueba;
     tamano_contenido = strlen(nombre_menu);
     for (i = 0; opciones_cortas[i] && opciones_largas[i]; i += 1) {
-        prueba = strlen(opciones_largas[i]) + 5;
+        prueba = strlen(opciones_largas[i]) + 6;
         if (prueba > tamano_contenido) {
             tamano_contenido = prueba;
         }
@@ -66,7 +66,7 @@ menu_crear(const char *nombre_menu, const char *opciones_cortas,
     for (i = 0; opciones_cortas[i] && opciones_largas[i]; i += 1) {
         printf("│  [%c] %*s │\n", 
                 opciones_cortas[i], 
-                (-tamano_contenido + 5), opciones_largas[i]);
+                (-tamano_contenido + 6), opciones_largas[i]);
     }
     printf("└─%s─┘\n", repetir_cadena("─", tamano_contenido));
 

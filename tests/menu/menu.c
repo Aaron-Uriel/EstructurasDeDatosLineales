@@ -22,7 +22,7 @@ main(void)
     PNode *nodo_prioridad_temporal;
 
     //Cola circular
-    SNode *final = NULL;
+    SNode *primero = NULL, *final = NULL;
 
     const char *menu_principal_opciones_cortas = "sdcpeix";
     const char *menu_principal_opciones_largas[] = {
@@ -534,20 +534,20 @@ main(void)
                         case 'c': // Cola. --------------------------------
                             do {
                                 system("clear");
-                                imprimir_cola_circular(cola_simple);
+                                imprimir_cola_circular(primero);
                                 opcion = menu_crear("Cola circular",
                                         menu_cola_pila_opciones_cortas,
                                         menu_cola_pila_opciones_largas);
                                 switch (opcion) {
                                     case 'a':
-                                        printf("\t|________________________________.\n");
+                                        printf("\n\t|________________________________.\n");
                                         printf("\t|_____________Agregar____________|\n");
                                         printf("\t| Ingrese el valor del nodo: ");
                                         scanf("%d", &id);
-                                        insertar_cola_circular(&cola_simple, &final, nueva_cola_circular(id));
+                                        insertar_cola_circular(&primero, &final, nueva_cola_circular(id));
                                         break;
                                     case 'q':
-                                        if ((nodo_simple_temporal = extraer_cola_circular(&cola_simple, &final))) {
+                                        if ((nodo_simple_temporal = extraer_cola_circular(&primero, &final))) {
                                             printf("| Se eliminó: %d\n", nodo_simple_temporal->value);
                                             eliminar_cola_circular(nodo_simple_temporal);
                                         } else {
@@ -557,6 +557,7 @@ main(void)
                                         break;
                                     case 'x': 
                                         eliminar_cola_circular(cola_simple);
+                                        eliminar_cola_circular(primero);
                                         eliminar_cola_circular(final);
                                         break;    
                                 }

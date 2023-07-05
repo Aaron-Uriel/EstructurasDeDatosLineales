@@ -1,4 +1,4 @@
-/*#include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <libdstruct.h>
 
@@ -6,7 +6,7 @@
 int
 main(void)
 {
-    List *headlist = list_new(); 
+   /* List *headlist = list_new(); 
     Node *hlist = NULL;
     int numero;
     printf("Un número: ");
@@ -48,6 +48,5 @@ main(void)
 
    static_stack_extract(queue);
    static_stack_print(queue);
-    return 0;
+    return 0;*/
 }
-*/

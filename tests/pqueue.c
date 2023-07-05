@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <assert.h>
 
 #include <libdstruct.h>
@@ -26,4 +26,3 @@ int main(void) {
     pqueue_print(my_pqueue);
     return 0;
 }
-*/

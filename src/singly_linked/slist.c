@@ -12,10 +12,6 @@
 void
 slist_insert_snode(SNode **lista, SNode *nodo)
 {
-    /* 
-     * Probablemente se puede mejorar, lo estoy haciendo basado en la 
-     * lista doblemente ligada. 
-     */
     if (lista && nodo) {
         if (*lista) {
             uint32_t conteo = 0;
@@ -32,8 +28,7 @@ slist_insert_snode(SNode **lista, SNode *nodo)
             /* Es mayor que todos. */
             if (nodo_actual->value <= nodo->value) {
                 nodo_actual->next = nodo;
-            }
-            else {
+            } else {
                 nodo->next = nodo_actual;
                 /* Cuando es el menor de todos. */
                 if (conteo == 0) {

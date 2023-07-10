@@ -30,8 +30,10 @@ snode_new(int32_t value)
 void
 snode_free(SNode **self)
 {
-	free(*self);
-    *self = NULL; 
+    if (self && *self) {
+        free(*self);
+        *self = NULL; 
+    }
 }
 
 /*

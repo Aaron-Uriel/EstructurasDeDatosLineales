@@ -23,13 +23,13 @@ main(void)
     //Cola circular
     SNode *primero = NULL, *final = NULL;
     //Cola estática
-    #define TAMAÑO 8
-    int cola[TAMAÑO] = {0, 0, 0, 0, 0, 0, 0, 0};
+    #define TAMANIO 8
+    int cola[TAMANIO] = {0, 0, 0, 0, 0, 0, 0, 0};
     int inicio = 0, finalEstatico = 0;	
 	int llena = 0;
 
     //Pila estática
-    int pila[TAMAÑO] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int pila[TAMANIO] = {0, 0, 0, 0, 0, 0, 0, 0};
 
     const char *menu_principal_opciones_cortas = "sdcpeix";
     const char *menu_principal_opciones_largas[] = {
@@ -473,19 +473,19 @@ main(void)
                                 printf("Cola: \n");
 				                if (llena)
     			                {
-        			                int condicParo = (TAMAÑO - 1 + inicio) % TAMAÑO, i;
-        			                for (i = inicio;i != condicParo; i = (i + 1) % TAMAÑO) {
+        			                int condicParo = (TAMANIO - 1 + inicio) % TAMANIO, i;
+        			                for (i = inicio;i != condicParo; i = (i + 1) % TAMANIO) {
             			                printf("%d ", cola[i]);
         			                }
         			                printf("%d \n", cola[i]);
     			                }
     
-                                for (int i = inicio; i != finalEstatico; i = (i + 1) % TAMAÑO) {
+                                for (int i = inicio; i != finalEstatico; i = (i + 1) % TAMANIO) {
                                     printf("%d ", cola[i]);
                                 }
                                 printf("\n");
                                 printf("Arreglo:\n");
-                                for (int i = 0; i < TAMAÑO; i++) {
+                                for (int i = 0; i < TAMANIO; i++) {
                                     printf("%d ", cola[i]);
                                 }
                                 printf("\n");
@@ -495,29 +495,27 @@ main(void)
                                         menu_cola_pila_opciones_largas);
                                 switch (opcion) {
                                     case 'a':
-
                                         if(!llena){
-					                    printf("\t|________________________________.\n");
-                                        printf("\t|_____________Agregar____________|\n");
-                                        printf("\t| Ingrese el valor del nodo: ");
-					                    scanf("%d", &cola[finalEstatico]);
-					                    finalEstatico = (finalEstatico + 1) % TAMAÑO;
-					                    if(finalEstatico % TAMAÑO == inicio)
-					                    {
-						                    llena = 1;
-					                    }
-					                    break;
+                                            printf("\t|________________________________.\n");
+                                            printf("\t|_____________Agregar____________|\n");
+                                            printf("\t| Ingrese el valor del nodo: ");
+                                            scanf("%d", &cola[finalEstatico]);
+                                            finalEstatico = (finalEstatico + 1) % TAMANIO;
+                                            if(finalEstatico % TAMANIO == inicio)
+                                            {
+                                                llena = 1;
+                                            }
 				                        }
 				                        printf("\nCola llena.\n");
 				                        break;
 
                                     case 'q':
-                                       if (finalEstatico == inicio && llena == 0)
-				                        {
-					                        printf("Está vacía.\n");
-					                        break;
-				                        }
-				                        inicio = (inicio + 1) % TAMAÑO;
+                                        if (finalEstatico == inicio && llena == 0)
+                                        {
+                                            printf("Está vacía.\n");
+                                            break;
+                                        }
+                                        inicio = (inicio + 1) % TAMANIO;
                                         if (llena)
                                         {
                                             llena = 0;
@@ -525,13 +523,13 @@ main(void)
                                         break;
 
                                     case 'x':
-                                    inicio = 0;
-                                    finalEstatico = 0;
-                                    llena = 0;
-                                    for (int i = 0; i < TAMAÑO; i++)
-                                    {
-                                        cola[i] = 0;
-                                    }
+                                        inicio = 0;
+                                        finalEstatico = 0;
+                                        llena = 0;
+                                        for (int i = 0; i < TAMANIO; i++)
+                                        {
+                                            cola[i] = 0;
+                                        }
                                         break;       
                                 } 
                             } while (opcion != 'x');
@@ -549,7 +547,7 @@ main(void)
 
                                 printf("\n");
                                 printf("Arreglo:\n");
-                                for (int i = 0; i < TAMAÑO; i++) {
+                                for (int i = 0; i < TAMANIO; i++) {
                                     printf("%d ", pila[i]);
                                 }
                                 printf("\n");
@@ -566,7 +564,7 @@ main(void)
                                             scanf("%d", &pila[finalEstatico]);
                                             finalEstatico++;
                                         
-                                            if(finalEstatico == TAMAÑO)
+                                            if(finalEstatico == TAMANIO)
                                             {
                                                 llena = 1;
                                             }
@@ -590,7 +588,7 @@ main(void)
                                     case 'x':
                                     finalEstatico = 0;
                                     llena = 0;
-                                    for (int i = 0; i < TAMAÑO; i++)
+                                    for (int i = 0; i < TAMANIO; i++)
                                     {
                                         pila[i] = 0;
                                     }
@@ -627,21 +625,20 @@ main(void)
                                         printf("\t|_____________Agregar____________|\n");
                                         printf("\t| Ingrese el valor del nodo: ");
                                         scanf("%d", &id);
-                                        insertar_cola_circular(&primero, &final, nueva_cola_circular(id));
+                                        getchar();
+                                        insertar_cola_circular(&primero, &final, snode_new(id));
                                         break;
                                     case 'q':
                                         if ((nodo_simple_temporal = extraer_cola_circular(&primero, &final))) {
                                             printf("| Se eliminó: %d\n", nodo_simple_temporal->value);
-                                            eliminar_cola_circular(nodo_simple_temporal);
+                                            snode_free(&nodo_simple_temporal);
                                         } else {
                                             printf("No hay nada.\n");
                                         }
                                         pausar();
                                         break;
-                                    case 'x': 
-                                        eliminar_cola_circular(cola_simple);
-                                        eliminar_cola_circular(primero);
-                                        eliminar_cola_circular(final);
+                                    case 'x':
+                                        eliminar_cola_circular(&primero, &final);
                                         break;    
                                 }
 
@@ -652,7 +649,7 @@ main(void)
                         case 'l':  // Lista. ---------------------------
                             do {
                                 system("clear");
-                                imprimir_lista_circular(lista_simple);
+                                imprimir_lista_circular(primero);
                                 printf("\n");
                                 opcion = menu_crear("Lista Circular.",
                                         menu_lista_opciones_cortas,
@@ -664,7 +661,7 @@ main(void)
                                         printf("\t| Ingrese el valor del nodo: ");
                                         scanf("%d", &id);
                                         getchar();
-                                        insertar_lista_circular(&lista_simple, nueva_lista_circular(id));
+                                        insertar_lista_circular(&primero, &final, snode_new(id));
                                         break;
                                     case 'q':
                                         printf("\n\t|_________________________________________.\n");
@@ -672,9 +669,9 @@ main(void)
                                         printf("\t| Ingrese el valor del nodo a eliminar: ");
                                         scanf("%d", &id);
                                         getchar();
-                                        if ((nodo_simple_temporal = extraer_lista_circular(&lista_simple, id))) {
+                                        if ((nodo_simple_temporal = extraer_lista_circular(&primero, &final, id))) {
                                             printf("Se elimino: %d \n", nodo_simple_temporal->value);
-                                            eliminar_lista_circular(nodo_simple_temporal);
+                                            snode_free(&nodo_simple_temporal);
                                         } else {
                                             printf("No se encontró el nodo. \n");
                                         }
@@ -687,7 +684,7 @@ main(void)
                                         scanf("%d", &id);
                                         getchar();
                                         printf("\t| El nodo %s en la lista.\n",
-                                                (buscar_lista_circular(lista_simple, id))? "existe": "no existe");
+                                                (buscar_lista_circular(primero, id))? "existe": "no existe");
                                         pausar();
                                         break; 
                                     case 'c': 
@@ -695,17 +692,16 @@ main(void)
                                         printf("\t|__________________Copiar_________________|\n");
                                         printf("\t| Ingrese el id del nodo a copiar: ");
                                         scanf("%d", &id);
-                                        nodo_simple_temporal = copiar_lista_circular(lista_simple, id);
-                                        if (nodo_simple_temporal) {
-                                            insertar_lista_circular(&lista_simple, nodo_simple_temporal);
+                                        getchar();
+                                        if ((nodo_simple_temporal = buscar_lista_circular(primero, id))) {
+                                            insertar_lista_circular(&primero, &final, snode_clone(nodo_simple_temporal));
                                         } else {
                                             printf("No existe el nodo con id: %d.\n", id);
-                                            getchar();
                                             pausar();
                                         }
                                         break;        
                                     case 'x': 
-                                        eliminar_lista_circular(lista_simple);
+                                        eliminar_lista_circular(&primero, &final);
                                         break; 
                                 }
                             } while (opcion != 'x');

@@ -152,19 +152,19 @@ PUBLIC void sstack_imprimir(SNode **sstack);
 
 
 /*Cola circular*/
-PUBLIC SNode *nueva_cola_circular(int value);
 PUBLIC void insertar_cola_circular(SNode **inicio, SNode **final, SNode *nodo);
 PUBLIC SNode *extraer_cola_circular (SNode **inicio, SNode **final);
-PUBLIC void eliminar_cola_circular (SNode *extraido);
+PUBLIC void eliminar_cola_circular (SNode **inicio, SNode **final);
 PUBLIC void imprimir_cola_circular(SNode *inicio);
 
 /*Lista circular*/
-PUBLIC SNode    *nueva_lista_circular(int valor);
-PUBLIC void     insertar_lista_circular(SNode **lista, SNode *node);
-PUBLIC SNode    *extraer_lista_circular(SNode **lista, int valor);
+PUBLIC void     insertar_lista_circular(SNode **inicio, SNode **final,
+        SNode *node);
+PUBLIC SNode    *extraer_lista_circular(SNode **inicio, SNode **final,
+        int valor);
 PUBLIC SNode    *buscar_lista_circular(SNode *lista, int valor);
 PUBLIC SNode    *copiar_lista_circular(SNode *lista, int valor);
-PUBLIC void     eliminar_lista_circular(SNode *nodo);
+PUBLIC void     eliminar_lista_circular(SNode **inicio, SNode **final);
 PUBLIC void     imprimir_lista_circular(SNode *lista);
 
 #endif
